@@ -15,30 +15,30 @@ Before proceeding with the implementation of the MLOps system on AWS, please pre
 ## Account & Permissions Requirements (AWS Account & IAM)
 - **AWS Account:** Have access to AWS Management Console.
 - **IAM Permissions:** The IAM user account needs AdministratorAccess or minimum policies including:
-  - `AmazonSageMakerFullAccess`
-  - `AWSLambda_FullAccess`
-  - `AmazonS3FullAccess`
-  - `AmazonEventBridgeFullAccess`
-  - `AmazonSNSFullAccess`
-  - `AmazonAPIGatewayAdministrator`
-  - `IAMFullAccess` (to configure PassRole)
+  - AmazonSageMakerFullAccess
+  - AWSLambda_FullAccess
+  - AmazonS3FullAccess
+  - AmazonEventBridgeFullAccess
+  - AmazonSNSFullAccess
+  - AmazonAPIGatewayAdministrator
+  - IAMFullAccess (to configure PassRole)
 
 ---
 
 ## Initialize IAM Roles for Services
 The system uses the following IAM Roles to delegate permissions between services (Principle of Least Privilege):
 
-1. **`SageMaker-Telco-Churn-Role`:**
-   - **Service Trust:** `sagemaker.amazonaws.com`
-   - **Attached Policies:** `AmazonSageMakerFullAccess`, `AmazonS3FullAccess`.
+1. **SageMaker-Telco-Churn-Role:**
+   - **Service Trust:** sagemaker.amazonaws.com
+   - **Attached Policies:** AmazonSageMakerFullAccess, AmazonS3FullAccess.
    - **Purpose:** Grants permissions for SageMaker Processing Job, HPO Job, Evaluation, and Serverless Endpoint to access S3 data.
 
 ![telco-churn-role](../../../static/images/3-Prerequiste/telco-churn-role.png)
 
-2. **`Lambda-Execution-Role` (used for Lambda Trigger & Lambda Deployer):**
-   - **Service Trust:** `lambda.amazonaws.com`
-   - **Attached Policies:** `AWSLambdaBasicExecutionRole`, `AmazonSageMakerFullAccess`, `AmazonS3FullAccess`.
-   - **Inline Policy (`PassRolePolicy`):** Allows Lambda to execute `iam:PassRole` to `SageMaker-Execution-Role`:
+2. **Lambda-Execution-Role (used for Lambda Trigger & Lambda Deployer):**
+   - **Service Trust:** lambda.amazonaws.com
+   - **Attached Policies:** AWSLambdaBasicExecutionRole, AmazonSageMakerFullAccess, AmazonS3FullAccess.
+   - **Inline Policy (PassRolePolicy):** Allows Lambda to execute iam:PassRole to SageMaker-Execution-Role:
      ```json
      {
          "Version": "2012-10-17",
@@ -55,7 +55,7 @@ The system uses the following IAM Roles to delegate permissions between services
 ---
 
 ## Create S3 Bucket & Data Lake Directory Structure
-Create 1 single S3 Bucket with a globally unique name (e.g., `telco-churn-mlops-<account-id>`).
+Create 1 single S3 Bucket with a globally unique name (e.g., telco-churn-mlops-<account-id>).
 
 Create directory structure (Prefixes) inside the Bucket as follows:
 ```text

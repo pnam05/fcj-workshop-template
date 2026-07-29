@@ -15,30 +15,30 @@ Trước khi tiến hành triển khai hệ thống MLOps trên AWS, cần chu�
 ## Yêu cầu Tài khoản & Quyền hạn (AWS Account & IAM)
 - **Tài khoản AWS:** Có quyền truy cập vào AWS Management.
 - **Quyền IAM (IAM Permissions):** Tài khoản IAM người dùng cần có quyền AdministratorAccess hoặc các policy tối thiểu bao gồm:
-  - `AmazonSageMakerFullAccess`
-  - `AWSLambda_FullAccess`
-  - `AmazonS3FullAccess`
-  - `AmazonEventBridgeFullAccess`
-  - `AmazonSNSFullAccess`
-  - `AmazonAPIGatewayAdministrator`
-  - `IAMFullAccess` (để cấu hình PassRole)
+  - AmazonSageMakerFullAccess
+  - AWSLambda_FullAccess
+  - AmazonS3FullAccess
+  - AmazonEventBridgeFullAccess
+  - AmazonSNSFullAccess
+  - AmazonAPIGatewayAdministrator
+  - IAMFullAccess (để cấu hình PassRole)
 
 ---
 
 ## Khởi tạo IAM Roles cho các dịch vụ
 Hệ thống sử dụng các IAM Role sau để phân quyền giữa các dịch vụ (nguyên tắc Principal of Least Privilege):
 
-1. **`SageMaker-Telco-Churn-Role`:**
-   - **Service Trust:** `sagemaker.amazonaws.com`
-   - **Attached Policies:** `AmazonSageMakerFullAccess`, `AmazonS3FullAccess`.
+1. **SageMaker-Telco-Churn-Role:**
+   - **Service Trust:** sagemaker.amazonaws.com
+   - **Attached Policies:** AmazonSageMakerFullAccess, AmazonS3FullAccess.
    - **Mục đích:** Cấp quyền cho SageMaker Processing Job, HPO Job, Evaluation và Serverless Endpoint truy cập dữ liệu S3.
  
 ![telco-churn-role](../../../static/images/3-Prerequiste/telco-churn-role.png)
 
-2. **`Lambda-Execution-Role` (dùng cho Lambda Trigger & Lambda Deployer):**
-   - **Service Trust:** `lambda.amazonaws.com`
-   - **Attached Policies:** `AWSLambdaBasicExecutionRole`, `AmazonSageMakerFullAccess`, `AmazonS3FullAccess`.
-   - **Inline Policy (`PassRolePolicy`):** Cho phép Lambda thực thi lệnh `iam:PassRole` tới `SageMaker-Execution-Role`:
+2. **Lambda-Execution-Role (dùng cho Lambda Trigger & Lambda Deployer):**
+   - **Service Trust:** lambda.amazonaws.com
+   - **Attached Policies:** AWSLambdaBasicExecutionRole,AmazonSageMakerFullAccess, AmazonS3FullAccess.
+   - **Inline Policy (PassRolePolicy):** Cho phép Lambda thực thi lệnh iam:PassRole tới SageMaker-Execution-Role:
      ```json
      {
          "Version": "2012-10-17",
@@ -55,7 +55,7 @@ Hệ thống sử dụng các IAM Role sau để phân quyền giữa các dịc
 ---
 
 ## Tạo S3 Bucket & Cấu trúc Thư mục Data Lake
-Tạo 1 S3 Bucket duy nhất với tên độc nhất trên toàn hệ thống (Ví dụ: `telco-churn-mlops-<account-id>`).
+Tạo 1 S3 Bucket duy nhất với tên độc nhất trên toàn hệ thống (Ví dụ: telco-churn-mlops-<account-id>).
 
 Tạo cấu trúc thư mục (Prefixes) bên trong Bucket như sau:
 ```text

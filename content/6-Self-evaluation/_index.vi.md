@@ -10,7 +10,7 @@ pre: " <b> 6. </b> "
 
 Trong suốt thời gian thực tập tại **First Cloud AI Journey (FCAJ)** từ ngày **15/06/2026** đến ngày **07/08/2026**, tôi đã có cơ hội học hỏi, rèn luyện và áp dụng các kiến thức chuyên ngành Khoa học Máy tính đã được trang bị tại Trường Đại học Bách Khoa - ĐHQG TP.HCM (HCMCUT) vào môi trường làm việc thực tế trên nền tảng Điện toán đám mây.
 
-Tôi đã tham gia nghiên cứu và xây dựng hoàn chỉnh dự án cá nhân **Automated MLOps Platform for Telco Customer Churn Prediction on AWS**, qua đó cải thiện rõ rệt các kỹ năng chuyên môn về MLOps, AWS Cloud Infrastructure, Lập trình Python SDK (`boto3`, `sagemaker`), Tư duy thiết kế kiến thức Event-Driven Architecture, cũng như kỹ năng viết báo cáo kỹ thuật và trình bày tài liệu Workshop song ngữ.
+Tôi đã tham gia nghiên cứu và xây dựng hoàn chỉnh dự án cá nhân **Automated MLOps Platform for Telco Customer Churn Prediction on AWS**, qua đó cải thiện rõ rệt các kỹ năng chuyên môn về MLOps, AWS Cloud Infrastructure, Lập trình Python SDK (boto3, sagemaker), Tư duy thiết kế kiến thức Event-Driven Architecture, cũng như kỹ năng viết báo cáo kỹ thuật và trình bày tài liệu Workshop song ngữ.
 
 Về tác phong làm việc, tôi luôn cố gắng hoàn thành tốt các mục tiêu đề ra đúng hạn, tuân thủ kỷ luật làm việc, và chủ động trao đổi với Mentor cũng như các thành viên trong nhóm để nâng cao hiệu quả công việc.
 

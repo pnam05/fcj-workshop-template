@@ -55,8 +55,8 @@ Build an MLOps system on the AWS SageMaker Workflow (Pipeline) platform combined
 ### 6. Budget Estimation  
 - AWS Lambda & Amazon EventBridge: $0.00 USD/month (Within Free Tier).  
 - Amazon S3: ~$0.12/month (~5 GB including Artifacts & Data).  
-- AWS SageMaker Processing & Training: ~$0.35/month (`ml.m5.large` instance).  
-- AWS SageMaker Hyperparameter Tuning: ~$0.80/month (6 parallel Tuning Jobs on `ml.m5.large`).  
+- AWS SageMaker Processing & Training: ~$0.35/month (ml.m5.large instance).  
+- AWS SageMaker Hyperparameter Tuning: ~$0.80/month (6 parallel Tuning Jobs on ml.m5.large).  
 - AWS SageMaker Serverless Endpoint: ~$1.20/month (2048 MB Memory, ~10,000 requests/month).  
 - Amazon CloudWatch & SNS: ~$0.10/month.  
 

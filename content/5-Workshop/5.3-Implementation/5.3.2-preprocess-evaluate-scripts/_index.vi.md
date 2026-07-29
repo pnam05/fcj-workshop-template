@@ -17,11 +17,11 @@ pre : " <b> 5.3.2 </b> "
 
 1. Trong trang **Create notebook instance**, tại mục **Notebook instance settings**, thiết lập các thông số như sau:
    + **Notebook instance name**: Nhập `telco-churn`
-   + **Notebook instance type**: Chọn `ml.t3.medium`
-   + **Platform identifier**: Chọn `Amazon Linux 2023, Jupyter Lab 4`
+   + **Notebook instance type**: Chọn ml.t3.medium
+   + **Platform identifier**: Chọn Amazon Linux 2023, Jupyter Lab 4
 
 2. Kéo xuống mục **Permissions and encryption**:
-   + **IAM role**: Chọn IAM Role `SageMaker-Telco-Churn-Role` đã tạo trước đó .
+   + **IAM role**: Chọn IAM Role SageMaker-Telco-Churn-Role đã tạo trước đó .
    + **Root access**: Chọn **Enable - Give users root access to the notebook**.
    + **Encryption key**: Giữ mặc định **No custom encryption**.
 
@@ -31,9 +31,9 @@ pre : " <b> 5.3.2 </b> "
 
 
 
-#### Tạo file `preprocessing.py` (Dùng cho `TelcoChurnProcessStep`)
+#### Tạo file `preprocessing.py` (Dùng cho TelcoChurnProcessStep)
 
-Script này thực hiện làm sạch dữ liệu, xử lý ép kiểu cột `TotalCharges`, One-Hot Encoding cho các biến phân loại và chia tập dữ liệu thành train, validation, test.
+Script này thực hiện làm sạch dữ liệu, xử lý ép kiểu cột TotalCharges, One-Hot Encoding cho các biến phân loại và chia tập dữ liệu thành train, validation, test.
 
 1. Trong môi trường Jupyter Notebook (hoặc SageMaker Studio), tạo file `preprocessing.py` với nội dung sau:
 
@@ -116,12 +116,12 @@ if __name__ == "__main__":
 ```
 
 {{% notice info %}}
-Dữ liệu đầu ra sẽ được tự động đồng bộ lên S3 theo đường dẫn được định nghĩa trong `TelcoChurnProcessStep` của SageMaker Pipeline.
+Dữ liệu đầu ra sẽ được tự động đồng bộ lên S3 theo đường dẫn được định nghĩa trong TelcoChurnProcessStep của SageMaker Pipeline.
 {{% /notice %}}
 
-#### 2.2. File `evaluate.py` (Dùng cho `TelcoChurnEvalStep`)
+#### 2.2. File `evaluate.py` (Dùng cho TelcoChurnEvalStep)
 
-Script này giải nén mô hình XGBoost tốt nhất từ bước HPO, dự đoán trên tập `test.csv` và tính chỉ số AUC score.
+Script này giải nén mô hình XGBoost tốt nhất từ bước HPO, dự đoán trên tập test.csv và tính chỉ số AUC score.
 
 1. Tạo file `evaluate.py` với nội dung sau:
 
@@ -174,5 +174,5 @@ if __name__ == "__main__":
 #### Tóm tắt
 
 Trong phần này, bạn đã chuẩn bị hai script quan trọng:
-* `preprocessing.py`: Xử lý, làm sạch và chia tập dữ liệu theo định dạng yêu cầu của SageMaker XGBoost.
-* `evaluate.py`: Đánh giá mô hình đã huấn luyện bằng chỉ số AUC và xuất file `evaluation.json` phục vụ việc kiểm tra điều kiện đăng ký mô hình (`ConditionStep`).
+* preprocessing.py: Xử lý, làm sạch và chia tập dữ liệu theo định dạng yêu cầu của SageMaker XGBoost.
+* evaluate.py: Đánh giá mô hình đã huấn luyện bằng chỉ số AUC và xuất file evaluation.json phục vụ việc kiểm tra điều kiện đăng ký mô hình (ConditionStep).

@@ -17,11 +17,11 @@ pre : " <b> 5.3.2 </b> "
 
 1. On the **Create notebook instance** page, under **Notebook instance settings**, set the parameters as follows:
    + **Notebook instance name**: Enter `telco-churn`
-   + **Notebook instance type**: Select `ml.t3.medium`
-   + **Platform identifier**: Select `Amazon Linux 2023, Jupyter Lab 4`
+   + **Notebook instance type**: Select ml.t3.medium
+   + **Platform identifier**: Select Amazon Linux 2023, Jupyter Lab 4
 
 2. Scroll down to **Permissions and encryption**:
-   + **IAM role**: Select the `SageMaker-Telco-Churn-Role` IAM Role created previously.
+   + **IAM role**: Select the SageMaker-Telco-Churn-Role IAM Role created previously.
    + **Root access**: Select **Enable - Give users root access to the notebook**.
    + **Encryption key**: Keep default **No custom encryption**.
 
@@ -31,9 +31,9 @@ pre : " <b> 5.3.2 </b> "
 
 
 
-#### Create `preprocessing.py` file (Used for `TelcoChurnProcessStep`)
+#### Create `preprocessing.py` file (Used for TelcoChurnProcessStep)
 
-This script performs data cleaning, data type casting for the `TotalCharges` column, One-Hot Encoding for categorical variables, and splits dataset into train, validation, test.
+This script performs data cleaning, data type casting for the TotalCharges column, One-Hot Encoding for categorical variables, and splits dataset into train, validation, test.
 
 1. In the Jupyter Notebook (or SageMaker Studio) environment, create file `preprocessing.py` with the following content:
 
@@ -116,12 +116,12 @@ if __name__ == "__main__":
 ```
 
 {{% notice info %}}
-Output data will be automatically synchronized to S3 based on the path defined in `TelcoChurnProcessStep` of SageMaker Pipeline.
+Output data will be automatically synchronized to S3 based on the path defined in TelcoChurnProcessStep of SageMaker Pipeline.
 {{% /notice %}}
 
-#### 2.2. File `evaluate.py` (Used for `TelcoChurnEvalStep`)
+#### 2.2. File `evaluate.py` (Used for TelcoChurnEvalStep)
 
-This script extracts the best XGBoost model from the HPO step, predicts on `test.csv`, and calculates the AUC score.
+This script extracts the best XGBoost model from the HPO step, predicts on test.csv, and calculates the AUC score.
 
 1. Create file `evaluate.py` with the following content:
 
@@ -174,5 +174,5 @@ if __name__ == "__main__":
 #### Summary
 
 In this section, you prepared two critical scripts:
-* `preprocessing.py`: Process, clean, and split dataset according to format required by SageMaker XGBoost.
-* `evaluate.py`: Evaluate trained model using AUC metric and export `evaluation.json` file serving model registration condition check (`ConditionStep`).
+* preprocessing.py: Process, clean, and split dataset according to format required by SageMaker XGBoost.
+* evaluate.py: Evaluate trained model using AUC metric and export evaluation.json file serving model registration condition check (ConditionStep).

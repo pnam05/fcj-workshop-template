@@ -56,8 +56,8 @@ Xây dựng hệ thống MLOps trên nền tảng AWS SageMaker Workflow (Pipeli
 ### 6. Ước tính ngân sách  
 - AWS Lambda & Amazon EventBridge: 0,00 USD/tháng (Thuộc Free Tier).  
 - Amazon S3: ~$0.12/tháng (~5 GB bao gồm Artifacts & Data).  
-- AWS SageMaker Processing & Training: ~$0.35/tháng (instance `ml.m5.large`).  
-- AWS SageMaker Hyperparameter Tuning: ~$0.80/tháng (6 Tuning Jobs song song `ml.m5.large`).  
+- AWS SageMaker Processing & Training: ~$0.35/tháng (instance ml.m5.large).  
+- AWS SageMaker Hyperparameter Tuning: ~$0.80/tháng (6 Tuning Jobs song song ml.m5.large).  
 - AWS SageMaker Serverless Endpoint: ~$1.20/tháng (2048 MB Memory, ~10,000 requests/tháng).  
 - Amazon CloudWatch & SNS: ~$0.10/tháng.  
  

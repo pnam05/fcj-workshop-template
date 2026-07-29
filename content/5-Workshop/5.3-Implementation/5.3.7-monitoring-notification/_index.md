@@ -17,14 +17,14 @@ pre : " <b> 5.3.7 </b> "
 ![metric-name](../../../../static/images/5-Workshop/5.3-Implementation/metric-name.png)
 - After selecting the metric, the interface will return to the configuration page. Scroll down to the **Conditions** section:
    + **Threshold type**: Select **Static**
-   + **Whenever Errors is...**: Select **Greater/Equal** (`>= threshold`)
+   + **Whenever Errors is...**: Select **Greater/Equal** (>= threshold)
    + **than...**: Enter threshold value `1`
  ![cond](../../../../static/images/5-Workshop/5.3-Implementation/cond.png)
 - Under **Notification**:
    + **Alarm state trigger**: Select **In alarm** (Execute action when metric exceeds alarm threshold).
    + **Send a notification to the following SNS topic**: Select **Select an existing SNS topic**.
-   + **Send a notification to...**: Select pre-created SNS Topic from dropdown menu (e.g. `Telco-Churn-Alarm-Topic`).
-   + Check Email information receiving notifications displayed in **Email (endpoints)** below (e.g. `trungnam2682005@gmail.com`).
+   + **Send a notification to...**: Select pre-created SNS Topic from dropdown menu (e.g. Telco-Churn-Alarm-Topic).
+   + Check Email information receiving notifications displayed in **Email (endpoints)** below (e.g.trungnam2682005@gmail.com).
    + Scroll to bottom of page and click **Next**.
     ![notice](../../../../static/images/5-Workshop/5.3-Implementation/notice.png)
 - Under **Name and description**:
