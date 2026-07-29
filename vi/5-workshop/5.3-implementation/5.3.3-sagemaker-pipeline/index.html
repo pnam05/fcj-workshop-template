@@ -1,0 +1,435 @@
+<!doctype html><html lang=vi class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.134.3"><meta name=description content><meta name=author content="thienlh@thienlu.com"><link rel=icon href=/fcj-workshop-template/images/favicon.png type=image/png><title>Xây dựng & Khởi chạy SageMaker Pipeline :: Báo cáo thực tập</title>
+<link href=/fcj-workshop-template/css/nucleus.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/fontawesome-all.min.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/hybrid.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/featherlight.min.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/perfect-scrollbar.min.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/auto-complete.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/atom-one-dark-reasonable.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/theme.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/hugo-theme.css?1785317952 rel=stylesheet><link href=/fcj-workshop-template/css/theme-workshop.css?1785317952 rel=stylesheet><script src=/fcj-workshop-template/js/jquery-3.3.1.min.js?1785317952></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.3-sagemaker-pipeline/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=/><svg id="Layer_1" data-name="Layer 1" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff}.cls-2{fill:#fff;fill-rule:evenodd}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38zm13.35 1.8a1 1 0 01-.64-.16 1.3 1.3.0 01-.35-.65L15.81 1.51a3 3 0 01-.15-.67.36.36.0 01.41-.41H17.7a1 1 0 01.65.16 1.4 1.4.0 01.33.65l2.79 11 2.59-11A1.17 1.17.0 0124.39.6a1.1 1.1.0 01.67-.16H26.4a1.1 1.1.0 01.67.16 1.17 1.17.0 01.32.65L30 12.39 32.88 1.25A1.39 1.39.0 0133.22.6a1 1 0 01.65-.16h1.54a.36.36.0 01.41.41 1.36 1.36.0 010 .26 3.64 3.64.0 01-.12.41l-4 12.86a1.3 1.3.0 01-.35.65 1 1 0 01-.64.16H29.25a1 1 0 01-.67-.17 1.26 1.26.0 01-.32-.67L25.67 3.64l-2.56 10.7a1.26 1.26.0 01-.32.67 1 1 0 01-.67.17zm21.36.44a11.28 11.28.0 01-2.56-.29 7.44 7.44.0 01-1.92-.67 1 1 0 01-.61-.93v-.84q0-.52.38-.52a.9.9.0 01.31.06l.42.17a8.77 8.77.0 001.83.58 9.78 9.78.0 002 .2 4.48 4.48.0 002.43-.55 1.76 1.76.0 00.86-1.57 1.61 1.61.0 00-.45-1.16A4.29 4.29.0 0043 9.22l-2.41-.76A5.15 5.15.0 0138 6.78a3.94 3.94.0 01-.83-2.41 3.7 3.7.0 01.45-1.85 4.47 4.47.0 011.19-1.37 5.27 5.27.0 011.7-.86A7.4 7.4.0 0142.6.0a8.87 8.87.0 011.12.07q.57.07 1.08.19t.95.26a4.27 4.27.0 01.7.29 1.59 1.59.0 01.49.41.94.94.0 01.15.55v.79q0 .52-.38.52a1.76 1.76.0 01-.64-.2 7.74 7.74.0 00-3.2-.64 4.37 4.37.0 00-2.21.47 1.6 1.6.0 00-.79 1.48 1.58 1.58.0 00.49 1.18 4.94 4.94.0 001.83.92L44.55 7a5.08 5.08.0 012.57 1.6A3.76 3.76.0 0147.9 11a4.21 4.21.0 01-.44 1.93 4.4 4.4.0 01-1.21 1.47 5.43 5.43.0 01-1.85.93A8.25 8.25.0 0142.05 15.62z"/><path class="cls-2" d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/><path class="cls-2" d="M47.47 21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74 3.13-2.2 8.27-1.57 8.86-.83s-.16 5.89-3.09 8.35c-.45.38-.88.18-.68-.32C46.69 25.8 48.17 22.11 47.47 21.21z"/></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/fcj-workshop-template/js/lunr.min.js?1785317952></script><script type=text/javascript src=/fcj-workshop-template/js/auto-complete.js?1785317952></script><script type=text/javascript>var baseurl="https://pnam05.github.io/fcj-workshop-template//vi"</script><script type=text/javascript src=/fcj-workshop-template/js/search.js?1785317952></script></div><div class=highlightable><ul class=topics><li data-nav-id=/fcj-workshop-template/vi/1-worklog/ title="Nhật ký công việc" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/><b>1. </b>Nhật ký công việc
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.1-week1/ title="Worklog Tuần 1" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.1-week1/><b>1.1. </b>Worklog Tuần 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.2-week2/ title="Worklog Tuần 2" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.2-week2/><b>1.2. </b>Worklog Tuần 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.3-week3/ title="Worklog Tuần 3" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.3-week3/><b>1.3. </b>Worklog Tuần 3
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.4-week4/ title="Worklog Tuần 4" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.4-week4/><b>1.4. </b>Worklog Tuần 4
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.5-week5/ title="Worklog Tuần 5" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.5-week5/><b>1.5. </b>Worklog Tuần 5
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.6-week6/ title="Worklog Tuần 6" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.6-week6/><b>1.6. </b>Worklog Tuần 6
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.7-week7/ title="Worklog Tuần 7" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.7-week7/><b>1.7. </b>Worklog Tuần 7
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.8-week8/ title="Worklog Tuần 8" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.8-week8/><b>1.8. </b>Worklog Tuần 8
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.9-week9/ title="Worklog Tuần 9" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.9-week9/><b>1.9. </b>Worklog Tuần 9
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.10-week10/ title="Worklog Tuần 10" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.10-week10/><b>1.10. </b>Worklog Tuần 10
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.11-week11/ title="Worklog Tuần 11" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.11-week11/><b>1.11. </b>Worklog Tuần 11
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/1-worklog/1.12-week12/ title="Worklog Tuần 12" class=dd-item><a href=/fcj-workshop-template/vi/1-worklog/1.12-week12/><b>1.12 </b>Worklog Tuần 12
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/fcj-workshop-template/vi/2-proposal/ title="Bản đề xuất" class=dd-item><a href=/fcj-workshop-template/vi/2-proposal/><b>2. </b>Bản đề xuất
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/3-blogsposted/ title="Các bài blogs đã đăng" class=dd-item><a href=/fcj-workshop-template/vi/3-blogsposted/><b>3. </b>Các bài blogs đã đăng
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/fcj-workshop-template/vi/3-blogsposted/3.1-blog1/ title="Blog 1" class=dd-item><a href=/fcj-workshop-template/vi/3-blogsposted/3.1-blog1/><b>3.1. </b>Blog 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/3-blogsposted/3.2-blog2/ title="Blog 2" class=dd-item><a href=/fcj-workshop-template/vi/3-blogsposted/3.2-blog2/><b>3.2. </b>Blog 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/3-blogsposted/3.3-blog3/ title="Blog 3" class=dd-item><a href=/fcj-workshop-template/vi/3-blogsposted/3.3-blog3/><b>3.3. </b>Blog 3
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/fcj-workshop-template/vi/4-eventparticipated/ title="Các events đã tham gia" class=dd-item><a href=/fcj-workshop-template/vi/4-eventparticipated/><b>4. </b>Các events đã tham gia
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/fcj-workshop-template/vi/4-eventparticipated/4.1-event1/ title="Event 1" class=dd-item><a href=/fcj-workshop-template/vi/4-eventparticipated/4.1-event1/><b>4.1. </b>Event 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/4-eventparticipated/4.2-event2/ title="Event 2" class=dd-item><a href=/fcj-workshop-template/vi/4-eventparticipated/4.2-event2/><b>4.2. </b>Event 2
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/ title=Workshop class="dd-item
+parent"><a href=/fcj-workshop-template/vi/5-workshop/><b>5. </b>Workshop
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.1-workshop-overview/ title="Tổng quan (Overview)" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.1-workshop-overview/><b>1. </b>Tổng quan (Overview)
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.2-prerequiste/ title="Các bước chuẩn bị" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.2-prerequiste/><b>5.2. </b>Các bước chuẩn bị
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.3-implementation/ title class="dd-item
+parent"><a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/><b>5.3. </b><i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.1-create-s3/ title="Tạo S3 và upload dữ liệu" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.1-create-s3/><b>5.3.1 </b>Tạo S3 và upload dữ liệu
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.2-preprocess-evaluate-scripts/ title="Tạo Scripts Xử lý Dữ liệu & Đánh giá Mô hình" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.2-preprocess-evaluate-scripts/><b>5.3.2 </b>Tạo Scripts Xử lý Dữ liệu & Đánh giá Mô hình
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.3-sagemaker-pipeline/ title="Xây dựng & Khởi chạy SageMaker Pipeline" class="dd-item
+active"><a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.3-sagemaker-pipeline/><b>5.3.1 </b>Xây dựng & Khởi chạy SageMaker Pipeline
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.4-data-drift-retrain/ title="Cấu hình AWS Lambda Check Data Drift & Kích hoạt Retrain" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.4-data-drift-retrain/><b>5.3.4 </b>Cấu hình AWS Lambda Check Data Drift & Kích hoạt Retrain
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.5-auto-deploy/ title="Tạo AWS Lambda Auto-Deployer và Amazon EventBridge Rule" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.5-auto-deploy/><b>5.3.5 </b>Tạo AWS Lambda Auto-Deployer và Amazon EventBridge Rule
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.6-inference-api/ title="Cấu hình Real-time Inference API (API Gateway & Predict Lambda)" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.6-inference-api/><b>5.3.6 </b>Cấu hình Real-time Inference API (API Gateway & Predict Lambda)
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.7-monitoring-notification/ title="Cấu hình Monitoring & Notification (CloudWatch & SNS)" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.7-monitoring-notification/><b>5.3.7 </b>Cấu hình Monitoring & Notification (CloudWatch & SNS)
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/ title="Truy cập S3 từ môi trường truyền thống" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/><b>5.4. </b>Truy cập S3 từ môi trường truyền thống
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.1-prepare/ title="Chuẩn bị tài nguyên" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.1-prepare/><b>5.4.1 </b>Chuẩn bị tài nguyên
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.2-create-interface-enpoint/ title="Tạo một S3 Interface endpoint" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.2-create-interface-enpoint/><b>5.4.2 </b>Tạo một S3 Interface endpoint
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.3-test-endpoint/ title="Kiểm tra Interface Endpoint" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.3-test-endpoint/><b>5.4.3 </b>Kiểm tra Interface Endpoint
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.4-dns-simulation/ title="Mô phỏng On-premises DNS " class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.4-dns-simulation/><b>5.4.4 </b>Mô phỏng On-premises DNS
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.5-policy/ title="VPC Endpoint Policies" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.5-policy/><b>5.5 </b>VPC Endpoint Policies
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/5-workshop/5.6-cleanup/ title="Dọn dẹp tài nguyên" class=dd-item><a href=/fcj-workshop-template/vi/5-workshop/5.6-cleanup/><b>5.6. </b>Dọn dẹp tài nguyên
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/fcj-workshop-template/vi/6-self-evaluation/ title="Tự đánh giá" class=dd-item><a href=/fcj-workshop-template/vi/6-self-evaluation/><b>6. </b>Tự đánh giá
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/fcj-workshop-template/vi/7-feedback/ title="Chia sẻ, đóng góp ý kiến" class=dd-item><a href=/fcj-workshop-template/vi/7-feedback/><b>7. </b>Chia sẻ, đóng góp ý kiến
+<i class="fas fa-check read-icon"></i></a></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=http://awsstudygroup.com><i class='fab fa-aws'></i> AWS Study Group - Blog</a></li><li><a class=padding href=https://www.facebook.com/groups/awsstudygroupfcj><i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=en value=https://pnam05.github.io/fcj-workshop-template/5-workshop/5.3-implementation/5.3.3-sagemaker-pipeline/>English</option><option id=vi value=https://pnam05.github.io/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.3-sagemaker-pipeline/ selected>Tiếng Việt</option></select><svg id="Capa_1" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><left><br><br><b>Last Updated</b><br><i><font color=orange>29-07-2026</font>
+</i></left><left><br><br><b>Team</b><br><i><a href=https://www.facebook.com/groups/660548818043427 style=color:orange>First Cloud AI Journey</a>
+</i></left><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
+</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links><a href=/fcj-workshop-template/vi/>Báo cáo thực tập</a> > <a href=/fcj-workshop-template/vi/5-workshop/>Workshop</a> > <a href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/></a>> Xây dựng & Khởi chạy SageMaker Pipeline</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Xây dựng & Khởi chạy SageMaker Pipeline</h1><p>Trong phần này, chúng ta sẽ thực hành toàn bộ quy trình MLOps trên Amazon SageMaker, từ bước chuẩn bị dữ liệu, huấn luyện đơn lẻ, tinh chỉnh siêu tham số (HPO), đăng ký mô hình, triển khai Serverless Endpoint cho tới việc đóng gói tự động thành một <strong>SageMaker Pipeline 4 bước</strong>.</p><h4 id=khởi-tạo-môi-trường--kết-nối-s3-bucket>Khởi tạo Môi trường & Kết nối S3 Bucket</h4><p>Đầu tiên, nhập các thư viện cần thiết, thiết lập phiên làm việc SageMaker và đọc dữ liệu thô từ S3.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> boto3
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> sagemaker
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>sagemaker_session <span style=color:#f92672>=</span> sagemaker<span style=color:#f92672>.</span>Session()
+</span></span><span style=display:flex><span>role <span style=color:#f92672>=</span> sagemaker<span style=color:#f92672>.</span>get_execution_role()
+</span></span><span style=display:flex><span>region <span style=color:#f92672>=</span> sagemaker_session<span style=color:#f92672>.</span>boto_region_name
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>bucket_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;telco-churn-mlops-fcaj&#34;</span> 
+</span></span><span style=display:flex><span>raw_data_key <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;raw/WA_Fn-UseC_-Telco-Customer-Churn.csv&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>s3_path <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>raw_data_key<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_csv(s3_path)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Kết nối thành công tới S3 Bucket: </span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Region: </span><span style=color:#e6db74>{</span>region<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Kích thước dataset: </span><span style=color:#e6db74>{</span>df<span style=color:#f92672>.</span>shape<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>df<span style=color:#f92672>.</span>head(<span style=color:#ae81ff>3</span>)
+</span></span></code></pre></div><h4 id=xử-lý-dữ-liệu-với-processing-job>Xử lý Dữ liệu với Processing Job</h4><p>Sử dụng SKLearnProcessor để kích hoạt một container chạy file preprocessing.py. Dữ liệu thô sẽ được đọc từ S3, sau đó chia làm các tập Train, Validation, Test và tự động đẩy ngược lại S3</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.sklearn.processing <span style=color:#f92672>import</span> SKLearnProcessor
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.processing <span style=color:#f92672>import</span> ProcessingInput, ProcessingOutput
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1. Khai báo SKLearnProcessor</span>
+</span></span><span style=display:flex><span>sklearn_processor <span style=color:#f92672>=</span> SKLearnProcessor(
+</span></span><span style=display:flex><span>    framework_version<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1.2-1&#34;</span>,
+</span></span><span style=display:flex><span>    role<span style=color:#f92672>=</span>role,
+</span></span><span style=display:flex><span>    instance_type<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ml.t3.medium&#34;</span>,
+</span></span><span style=display:flex><span>    instance_count<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    base_job_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;telco-churn-preprocessing&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. Định nghĩa vị trí Input (S3) và Output (S3)</span>
+</span></span><span style=display:flex><span>input_s3_uri <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv&#34;</span>
+</span></span><span style=display:flex><span>output_s3_uri <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/processed&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34; Đang khởi chạy Processing Job trên AWS...&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. Kích hoạt Processing Job</span>
+</span></span><span style=display:flex><span>sklearn_processor<span style=color:#f92672>.</span>run(
+</span></span><span style=display:flex><span>    code<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;preprocessing.py&#34;</span>,
+</span></span><span style=display:flex><span>    inputs<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>        ProcessingInput(
+</span></span><span style=display:flex><span>            source<span style=color:#f92672>=</span>input_s3_uri,
+</span></span><span style=display:flex><span>            destination<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/input&#34;</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>    ],
+</span></span><span style=display:flex><span>    outputs<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>        ProcessingOutput(
+</span></span><span style=display:flex><span>            output_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;train_data&#34;</span>,
+</span></span><span style=display:flex><span>            source<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/output/train&#34;</span>,
+</span></span><span style=display:flex><span>            destination<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>output_s3_uri<span style=color:#e6db74>}</span><span style=color:#e6db74>/train&#34;</span>
+</span></span><span style=display:flex><span>        ),
+</span></span><span style=display:flex><span>        ProcessingOutput(
+</span></span><span style=display:flex><span>            output_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;validation_data&#34;</span>,
+</span></span><span style=display:flex><span>            source<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/output/validation&#34;</span>,
+</span></span><span style=display:flex><span>            destination<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>output_s3_uri<span style=color:#e6db74>}</span><span style=color:#e6db74>/validation&#34;</span>
+</span></span><span style=display:flex><span>        ),
+</span></span><span style=display:flex><span>        ProcessingOutput(
+</span></span><span style=display:flex><span>            output_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;test_data&#34;</span>,
+</span></span><span style=display:flex><span>            source<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/output/test&#34;</span>,
+</span></span><span style=display:flex><span>            destination<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>output_s3_uri<span style=color:#e6db74>}</span><span style=color:#e6db74>/test&#34;</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>    ]
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><p><img alt=preprocess src=../../../../static/images/5-Workshop/5.3-Implementation/preprocess.png></p><h4 id=huấn-luyện-mô-hình-xgboost-đơn-lẻ-training-job>Huấn luyện Mô hình XGBoost Đơn lẻ (Training Job)</h4><h5 id=lấy-image-uri--thiết-lập-cấu-hình-s3>Lấy Image URI & Thiết lập Cấu hình S3</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.inputs <span style=color:#f92672>import</span> TrainingInput
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1. Lấy URI của Docker Image XGBoost</span>
+</span></span><span style=display:flex><span>xgboost_container <span style=color:#f92672>=</span> sagemaker<span style=color:#f92672>.</span>image_uris<span style=color:#f92672>.</span>retrieve(
+</span></span><span style=display:flex><span>    framework<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;xgboost&#34;</span>,
+</span></span><span style=display:flex><span>    region<span style=color:#f92672>=</span>region,
+</span></span><span style=display:flex><span>    version<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;1.5-1&#34;</span> 
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. Đường dẫn dữ liệu và output trên S3</span>
+</span></span><span style=display:flex><span>s3_train_data <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/processed/train/train.csv&#34;</span>
+</span></span><span style=display:flex><span>s3_validation_data <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/processed/validation/validation.csv&#34;</span>
+</span></span><span style=display:flex><span>s3_output_path <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/models/xgboost-single-train&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>train_input <span style=color:#f92672>=</span> TrainingInput(s3_data<span style=color:#f92672>=</span>s3_train_data, content_type<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/csv&#34;</span>)
+</span></span><span style=display:flex><span>validation_input <span style=color:#f92672>=</span> TrainingInput(s3_data<span style=color:#f92672>=</span>s3_validation_data, content_type<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/csv&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34; Đã cấu hình xong đường dẫn dữ liệu S3 cho Training Job&#34;</span>)
+</span></span></code></pre></div><h5 id=cấu-hình-hyperparameters--huấn-luyện>Cấu hình Hyperparameters & Huấn luyện</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 1. Khai báo Estimator</span>
+</span></span><span style=display:flex><span>xgb_estimator <span style=color:#f92672>=</span> sagemaker<span style=color:#f92672>.</span>estimator<span style=color:#f92672>.</span>Estimator(
+</span></span><span style=display:flex><span>    image_uri<span style=color:#f92672>=</span>xgboost_container,
+</span></span><span style=display:flex><span>    role<span style=color:#f92672>=</span>role,
+</span></span><span style=display:flex><span>    instance_count<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    instance_type<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ml.m5.large&#34;</span>, 
+</span></span><span style=display:flex><span>    output_path<span style=color:#f92672>=</span>s3_output_path,
+</span></span><span style=display:flex><span>    sagemaker_session<span style=color:#f92672>=</span>sagemaker_session,
+</span></span><span style=display:flex><span>    base_job_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;telco-churn-xgb-train&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. Thiết lập Hyperparameters</span>
+</span></span><span style=display:flex><span>xgb_estimator<span style=color:#f92672>.</span>set_hyperparameters(
+</span></span><span style=display:flex><span>    max_depth<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>,
+</span></span><span style=display:flex><span>    eta<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>,
+</span></span><span style=display:flex><span>    gamma<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>,
+</span></span><span style=display:flex><span>    min_child_weight<span style=color:#f92672>=</span><span style=color:#ae81ff>6</span>,
+</span></span><span style=display:flex><span>    subsample<span style=color:#f92672>=</span><span style=color:#ae81ff>0.8</span>,
+</span></span><span style=display:flex><span>    objective<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;binary:logistic&#34;</span>,
+</span></span><span style=display:flex><span>    eval_metric<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;auc&#34;</span>, 
+</span></span><span style=display:flex><span>    num_round<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. Kích hoạt Training Job</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34; Đang khởi chạy SageMaker Training Job...&#34;</span>)
+</span></span><span style=display:flex><span>xgb_estimator<span style=color:#f92672>.</span>fit({
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;train&#34;</span>: train_input,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;validation&#34;</span>: validation_input
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><h4 id=tinh-chỉnh-siêu-tham-số-hyperparameter-optimization---hpo>Tinh chỉnh Siêu tham số (Hyperparameter Optimization - HPO)</h4><p>Thiết lập dải tham số tìm kiếm và khởi tạo HyperparameterTuner để tự động chạy 6 thử nghiệm (2 job song song) tìm ra cấu hình đạt Validation AUC cao nhất.</p><h5 id=thiết-lập-dải-tham-số--khởi-tạo-tuner>Thiết lập Dải Tham số & Khởi tạo Tuner</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.tuner <span style=color:#f92672>import</span> IntegerParameter, ContinuousParameter, HyperparameterTuner
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.pipeline_context <span style=color:#f92672>import</span> PipelineSession
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.processing <span style=color:#f92672>import</span> ScriptProcessor
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>pipeline_session <span style=color:#f92672>=</span> PipelineSession()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1. Khai báo dải tìm kiếm</span>
+</span></span><span style=display:flex><span>hyperparameter_ranges <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;max_depth&#34;</span>: IntegerParameter(<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>8</span>),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;eta&#34;</span>: ContinuousParameter(<span style=color:#ae81ff>0.01</span>, <span style=color:#ae81ff>0.2</span>),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;min_child_weight&#34;</span>: IntegerParameter(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>10</span>),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;subsample&#34;</span>: ContinuousParameter(<span style=color:#ae81ff>0.5</span>, <span style=color:#ae81ff>0.9</span>),
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;alpha&#34;</span>: ContinuousParameter(<span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>2.0</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>objective_metric_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;validation:auc&#34;</span>
+</span></span><span style=display:flex><span>objective_type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Maximize&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. Estimator &amp; ScriptProcessor cho HPO</span>
+</span></span><span style=display:flex><span>xgb_hpo_estimator <span style=color:#f92672>=</span> sagemaker<span style=color:#f92672>.</span>estimator<span style=color:#f92672>.</span>Estimator(
+</span></span><span style=display:flex><span>    image_uri<span style=color:#f92672>=</span>xgboost_container,
+</span></span><span style=display:flex><span>    role<span style=color:#f92672>=</span>role,
+</span></span><span style=display:flex><span>    instance_count<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    instance_type<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ml.m5.large&#34;</span>,
+</span></span><span style=display:flex><span>    output_path<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/models/xgboost-hpo&#34;</span>,
+</span></span><span style=display:flex><span>    sagemaker_session<span style=color:#f92672>=</span>pipeline_session, 
+</span></span><span style=display:flex><span>    base_job_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;telco-churn-hpo&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>xgb_hpo_estimator<span style=color:#f92672>.</span>set_hyperparameters(
+</span></span><span style=display:flex><span>    objective<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;binary:logistic&#34;</span>,
+</span></span><span style=display:flex><span>    eval_metric<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;auc&#34;</span>,
+</span></span><span style=display:flex><span>    num_round<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>xgb_eval_processor <span style=color:#f92672>=</span> ScriptProcessor(
+</span></span><span style=display:flex><span>    image_uri<span style=color:#f92672>=</span>xgboost_container, 
+</span></span><span style=display:flex><span>    command<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;python3&#34;</span>],
+</span></span><span style=display:flex><span>    role<span style=color:#f92672>=</span>role,
+</span></span><span style=display:flex><span>    instance_count<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    instance_type<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;ml.m5.large&#34;</span>, 
+</span></span><span style=display:flex><span>    sagemaker_session<span style=color:#f92672>=</span>pipeline_session
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. Khai báo HyperparameterTuner</span>
+</span></span><span style=display:flex><span>tuner <span style=color:#f92672>=</span> HyperparameterTuner(
+</span></span><span style=display:flex><span>    estimator<span style=color:#f92672>=</span>xgb_hpo_estimator,
+</span></span><span style=display:flex><span>    objective_metric_name<span style=color:#f92672>=</span>objective_metric_name,
+</span></span><span style=display:flex><span>    hyperparameter_ranges<span style=color:#f92672>=</span>hyperparameter_ranges,
+</span></span><span style=display:flex><span>    objective_type<span style=color:#f92672>=</span>objective_type,
+</span></span><span style=display:flex><span>    max_jobs<span style=color:#f92672>=</span><span style=color:#ae81ff>6</span>,
+</span></span><span style=display:flex><span>    max_parallel_jobs<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>,
+</span></span><span style=display:flex><span>    base_tuning_job_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;hpo-telco-churn&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34; Đã khởi tạo HyperparameterTuner thành công!&#34;</span>)
+</span></span></code></pre></div><h5 id=chạy-hpo-job--trích-xuất-kết-quả-tốt-nhất>Chạy HPO Job & Trích xuất Kết quả Tốt nhất</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>print(<span style=color:#e6db74>&#34; Đang khởi chạy Hyperparameter Tuning Job trên AWS...&#34;</span>)
+</span></span><span style=display:flex><span>tuner<span style=color:#f92672>.</span>fit({<span style=color:#e6db74>&#34;train&#34;</span>: train_input, <span style=color:#e6db74>&#34;validation&#34;</span>: validation_input})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Lấy thông tin Job tốt nhất</span>
+</span></span><span style=display:flex><span>best_job_name <span style=color:#f92672>=</span> tuner<span style=color:#f92672>.</span>best_training_job()
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Training Job cho kết quả tốt nhất: </span><span style=color:#e6db74>{</span>best_job_name<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>hpo_results <span style=color:#f92672>=</span> tuner<span style=color:#f92672>.</span>analytics()<span style=color:#f92672>.</span>dataframe()
+</span></span><span style=display:flex><span>best_job_row <span style=color:#f92672>=</span> hpo_results[hpo_results[<span style=color:#e6db74>&#39;TrainingJobName&#39;</span>] <span style=color:#f92672>==</span> best_job_name]<span style=color:#f92672>.</span>iloc[<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Validation AUC tốt nhất: </span><span style=color:#e6db74>{</span>best_job_row[<span style=color:#e6db74>&#39;FinalObjectiveValue&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> col <span style=color:#f92672>in</span> hpo_results<span style=color:#f92672>.</span>columns:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> col <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> [<span style=color:#e6db74>&#39;TrainingJobName&#39;</span>, <span style=color:#e6db74>&#39;TrainingJobStatus&#39;</span>, <span style=color:#e6db74>&#39;FinalObjectiveValue&#39;</span>, <span style=color:#e6db74>&#39;TrainingStartTime&#39;</span>, <span style=color:#e6db74>&#39;TrainingEndTime&#39;</span>]:
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; - </span><span style=color:#e6db74>{</span>col<span style=color:#e6db74>}</span><span style=color:#e6db74>: </span><span style=color:#e6db74>{</span>best_job_row[col]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><img alt=best-conf src=../../../../static/images/5-Workshop/5.3-Implementation/best-conf.png></p><h4 id=đăng-ký-mô-hình-vào-sagemaker-model-registry>Đăng ký Mô hình vào SageMaker Model Registry</h4><p>Tạo mới một Model Package Group và đăng ký mô hình tốt nhất đạt được từ bước HPO.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> boto3
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>sm_boto3_client <span style=color:#f92672>=</span> boto3<span style=color:#f92672>.</span>client(<span style=color:#e6db74>&#39;sagemaker&#39;</span>, region_name<span style=color:#f92672>=</span>region)
+</span></span><span style=display:flex><span>model_package_group_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;TelcoChurnModelGroup&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1. Tạo Group trong Model Registry</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>    sm_boto3_client<span style=color:#f92672>.</span>create_model_package_group(
+</span></span><span style=display:flex><span>        ModelPackageGroupName<span style=color:#f92672>=</span>model_package_group_name,
+</span></span><span style=display:flex><span>        ModelPackageGroupDescription<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Group chua cac phien ban mo hinh du doan Telco Customer Churn&#34;</span>
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Đã tạo mới Model Package Group: </span><span style=color:#e6db74>{</span>model_package_group_name<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>except</span> <span style=color:#a6e22e>Exception</span> <span style=color:#66d9ef>as</span> e:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#e6db74>&#34;already exists&#34;</span> <span style=color:#f92672>in</span> str(e):
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Model Package Group &#39;</span><span style=color:#e6db74>{</span>model_package_group_name<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39; đã tồn tại.&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. Đăng ký phiên bản mô hình mới</span>
+</span></span><span style=display:flex><span>best_model_s3_uri <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/models/xgboost-hpo/</span><span style=color:#e6db74>{</span>best_job_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/output/model.tar.gz&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>create_model_package_input <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;ModelPackageGroupName&#34;</span>: model_package_group_name,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;ModelPackageDescription&#34;</span>: <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Mo hinh XGBoost tot nhat tu HPO Job </span><span style=color:#e6db74>{</span>best_job_name<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;ModelApprovalStatus&#34;</span>: <span style=color:#e6db74>&#34;PendingManualApproval&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;InferenceSpecification&#34;</span>: {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Containers&#34;</span>: [{<span style=color:#e6db74>&#34;Image&#34;</span>: xgboost_container, <span style=color:#e6db74>&#34;ModelDataUrl&#34;</span>: best_model_s3_uri}],
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;SupportedContentTypes&#34;</span>: [<span style=color:#e6db74>&#34;text/csv&#34;</span>],
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;SupportedResponseMIMETypes&#34;</span>: [<span style=color:#e6db74>&#34;text/csv&#34;</span>],
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>response <span style=color:#f92672>=</span> sm_boto3_client<span style=color:#f92672>.</span>create_model_package(<span style=color:#f92672>**</span>create_model_package_input)
+</span></span><span style=display:flex><span>model_package_arn <span style=color:#f92672>=</span> response[<span style=color:#e6db74>&#34;ModelPackageArn&#34;</span>]
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;🔗 Model Package ARN: </span><span style=color:#e6db74>{</span>model_package_arn<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. Phê duyệt mô hình (Approved)</span>
+</span></span><span style=display:flex><span>sm_boto3_client<span style=color:#f92672>.</span>update_model_package(
+</span></span><span style=display:flex><span>    ModelPackageArn<span style=color:#f92672>=</span>model_package_arn,
+</span></span><span style=display:flex><span>    ModelApprovalStatus<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Approved&#34;</span>,
+</span></span><span style=display:flex><span>    ApprovalDescription<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Mo hinh dat chi so AUC cao tu HPO, du dieu kien deploy len Serverless Endpoint.&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34; Đã chuyển trạng thái mô hình sang APPROVED thành công!&#34;</span>)
+</span></span></code></pre></div><p><img alt=best-conf src=../../../../static/images/5-Workshop/5.3-Implementation/model-reg.png></p><h4 id=triển-khai--kiểm-thử-serverless-endpoint>Triển khai & Kiểm thử Serverless Endpoint</h4><h5 id=deploy-serverless-endpoint>Deploy Serverless Endpoint</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.serverless <span style=color:#f92672>import</span> ServerlessInferenceConfig
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.model <span style=color:#f92672>import</span> Model
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>serverless_config <span style=color:#f92672>=</span> ServerlessInferenceConfig(
+</span></span><span style=display:flex><span>    memory_size_in_mb<span style=color:#f92672>=</span><span style=color:#ae81ff>2048</span>,
+</span></span><span style=display:flex><span>    max_concurrency<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>endpoint_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;telco-churn-serverless-endpoint&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> Model(
+</span></span><span style=display:flex><span>    image_uri<span style=color:#f92672>=</span>xgboost_container,
+</span></span><span style=display:flex><span>    model_data<span style=color:#f92672>=</span>best_model_s3_uri,
+</span></span><span style=display:flex><span>    role<span style=color:#f92672>=</span>role,
+</span></span><span style=display:flex><span>    sagemaker_session<span style=color:#f92672>=</span>sagemaker_session
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34; Đang khởi tạo Serverless Endpoint...&#34;</span>)
+</span></span><span style=display:flex><span>predictor <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>deploy(
+</span></span><span style=display:flex><span>    endpoint_name<span style=color:#f92672>=</span>endpoint_name,
+</span></span><span style=display:flex><span>    serverless_inference_config<span style=color:#f92672>=</span>serverless_config
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Triển khai Serverless Endpoint thành công: </span><span style=color:#e6db74>{</span>endpoint_name<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><img alt=deploy src=../../../../static/images/5-Workshop/5.3-Implementation/deploy.png></p><h5 id=kiểm-thử-dự-đoán-inference-test>Kiểm thử dự đoán (Inference Test)</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Lấy 1 mẫu dữ liệu từ tập Test trên S3 để gửi tới Endpoint</span>
+</span></span><span style=display:flex><span>s3_test_path <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/processed/test/test.csv&#34;</span>
+</span></span><span style=display:flex><span>test_df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_csv(s3_test_path, header<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>sample_data <span style=color:#f92672>=</span> test_df<span style=color:#f92672>.</span>iloc[<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>:]<span style=color:#f92672>.</span>values
+</span></span><span style=display:flex><span>sample_csv_string <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;,&#34;</span><span style=color:#f92672>.</span>join(map(str, sample_data))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>response <span style=color:#f92672>=</span> sagemaker_session<span style=color:#f92672>.</span>sagemaker_runtime_client<span style=color:#f92672>.</span>invoke_endpoint(
+</span></span><span style=display:flex><span>    EndpointName<span style=color:#f92672>=</span>endpoint_name,
+</span></span><span style=display:flex><span>    ContentType<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/csv&#34;</span>,
+</span></span><span style=display:flex><span>    Body<span style=color:#f92672>=</span>sample_csv_string
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>churn_probability <span style=color:#f92672>=</span> float(response[<span style=color:#e6db74>&#34;Body&#34;</span>]<span style=color:#f92672>.</span>read()<span style=color:#f92672>.</span>decode(<span style=color:#e6db74>&#34;utf-8&#34;</span>))
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Xác suất rời bỏ dịch vụ (Churn Probability): </span><span style=color:#e6db74>{</span>churn_probability<span style=color:#e6db74>:</span><span style=color:#e6db74>.4f</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Dự đoán: </span><span style=color:#e6db74>{</span><span style=color:#e6db74>&#39;CHURN (Rời bỏ)&#39;</span> <span style=color:#66d9ef>if</span> churn_probability <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0.5</span> <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#39;RETAIN (Ở lại)&#39;</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><img alt=deploy src=../../../../static/images/5-Workshop/5.3-Implementation/inference.png></p><h4 id=đóng-gói--tự-động-hóa-với-sagemaker-pipeline-4-bước>Đóng gói & Tự động hóa với SageMaker Pipeline (4 Bước)</h4><p>Toàn bộ quy trình sẽ được tự động hóa bằng SageMaker Pipeline gồm:</p><ul><li><strong>ProcessingStep:</strong> Làm sạch & phân chia dữ liệu.</li><li><strong>TuningStep:</strong> Tìm kiếm siêu tham số tối ưu.</li><li><strong>ProcessingStep (Evaluation):</strong> Giải nén mô hình tốt nhất, dự đoán tập Test và xuất chỉ số AUC vào file evaluation.json.</li><li><strong>ConditionStep:</strong> Kiểm tra chỉ số AUC. Nếu AUC >= 0.80, tự động đăng ký mô hình vào Registry (ModelStep). Ngược lại, hủy Pipeline (FailStep)[cite: 2].</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.steps <span style=color:#f92672>import</span> ProcessingStep, TuningStep
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.model_step <span style=color:#f92672>import</span> ModelStep
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.pipeline <span style=color:#f92672>import</span> Pipeline
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.properties <span style=color:#f92672>import</span> PropertyFile
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.conditions <span style=color:#f92672>import</span> ConditionGreaterThanOrEqualTo
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.condition_step <span style=color:#f92672>import</span> ConditionStep
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.fail_step <span style=color:#f92672>import</span> FailStep
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.functions <span style=color:#f92672>import</span> JsonGet
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.workflow.pipeline_context <span style=color:#f92672>import</span> PipelineSession
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sagemaker.model <span style=color:#f92672>import</span> Model
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>pipeline_session <span style=color:#f92672>=</span> PipelineSession()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># STEP 1: PROCESSING STEP</span>
+</span></span><span style=display:flex><span>step_process <span style=color:#f92672>=</span> ProcessingStep(
+</span></span><span style=display:flex><span>    name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TelcoChurnProcessStep&#34;</span>,
+</span></span><span style=display:flex><span>    processor<span style=color:#f92672>=</span>sklearn_processor,
+</span></span><span style=display:flex><span>    inputs<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>        ProcessingInput(
+</span></span><span style=display:flex><span>            source<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;s3://</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/raw/&#34;</span>,
+</span></span><span style=display:flex><span>            destination<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/input&#34;</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>    ],
+</span></span><span style=display:flex><span>    outputs<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>        ProcessingOutput(output_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;train_data&#34;</span>, source<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/output/train&#34;</span>, destination<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>output_s3_uri<span style=color:#e6db74>}</span><span style=color:#e6db74>/train&#34;</span>),
+</span></span><span style=display:flex><span>        ProcessingOutput(output_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;validation_data&#34;</span>, source<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/output/validation&#34;</span>, destination<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>output_s3_uri<span style=color:#e6db74>}</span><span style=color:#e6db74>/validation&#34;</span>),
+</span></span><span style=display:flex><span>        ProcessingOutput(output_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;test_data&#34;</span>, source<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/output/test&#34;</span>, destination<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>output_s3_uri<span style=color:#e6db74>}</span><span style=color:#e6db74>/test&#34;</span>)
+</span></span><span style=display:flex><span>    ],
+</span></span><span style=display:flex><span>    code<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;preprocessing.py&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>train_data_uri <span style=color:#f92672>=</span> step_process<span style=color:#f92672>.</span>properties<span style=color:#f92672>.</span>ProcessingOutputConfig<span style=color:#f92672>.</span>Outputs[<span style=color:#e6db74>&#34;train_data&#34;</span>]<span style=color:#f92672>.</span>S3Output<span style=color:#f92672>.</span>S3Uri
+</span></span><span style=display:flex><span>val_data_uri <span style=color:#f92672>=</span> step_process<span style=color:#f92672>.</span>properties<span style=color:#f92672>.</span>ProcessingOutputConfig<span style=color:#f92672>.</span>Outputs[<span style=color:#e6db74>&#34;validation_data&#34;</span>]<span style=color:#f92672>.</span>S3Output<span style=color:#f92672>.</span>S3Uri
+</span></span><span style=display:flex><span>test_data_uri <span style=color:#f92672>=</span> step_process<span style=color:#f92672>.</span>properties<span style=color:#f92672>.</span>ProcessingOutputConfig<span style=color:#f92672>.</span>Outputs[<span style=color:#e6db74>&#34;test_data&#34;</span>]<span style=color:#f92672>.</span>S3Output<span style=color:#f92672>.</span>S3Uri
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># STEP 2: TUNING STEP</span>
+</span></span><span style=display:flex><span>step_tuning <span style=color:#f92672>=</span> TuningStep(
+</span></span><span style=display:flex><span>    name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TelcoChurnHpoStep&#34;</span>,
+</span></span><span style=display:flex><span>    tuner<span style=color:#f92672>=</span>tuner,
+</span></span><span style=display:flex><span>    inputs<span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;train&#34;</span>: TrainingInput(s3_data<span style=color:#f92672>=</span>train_data_uri, content_type<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/csv&#34;</span>),
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;validation&#34;</span>: TrainingInput(s3_data<span style=color:#f92672>=</span>val_data_uri, content_type<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/csv&#34;</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># STEP 3: EVALUATION STEP</span>
+</span></span><span style=display:flex><span>evaluation_report <span style=color:#f92672>=</span> PropertyFile(
+</span></span><span style=display:flex><span>    name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;EvaluationReport&#34;</span>,
+</span></span><span style=display:flex><span>    output_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;evaluation&#34;</span>,
+</span></span><span style=display:flex><span>    path<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;evaluation.json&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>best_model_s3_uri <span style=color:#f92672>=</span> step_tuning<span style=color:#f92672>.</span>get_top_model_s3_uri(top_k<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>, s3_bucket<span style=color:#f92672>=</span><span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>bucket_name<span style=color:#e6db74>}</span><span style=color:#e6db74>/models/xgboost-hpo&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>step_eval <span style=color:#f92672>=</span> ProcessingStep(
+</span></span><span style=display:flex><span>    name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TelcoChurnEvalStep&#34;</span>,
+</span></span><span style=display:flex><span>    processor<span style=color:#f92672>=</span>xgb_eval_processor,
+</span></span><span style=display:flex><span>    code<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;evaluate.py&#34;</span>,
+</span></span><span style=display:flex><span>    inputs<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>        ProcessingInput(source<span style=color:#f92672>=</span>best_model_s3_uri, destination<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/model&#34;</span>),
+</span></span><span style=display:flex><span>        ProcessingInput(source<span style=color:#f92672>=</span>test_data_uri, destination<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/test&#34;</span>)
+</span></span><span style=display:flex><span>    ],
+</span></span><span style=display:flex><span>    outputs<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>        ProcessingOutput(output_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;evaluation&#34;</span>, source<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/opt/ml/processing/evaluation&#34;</span>)
+</span></span><span style=display:flex><span>    ],
+</span></span><span style=display:flex><span>    property_files<span style=color:#f92672>=</span>[evaluation_report]
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># STEP 4: REGISTER &amp; FAIL STEPS</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> Model(
+</span></span><span style=display:flex><span>    image_uri<span style=color:#f92672>=</span>xgb_hpo_estimator<span style=color:#f92672>.</span>image_uri,
+</span></span><span style=display:flex><span>    model_data<span style=color:#f92672>=</span>best_model_s3_uri,
+</span></span><span style=display:flex><span>    sagemaker_session<span style=color:#f92672>=</span>pipeline_session,
+</span></span><span style=display:flex><span>    role<span style=color:#f92672>=</span>role
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>step_register <span style=color:#f92672>=</span> ModelStep(
+</span></span><span style=display:flex><span>    name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TelcoChurnRegisterModelStep&#34;</span>,
+</span></span><span style=display:flex><span>    step_args<span style=color:#f92672>=</span>model<span style=color:#f92672>.</span>register(
+</span></span><span style=display:flex><span>        content_types<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;text/csv&#34;</span>],
+</span></span><span style=display:flex><span>        response_types<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;text/csv&#34;</span>],
+</span></span><span style=display:flex><span>        inference_instances<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;ml.m5.large&#34;</span>],
+</span></span><span style=display:flex><span>        transform_instances<span style=color:#f92672>=</span>[<span style=color:#e6db74>&#34;ml.m5.large&#34;</span>],
+</span></span><span style=display:flex><span>        model_package_group_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TelcoChurnModelGroup&#34;</span>,
+</span></span><span style=display:flex><span>        approval_status<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Approved&#34;</span>
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>step_fail <span style=color:#f92672>=</span> FailStep(
+</span></span><span style=display:flex><span>    name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TelcoChurnAUCFailStep&#34;</span>,
+</span></span><span style=display:flex><span>    error_message<span style=color:#f92672>=</span><span style=color:#e6db74>&#34; Retrain thất bại: Mô hình mới có AUC thấp hơn ngưỡng cho phép (0.80)!&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># CONDITION STEP</span>
+</span></span><span style=display:flex><span>cond_gte <span style=color:#f92672>=</span> ConditionGreaterThanOrEqualTo(
+</span></span><span style=display:flex><span>    left<span style=color:#f92672>=</span>JsonGet(
+</span></span><span style=display:flex><span>        step_name<span style=color:#f92672>=</span>step_eval<span style=color:#f92672>.</span>name,
+</span></span><span style=display:flex><span>        property_file<span style=color:#f92672>=</span>evaluation_report,
+</span></span><span style=display:flex><span>        json_path<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;binary_classification_metrics.auc.value&#34;</span>
+</span></span><span style=display:flex><span>    ),
+</span></span><span style=display:flex><span>    right<span style=color:#f92672>=</span><span style=color:#ae81ff>0.80</span> 
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>step_cond <span style=color:#f92672>=</span> ConditionStep(
+</span></span><span style=display:flex><span>    name<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TelcoChurnCheckAUCThreshold&#34;</span>,
+</span></span><span style=display:flex><span>    conditions<span style=color:#f92672>=</span>[cond_gte],
+</span></span><span style=display:flex><span>    if_steps<span style=color:#f92672>=</span>[step_register], 
+</span></span><span style=display:flex><span>    else_steps<span style=color:#f92672>=</span>[step_fail]    
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># PIPELINE UPSERT &amp; START</span>
+</span></span><span style=display:flex><span>pipeline_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;TelcoChurnMLOpsPipeline&#34;</span>
+</span></span><span style=display:flex><span>pipeline <span style=color:#f92672>=</span> Pipeline(
+</span></span><span style=display:flex><span>    name<span style=color:#f92672>=</span>pipeline_name,
+</span></span><span style=display:flex><span>    steps<span style=color:#f92672>=</span>[step_process, step_tuning, step_eval, step_cond],
+</span></span><span style=display:flex><span>    sagemaker_session<span style=color:#f92672>=</span>sagemaker_session
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>pipeline<span style=color:#f92672>.</span>upsert(role_arn<span style=color:#f92672>=</span>role)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Đã khởi tạo thành công SageMaker Pipeline 4 bước: </span><span style=color:#e6db74>{</span>pipeline_name<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>execution <span style=color:#f92672>=</span> pipeline<span style=color:#f92672>.</span>start()
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34; Pipeline đang tự động thực thi! Execution ARN: </span><span style=color:#e6db74>{</span>execution<span style=color:#f92672>.</span>arn<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><img alt=deploy src=../../../../static/images/5-Workshop/5.3-Implementation/pipeline.png></p><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.2-preprocess-evaluate-scripts/ title="Tạo Scripts Xử lý Dữ liệu & Đánh giá Mô hình"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/fcj-workshop-template/vi/5-workshop/5.3-implementation/5.3.4-data-drift-retrain/ title="Cấu hình AWS Lambda Check Data Drift & Kích hoạt Retrain" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/fcj-workshop-template/js/clipboard.min.js?1785317952></script><script src=/fcj-workshop-template/js/perfect-scrollbar.min.js?1785317952></script><script src=/fcj-workshop-template/js/perfect-scrollbar.jquery.min.js?1785317952></script><script src=/fcj-workshop-template/js/jquery.sticky.js?1785317952></script><script src=/fcj-workshop-template/js/featherlight.min.js?1785317952></script><script src=/fcj-workshop-template/js/highlight.pack.js?1785317952></script><script>hljs.initHighlightingOnLoad()</script><script src=/fcj-workshop-template/js/modernizr.custom-3.6.0.js?1785317952></script><script src=/fcj-workshop-template/js/learn.js?1785317952></script><script src=/fcj-workshop-template/js/hugo-learn.js?1785317952></script><link href=/fcj-workshop-template/mermaid/mermaid.css?1785317952 rel=stylesheet><script src=/fcj-workshop-template/mermaid/mermaid.js?1785317952></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,(e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date),(i=t.createElement(n),a=t.getElementsByTagName(n)[0]),i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-158079754-2","auto"),ga("send","pageview")</script></body></html>
