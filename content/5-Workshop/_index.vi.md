@@ -16,8 +16,8 @@ Bài Workshop này sẽ hướng dẫn bạn từng bước xây dựng một **
 
 Hệ thống kết hợp sức mạnh của kiến trúc Event-Driven Automation và AWS Serverless Services:
 + **Tự động kích hoạt (Automated Retrain Trigger):** Kiểm tra Data Drift và khởi chạy SageMaker Pipeline ngay khi Admin tải dữ liệu mới lên Amazon S3.
-+ **Quy trình MLOps chuẩn 4 bước (SageMaker Pipeline):** Tự động hóa từ khâu Tiền xử lý dữ liệu (`SKLearnProcessor`), Huấn luyện & Tối ưu siêu tham số (`HyperparameterTuner`), Đánh giá chất lượng mô hình (`ScriptProcessor`), đến kiểm tra Quality Gate ($AUC \ge 0.80$).
-+ **Triển khai tự động (Continuous Deployment - CD):** Sử dụng Amazon EventBridge để lắng nghe sự kiện gán nhãn `Approved` trong Model Registry, kích hoạt AWS Lambda tự động tạo cấu hình và cập nhật lên **SageMaker Serverless Endpoint** mà không gây gián đoạn dịch vụ (Zero-Downtime Deployment).
++ **Quy trình MLOps chuẩn 4 bước (SageMaker Pipeline):** Tự động hóa từ khâu Tiền xử lý dữ liệu (SKLearnProcessor), Huấn luyện & Tối ưu siêu tham số (HyperparameterTuner), Đánh giá chất lượng mô hình (ScriptProcessor), đến kiểm tra Quality Gate ($AUC \ge 0.80$).
++ **Triển khai tự động (Continuous Deployment - CD):** Sử dụng Amazon EventBridge để lắng nghe sự kiện gán nhãn Approved trong Model Registry, kích hoạt AWS Lambda tự động tạo cấu hình và cập nhật lên **SageMaker Serverless Endpoint** mà không gây gián đoạn dịch vụ (Zero-Downtime Deployment).
 + **Dự đoán thời gian thực (Real-time Inference API):** Tích hợp Amazon API Gateway (HTTP API) và Lambda Inference Handler để tiếp nhận request HTTPS và trả về xác suất Churn tức thì.
 + **Giám sát & Báo động (Monitoring & Alerts):** Quản lý Log tập trung qua CloudWatch Logs, thiết lập CloudWatch Alarms và bắn Email thông báo tự động qua Amazon SNS.
 

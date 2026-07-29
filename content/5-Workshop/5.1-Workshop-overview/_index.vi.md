@@ -3,7 +3,7 @@ title: "Tổng quan (Overview)"
 date: 2026-07-27
 weight: 1
 chapter: false
-pre: " <b> 1. </b> "
+pre: " <b> 5.1. </b> "
 ---
 
 # Tổng quan Workshop: MLOps Platform cho bài toán Dự đoán Rời bỏ Dịch vụ Viễn thông (Telco Customer Churn)
@@ -47,6 +47,6 @@ Sau khi hoàn thành bài lab này, bạn sẽ nắm vững và triển khai đ�
 
 ---
 
-## ⏱️ Thời gian & Chi phí ước tính
+## Thời gian & Chi phí ước tính
 - **Thời gian thực hiện:** ~60 - 90 phút.
 - **Chi phí hạ tầng:** ~$0.50 - $1.00 USD (Nếu dọn dẹp tài nguyên đúng theo bước Clean-up ở cuối bài lab, hầu hết các dịch vụ đều nằm trong AWS Free Tier).

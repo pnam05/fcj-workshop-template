@@ -26,7 +26,7 @@ Xây dựng hệ thống MLOps trên nền tảng AWS SageMaker Workflow (Pipeli
  
 ### 3. Kiến trúc giải pháp  
 
-![Architecture](../../static/images/2-Proposal/architecture.png)
+![Architecture](/images/2-Proposal/architecture.png)
 
 *Dịch vụ AWS sử dụng*  
 - *Amazon S3*: Lưu trữ dữ liệu thô, dữ liệu đã xử lý và các Model Artifacts.
