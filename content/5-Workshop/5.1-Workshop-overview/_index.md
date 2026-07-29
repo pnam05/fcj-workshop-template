@@ -19,15 +19,15 @@ This workshop guides you through building an **End-to-End Automated MLOps Platfo
 
 ## Workshop Objectives
 By completing this workshop, you will learn how to build and deploy:
-1. **Real-time Inference API:** Integrate **Amazon API Gateway**, **AWS Lambda**, and **AWS SageMaker Serverless Endpoint** for real-time predictions with zero idle costs.
-2. **Event-Driven Retrain Trigger:** Automatically detect new dataset uploads on **Amazon S3**, check for **Data Drift**, and trigger the pipeline.
+1. **Real-time Inference API:** Integrate Amazon API Gateway, AWS Lambda, and AWS SageMaker Serverless Endpoint for real-time predictions with zero idle costs.
+2. **Event-Driven Retrain Trigger:** Automatically detect new dataset uploads on Amazon S3, check for Data Drift, and trigger the pipeline.
 3. **4-Step SageMaker Pipeline:**
-   - `TelcoChurnProcessStep`: Data preprocessing and splitting using `SKLearnProcessor`.
-   - `TelcoChurnHpoStep`: Automated XGBoost hyperparameter tuning via `HyperparameterTuner`.
-   - `TelcoChurnEvalStep`: Model evaluation on the test set using `ScriptProcessor`.
-   - `ConditionStep`: Quality gate evaluation ($AUC \ge 0.80$). Automatically registers passing models to **SageMaker Model Registry** as `Approved`.
-4. **Continuous Deployment (CD):** Utilize **Amazon EventBridge** to detect `Approved` model packages and trigger an **AWS Lambda Deployer** for zero-downtime endpoint updates.
-5. **Monitoring & Alerting:** Centralized logging with **CloudWatch Logs**, metric tracking via **CloudWatch Alarms**, and automated email notifications through **Amazon SNS**.
+   - TelcoChurnProcessStep: Data preprocessing and splitting using SKLearnProcessor.
+   - TelcoChurnHpoStep: Automated XGBoost hyperparameter tuning via HyperparameterTune`.
+   - TelcoChurnEvalStep: Model evaluation on the test set using ScriptProcessor.
+   - ConditionStep: Quality gate evaluation ($AUC \ge 0.80$). Automatically registers passing models to SageMaker Model Registry as Approved.
+4. **Continuous Deployment (CD):** Utilize Amazon EventBridge to detect Approved model packages and trigger an AWS Lambda Deployer for zero-downtime endpoint updates.
+5. **Monitoring & Alerting:** Centralized logging with CloudWatch Logs, metric tracking via CloudWatch Alarms, and automated email notifications through Amazon SNS.
 
 ---
 

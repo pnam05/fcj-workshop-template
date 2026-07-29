@@ -26,10 +26,7 @@ Xây dựng hệ thống MLOps trên nền tảng AWS SageMaker Workflow (Pipeli
  
 ### 3. Kiến trúc giải pháp  
 
-
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
-
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+![Architecture](../../static/images/2-Proposal/architecture.png)
 
 *Dịch vụ AWS sử dụng*  
 - *Amazon S3*: Lưu trữ dữ liệu thô, dữ liệu đã xử lý và các Model Artifacts.
@@ -62,7 +59,7 @@ Xây dựng hệ thống MLOps trên nền tảng AWS SageMaker Workflow (Pipeli
 - AWS SageMaker Processing & Training: ~$0.35/tháng (instance `ml.m5.large`).  
 - AWS SageMaker Hyperparameter Tuning: ~$0.80/tháng (6 Tuning Jobs song song `ml.m5.large`).  
 - AWS SageMaker Serverless Endpoint: ~$1.20/tháng (2048 MB Memory, ~10,000 requests/tháng).  
-- *Amazon CloudWatch & SNS*: ~$0.10/tháng.  
+- Amazon CloudWatch & SNS: ~$0.10/tháng.  
  
 
 *Tổng*: ~$2.57 - $4.00 USD/tháng

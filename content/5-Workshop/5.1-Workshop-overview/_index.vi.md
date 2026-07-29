@@ -19,21 +19,21 @@ Workshop này sẽ xây dựng một **Hệ thống MLOps Tự động hóa Khé
 
 ## Mục tiêu Workshop
 Sau khi hoàn thành bài lab này, bạn sẽ nắm vững và triển khai được:
-1. **Dự đoán thời gian thực (Real-time Inference):** Tích hợp **Amazon API Gateway**, **AWS Lambda** và **AWS SageMaker Serverless Endpoint** để xử lý request và trả về xác suất rời bỏ dịch vụ tức thì với chi phí tối ưu (0đ khi không có lưu lượng).
-2. **Kích hoạt tự động (Event-Driven Trigger):** Tự động phát hiện khi Admin tải dữ liệu mới lên **Amazon S3**, kiểm tra **Data Drift** và khởi chạy luồng Retrain.
+1. **Dự đoán thời gian thực (Real-time Inference):** Tích hợp Amazon API Gateway, AWS Lambda và AWS SageMaker Serverless Endpoint để xử lý request và trả về xác suất rời bỏ dịch vụ tức thì với chi phí tối ưu (0đ khi không có lưu lượng).
+2. **Kích hoạt tự động (Event-Driven Trigger):** Tự động phát hiện khi Admin tải dữ liệu mới lên Amazon S3, kiểm tra Data Drift và khởi chạy luồng Retrain.
 3. **Luồng làm việc MLOps (SageMaker Pipeline - 4 bước):**
-   - `TelcoChurnProcessStep`: Tiền xử lý dữ liệu và chia tập Train/Validation/Test (`SKLearnProcessor`).
-   - `TelcoChurnHpoStep`: Huấn luyện & Tối ưu siêu tham số tự động với mô hình XGBoost (`HyperparameterTuner`).
-   - `TelcoChurnEvalStep`: Đánh giá chất lượng mô hình trên tập Test (`ScriptProcessor`).
-   - `ConditionStep`: Kiểm tra ngưỡng chất lượng ($AUC \ge 0.80$). Nếu đạt, tự động đăng ký vào **SageMaker Model Registry** ở trạng thái `Approved`.
-4. **Triển khai tự động (Continuous Deployment - CD):** Sử dụng **Amazon EventBridge** lắng nghe trạng thái `Approved` từ Model Registry để kích hoạt **AWS Lambda Deployer** tự động cập nhật Serverless Endpoint mà không gây gián đoạn dịch vụ (Zero-Downtime Deployment).
-5. **Giám sát & Báo động (Monitoring & Alerting):** Lưu trữ log tập trung qua **CloudWatch Logs**, thiết lập **CloudWatch Alarm** và gửi email cảnh báo tự động về hòm thư qua **Amazon SNS**.
+   - TelcoChurnProcessStep: Tiền xử lý dữ liệu và chia tập Train/Validation/Test (SKLearnProcessor).
+   - TelcoChurnHpoStep: Huấn luyện & Tối ưu siêu tham số tự động với mô hình XGBoost (HyperparameterTuner).
+   - TelcoChurnEvalStep: Đánh giá chất lượng mô hình trên tập Test (ScriptProcessor).
+   - ConditionStep: Kiểm tra ngưỡng chất lượng ($AUC \ge 0.80$). Nếu đạt, tự động đăng ký vào SageMaker Model Registry ở trạng thái Approved.
+4. **Triển khai tự động (Continuous Deployment - CD):** Sử dụng Amazon EventBridge lắng nghe trạng thái Approved từ Model Registry để kích hoạt AWS Lambda Deployer tự động cập nhật Serverless Endpoint mà không gây gián đoạn dịch vụ (Zero-Downtime Deployment).
+5. **Giám sát & Báo động (Monitoring & Alerting):** Lưu trữ log tập trung qua CloudWatch Logs, thiết lập CloudWatch Alarm và gửi email cảnh báo tự động về hòm thư qua Amazon SNS.
 
 ---
 
 ##  Sơ đồ Kiến trúc Hệ thống (Architecture Diagram)
 
-![Sơ đồ Kiến trúc MLOps AWS](/images/1-Overview/mlops_architecture.png)
+![Sơ đồ Kiến trúc MLOps AWS](../../../static/images/5-Workshop/5.1-Workshop-overview/architecture.png)
 
 ### Các Dịch vụ AWS Sử Dụng:
 - **Amazon S3:** Lưu trữ Dữ liệu thô, Dữ liệu đã xử lý  và Model Artifacts.

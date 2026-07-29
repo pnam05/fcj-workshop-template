@@ -12,7 +12,7 @@ chapter: false
 &emsp; **Số điện thoại:** 0919339938
 
 &emsp; **Email:** trungnam2682005@gmail.com
-&emsp; **Trường:** Đại học Sư phạm Kỹ thuật TP.HCM
+&emsp; **Trường:** Trường Đại học Bách khoa - ĐHQG-HCM
 
 &emsp; **Ngành:** Khoa học Máy tính
 
@@ -22,9 +22,9 @@ chapter: false
 
 &emsp; **Vị trí thực tập:** Workforce Bootcamp - First Cloud AI Journey
 
-&emsp; **Thời gian thực tập:** Từ ngày 12/08/2025 đến ngày 12/11/2025
+&emsp; **Thời gian thực tập:** Từ ngày 15/06/2026 đến ngày 14/08/2026
 
-![Ảnh đại diện của bạn](/images/avatar.png)
+![Avatar](/static/images/avatar.png)
 
 
 
