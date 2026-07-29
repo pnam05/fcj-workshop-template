@@ -10,7 +10,7 @@ pre : " <b> 5.3.1 </b> "
 2. Bucket name: Nhập telco-churn-mlops-fcaj (hoặc tên duy nhất kèm ID tài khoản của bạn).
 3. Giữ nguyên các thiết lập mặc định và bấm Create bucket.
 ![createS3](../../../../static/images/5-Workshop/5.3-Implementation/s3name.png)
-4. Trong Bucket vừa tạo, tạo các folder (Prefix) sau:
+4. Trong Bucket vừa tạo, tạo các folder sau:
 
 - raw/
 - processed/

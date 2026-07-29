@@ -32,6 +32,8 @@ Hệ thống sử dụng các IAM Role sau để phân quyền giữa các dịc
    - **Service Trust:** `sagemaker.amazonaws.com`
    - **Attached Policies:** `AmazonSageMakerFullAccess`, `AmazonS3FullAccess`.
    - **Mục đích:** Cấp quyền cho SageMaker Processing Job, HPO Job, Evaluation và Serverless Endpoint truy cập dữ liệu S3.
+ 
+![telco-churn-role](../../../static/images/3-Prerequiste/telco-churn-role.png)
 
 2. **`Lambda-Execution-Role` (dùng cho Lambda Trigger & Lambda Deployer):**
    - **Service Trust:** `lambda.amazonaws.com`
