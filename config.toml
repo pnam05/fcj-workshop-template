@@ -1,4 +1,4 @@
-baseURL = "baseURL = 'https://pnam05.github.io/fcj-workshop-template/'"
+baseURL = "https://pnam05.github.io/fcj-workshop-template/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"
