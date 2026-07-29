@@ -1,31 +1,30 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-07-29
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+# Automating MLOps Workflow and Deploying Telco Customer Churn Prediction Models on AWS
 
 #### Overview
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+In real-world enterprise environments, Machine Learning models often face **Data Drift** (degradation of prediction quality over time) and require significant manual effort to operate and update.
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+This Workshop will guide you step-by-step to build a complete **End-to-End Automated MLOps Platform** on AWS Cloud for the Telco Customer Churn Prediction problem.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+The system combines the power of Event-Driven Automation architecture and AWS Serverless Services:
++ **Automated Retrain Trigger:** Checks Data Drift and launches SageMaker Pipeline as soon as an Admin uploads new data to Amazon S3.
++ **Standard 4-step MLOps Workflow (SageMaker Pipeline):** Automates from Data Preprocessing (SKLearnProcessor), Training & Hyperparameter Optimization (HyperparameterTuner), Model Quality Evaluation (ScriptProcessor), to Quality Gate checking ($AUC \ge 0.80$).
++ **Automated Deployment (Continuous Deployment - CD):** Uses Amazon EventBridge to listen for Approved status events in Model Registry, triggering AWS Lambda to automatically create configurations and update to **SageMaker Serverless Endpoint** with Zero-Downtime Deployment.
++ **Real-time Inference API:** Integrates Amazon API Gateway (HTTP API) and Lambda Inference Handler to receive HTTPS requests and return immediate Churn probabilities.
++ **Monitoring & Alerts:** Centralized Log management via CloudWatch Logs, establishing CloudWatch Alarms, and sending automated Email notifications via Amazon SNS.
 
-#### Content
+#### Detailed Workshop Contents
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+1. [1. Overview (Workshop Overview)](5.1-Workshop-overview/)
+2. [2. Prerequisites](5.2-Prerequiste/)
+3. [3. Step-by-Step Implementation](5.3-Implementation/)
+4. [4. Test & Validation](5.4-Test-Validation/)
+5. [5. Resource Clean-up](5.5-Cleanup/)

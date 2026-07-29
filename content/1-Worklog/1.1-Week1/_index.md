@@ -1,57 +1,33 @@
 ---
-title: "Week 1 Worklog"
-date: 2024-01-01
+title: "Worklog Week 1"
+date: 2026-06-15
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 1 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Connect with members of the First Cloud AI Journey (FCAJ) and understand the internship rules.
+* Master basic AWS Cloud services (IAM, S3, EC2) and get familiar with the AWS Console & AWS CLI interfaces.
+* Survey the Telco Customer Churn prediction problem and shape the objectives for the MLOps project.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to implement this week:
 
+| Day | Task | Start Date | Completion Date | Reference Documentation |
+| --- | --- | --- | --- | --- |
+| Mon | - Attend Onboarding session, meet FCAJ members <br> - Read and note rules, regulations, and discipline at the internship unit | 15/06/2026 | 15/06/2026 | FCAJ Internship Regulations |
+| Tue | - Learn overview of AWS Cloud & foundational service groups: <br>&emsp; + Identity & Access Management (IAM) <br>&emsp; + Compute (EC2) <br>&emsp; + Storage (S3) <br>&emsp; + Networking (VPC, Security Group) | 16/06/2026 | 16/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Wed | - Set up AWS Free Tier account & basic security configuration (MFA) <br> - Install AWS CLI v2 on local machine <br> - **Hands-on:** Create IAM User, create Access Key, configure `aws configure` (Region `ap-southeast-1`) and check connection via terminal | 17/06/2026 | 17/06/2026 | AWS Documentation |
+| Thu | - Research Amazon S3 storage service & Amazon EC2 virtualization service <br> - Survey the Telco Customer Churn dataset (`WA_Fn-UseC_-Telco-Customer-Churn.csv`) <br> - Identify technical requirements and technologies needed for the MLOps system | 18/06/2026 | 18/06/2026 | Kaggle / AWS SageMaker Docs |
+| Fri | - **Hands-on:** <br>&emsp; + Create test S3 Bucket via AWS CLI <br>&emsp; + Launch EC2 Instance (Amazon Linux 2), connect SSH via Terminal <br>&emsp; + Discuss with Mentor on the direction for building an automated MLOps Platform | 19/06/2026 | 19/06/2026 | AWS Hands-on Labs |
 
-### Week 1 Achievements:
+### Week 1 Accomplishments:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Understood internship rules, workflows, and connected well with FCAJ group members.
+* Successfully installed and configured AWS CLI v2 on personal machine with IAM Access Key (Region `ap-southeast-1`).
+* Mastered basic concepts and operations on core services:
+  * **IAM:** Create Role, grant Least Privilege permissions, and understand `PassRole`.
+  * **S3:** Concepts of Bucket, Prefix, Object, and access permissions.
+  * **EC2:** Launch instance, configure Security Group (Inbound/Outbound rules), and secure SSH connection.
+* Completed survey of the Telco Customer Churn dataset and finalized the architectural direction of the automated MLOps Platform on AWS for the personal project.

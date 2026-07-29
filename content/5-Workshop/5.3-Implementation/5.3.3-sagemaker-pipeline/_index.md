@@ -1,40 +1,459 @@
 ---
-title : "Create a gateway endpoint"
-date : 2024-01-01 
-weight : 1
+title : "Build & Launch SageMaker Pipeline"
+date : 2026-07-27 
+weight : 3
 chapter : false
 pre : " <b> 5.3.1 </b> "
 ---
 
-1. Open the [Amazon VPC console](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#Home:)
-2. In the navigation pane, choose **Endpoints**, then click **Create Endpoint**:
+ In this section, we will practice the complete MLOps workflow on Amazon SageMaker, from data preparation, standalone training, hyperparameter tuning (HPO), model registration, Serverless Endpoint deployment to automated packaging into a **4-step SageMaker Pipeline**.
 
-{{% notice note %}}
-You will see **6 existing VPC endpoints** that support **AWS Systems Manager (SSM)**. These endpoints were deployed automatically by the **CloudFormation Templates** for this workshop.
-{{% /notice %}}
+#### Environment Initialization & S3 Bucket Connection
+First, import necessary libraries, set up SageMaker session, and read raw data from S3.
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/endpoints.png)
+```python
+import boto3
+import pandas as pd
+import sagemaker
 
-3. In the Create endpoint console:
-+ Specify name of the endpoint: ```s3-gwe```
-+ In service category, choose **AWS services**
+sagemaker_session = sagemaker.Session()
+role = sagemaker.get_execution_role()
+region = sagemaker_session.boto_region_name
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/create-s3-gwe1.png)
+bucket_name = "telco-churn-mlops-fcaj" 
+raw_data_key = "raw/WA_Fn-UseC_-Telco-Customer-Churn.csv"
 
-+ In **Services**, type ```s3``` in the search box and choose the service with type **gateway**
+s3_path = f"s3://{bucket_name}/{raw_data_key}"
+df = pd.read_csv(s3_path)
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/services.png)
+print(f" Successfully connected to S3 Bucket: {bucket_name}")
+print(f" Region: {region}")
+print(f" Dataset shape: {df.shape}")
+df.head(3)
+```
 
-+ For VPC, select **VPC Cloud** from the drop-down.
-+ For **Configure route tables**, select the route table that is already associated with **two subnets** (note: this is not the main route table for the VPC, but a second route table created by CloudFormation).
+#### Processing Data with Processing Job
+Use SKLearnProcessor to launch a container running the `preprocessing.py` file. Raw data will be read from S3, then split into Train, Validation, Test sets and automatically pushed back to S3.
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/vpc.png)
+```python
+from sagemaker.sklearn.processing import SKLearnProcessor
+from sagemaker.processing import ProcessingInput, ProcessingOutput
 
-+ **For Policy**, leave the default option, **Full Access**, to allow full access to the service. You will deploy **a VPC endpoint policy** in a later lab module to demonstrate restricting access to **S3 buckets** based on policies.
+# 1. Declare SKLearnProcessor
+sklearn_processor = SKLearnProcessor(
+    framework_version="1.2-1",
+    role=role,
+    instance_type="ml.t3.medium",
+    instance_count=1,
+    base_job_name="telco-churn-preprocessing"
+)
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/policy.png)
+# 2. Define Input (S3) and Output (S3) locations
+input_s3_uri = f"s3://{bucket_name}/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv"
+output_s3_uri = f"s3://{bucket_name}/processed"
 
-+ Do not add a tag to the VPC endpoint at this time.
-+ Click **Create endpoint**, then click x after receiving a successful creation message.
+print(" Launching Processing Job on AWS...")
 
-![endpoint](/images/5-Workshop/5.3-S3-vpc/complete.png)
+# 3. Trigger Processing Job
+sklearn_processor.run(
+    code="preprocessing.py",
+    inputs=[
+        ProcessingInput(
+            source=input_s3_uri,
+            destination="/opt/ml/processing/input"
+        )
+    ],
+    outputs=[
+        ProcessingOutput(
+            output_name="train_data",
+            source="/opt/ml/processing/output/train",
+            destination=f"{output_s3_uri}/train"
+        ),
+        ProcessingOutput(
+            output_name="validation_data",
+            source="/opt/ml/processing/output/validation",
+            destination=f"{output_s3_uri}/validation"
+        ),
+        ProcessingOutput(
+            output_name="test_data",
+            source="/opt/ml/processing/output/test",
+            destination=f"{output_s3_uri}/test"
+        )
+    ]
+)
+```
+![preprocess](../../../../static/images/5-Workshop/5.3-Implementation/preprocess.png)
+
+
+#### Standalone XGBoost Model Training (Training Job)
+##### Get Image URI & Configure S3 Paths
+
+```python
+from sagemaker.inputs import TrainingInput
+
+# 1. Retrieve XGBoost Docker Image URI
+xgboost_container = sagemaker.image_uris.retrieve(
+    framework="xgboost",
+    region=region,
+    version="1.5-1" 
+)
+
+# 2. Data and output paths on S3
+s3_train_data = f"s3://{bucket_name}/processed/train/train.csv"
+s3_validation_data = f"s3://{bucket_name}/processed/validation/validation.csv"
+s3_output_path = f"s3://{bucket_name}/models/xgboost-single-train"
+
+train_input = TrainingInput(s3_data=s3_train_data, content_type="text/csv")
+validation_input = TrainingInput(s3_data=s3_validation_data, content_type="text/csv")
+
+print(" S3 data paths configured for Training Job")
+```
+
+##### Configure Hyperparameters & Train
+
+```python
+# 1. Declare Estimator
+xgb_estimator = sagemaker.estimator.Estimator(
+    image_uri=xgboost_container,
+    role=role,
+    instance_count=1,
+    instance_type="ml.m5.large", 
+    output_path=s3_output_path,
+    sagemaker_session=sagemaker_session,
+    base_job_name="telco-churn-xgb-train"
+)
+
+# 2. Set Hyperparameters
+xgb_estimator.set_hyperparameters(
+    max_depth=5,
+    eta=0.2,
+    gamma=4,
+    min_child_weight=6,
+    subsample=0.8,
+    objective="binary:logistic",
+    eval_metric="auc", 
+    num_round=100
+)
+
+# 3. Trigger Training Job
+print(" Launching SageMaker Training Job...")
+xgb_estimator.fit({
+    "train": train_input,
+    "validation": validation_input
+})
+```
+
+#### Hyperparameter Optimization (HPO)
+Set search parameter ranges and initialize HyperparameterTuner to automatically run 6 experiments (2 parallel jobs) to find the configuration achieving the highest Validation AUC.
+##### Set Parameter Ranges & Initialize Tuner
+```python
+from sagemaker.tuner import IntegerParameter, ContinuousParameter, HyperparameterTuner
+from sagemaker.workflow.pipeline_context import PipelineSession
+from sagemaker.processing import ScriptProcessor
+
+pipeline_session = PipelineSession()
+
+# 1. Declare search ranges
+hyperparameter_ranges = {
+    "max_depth": IntegerParameter(3, 8),
+    "eta": ContinuousParameter(0.01, 0.2),
+    "min_child_weight": IntegerParameter(1, 10),
+    "subsample": ContinuousParameter(0.5, 0.9),
+    "alpha": ContinuousParameter(0.0, 2.0)
+}
+
+objective_metric_name = "validation:auc"
+objective_type = "Maximize"
+
+# 2. Estimator & ScriptProcessor for HPO
+xgb_hpo_estimator = sagemaker.estimator.Estimator(
+    image_uri=xgboost_container,
+    role=role,
+    instance_count=1,
+    instance_type="ml.m5.large",
+    output_path=f"s3://{bucket_name}/models/xgboost-hpo",
+    sagemaker_session=pipeline_session, 
+    base_job_name="telco-churn-hpo"
+)
+
+xgb_hpo_estimator.set_hyperparameters(
+    objective="binary:logistic",
+    eval_metric="auc",
+    num_round=100
+)
+
+xgb_eval_processor = ScriptProcessor(
+    image_uri=xgboost_container, 
+    command=["python3"],
+    role=role,
+    instance_count=1,
+    instance_type="ml.m5.large", 
+    sagemaker_session=pipeline_session
+)
+
+# 3. Declare HyperparameterTuner
+tuner = HyperparameterTuner(
+    estimator=xgb_hpo_estimator,
+    objective_metric_name=objective_metric_name,
+    hyperparameter_ranges=hyperparameter_ranges,
+    objective_type=objective_type,
+    max_jobs=6,
+    max_parallel_jobs=2,
+    base_tuning_job_name="hpo-telco-churn"
+)
+
+print(" Successfully initialized HyperparameterTuner!")
+```
+
+##### Run HPO Job & Extract Best Results
+
+```python
+print(" Launching Hyperparameter Tuning Job on AWS...")
+tuner.fit({"train": train_input, "validation": validation_input})
+
+# Get best job information
+best_job_name = tuner.best_training_job()
+print(f" Best training job result: {best_job_name}")
+
+hpo_results = tuner.analytics().dataframe()
+best_job_row = hpo_results[hpo_results['TrainingJobName'] == best_job_name].iloc[0]
+
+print(f" Best Validation AUC: {best_job_row['FinalObjectiveValue']}")
+for col in hpo_results.columns:
+    if col not in ['TrainingJobName', 'TrainingJobStatus', 'FinalObjectiveValue', 'TrainingStartTime', 'TrainingEndTime']:
+        print(f" - {col}: {best_job_row[col]}")
+```
+![best-conf](../../../../static/images/5-Workshop/5.3-Implementation/best-conf.png)
+
+#### Register Model in SageMaker Model Registry
+Create a new Model Package Group and register the best model obtained from the HPO step.
+```python
+import boto3
+
+sm_boto3_client = boto3.client('sagemaker', region_name=region)
+model_package_group_name = "TelcoChurnModelGroup"
+
+# 1. Create Group in Model Registry
+try:
+    sm_boto3_client.create_model_package_group(
+        ModelPackageGroupName=model_package_group_name,
+        ModelPackageGroupDescription="Group containing Telco Customer Churn prediction model versions"
+    )
+    print(f" Created new Model Package Group: {model_package_group_name}")
+except Exception as e:
+    if "already exists" in str(e):
+        print(f" Model Package Group '{model_package_group_name}' already exists.")
+
+# 2. Register new model version
+best_model_s3_uri = f"s3://{bucket_name}/models/xgboost-hpo/{best_job_name}/output/model.tar.gz"
+
+create_model_package_input = {
+    "ModelPackageGroupName": model_package_group_name,
+    "ModelPackageDescription": f"Best XGBoost model from HPO Job {best_job_name}",
+    "ModelApprovalStatus": "PendingManualApproval",
+    "InferenceSpecification": {
+        "Containers": [{"Image": xgboost_container, "ModelDataUrl": best_model_s3_uri}],
+        "SupportedContentTypes": ["text/csv"],
+        "SupportedResponseMIMETypes": ["text/csv"],
+    }
+}
+
+response = sm_boto3_client.create_model_package(**create_model_package_input)
+model_package_arn = response["ModelPackageArn"]
+print(f"🔗 Model Package ARN: {model_package_arn}")
+
+# 3. Approve model (Approved)
+sm_boto3_client.update_model_package(
+    ModelPackageArn=model_package_arn,
+    ModelApprovalStatus="Approved",
+    ApprovalDescription="Model achieved high AUC metric from HPO, eligible for deployment to Serverless Endpoint."
+)
+print(" Successfully updated model status to APPROVED!")
+```
+![best-conf](../../../../static/images/5-Workshop/5.3-Implementation/model-reg.png)
+
+#### Deploy & Test Serverless Endpoint
+
+##### Deploy Serverless Endpoint
+```python
+from sagemaker.serverless import ServerlessInferenceConfig
+from sagemaker.model import Model
+
+serverless_config = ServerlessInferenceConfig(
+    memory_size_in_mb=2048,
+    max_concurrency=10
+)
+
+endpoint_name = "telco-churn-serverless-endpoint"
+
+model = Model(
+    image_uri=xgboost_container,
+    model_data=best_model_s3_uri,
+    role=role,
+    sagemaker_session=sagemaker_session
+)
+
+print(" Initializing Serverless Endpoint...")
+predictor = model.deploy(
+    endpoint_name=endpoint_name,
+    serverless_inference_config=serverless_config
+)
+print(f" Successfully deployed Serverless Endpoint: {endpoint_name}")
+```
+![deploy](../../../../static/images/5-Workshop/5.3-Implementation/deploy.png)
+
+
+##### Prediction Test (Inference Test)
+
+```python
+# Get 1 data sample from Test set on S3 to send to Endpoint
+s3_test_path = f"s3://{bucket_name}/processed/test/test.csv"
+test_df = pd.read_csv(s3_test_path, header=None)
+
+sample_data = test_df.iloc[0, 1:].values
+sample_csv_string = ",".join(map(str, sample_data))
+
+response = sagemaker_session.sagemaker_runtime_client.invoke_endpoint(
+    EndpointName=endpoint_name,
+    ContentType="text/csv",
+    Body=sample_csv_string
+)
+
+churn_probability = float(response["Body"].read().decode("utf-8"))
+print(f" Churn Probability: {churn_probability:.4f}")
+print(f" Prediction: {'CHURN (Leave)' if churn_probability >= 0.5 else 'RETAIN (Stay)'}")
+```
+![deploy](../../../../static/images/5-Workshop/5.3-Implementation/inference.png)
+
+#### Packaging & Automation with SageMaker Pipeline (4 Steps)
+The entire workflow will be automated using SageMaker Pipeline consisting of:
+- **ProcessingStep:** Clean & split data.  
+- **TuningStep:** Search for optimal hyperparameters.  
+- **ProcessingStep (Evaluation):** Extract best model, predict on Test set, and export AUC metric into evaluation.json. 
+- **ConditionStep:** Check AUC metric. If AUC >= 0.80, automatically register model into Registry (ModelStep). Otherwise, cancel Pipeline (FailStep).
+```python
+from sagemaker.workflow.steps import ProcessingStep, TuningStep
+from sagemaker.workflow.model_step import ModelStep
+from sagemaker.workflow.pipeline import Pipeline
+from sagemaker.workflow.properties import PropertyFile
+from sagemaker.workflow.conditions import ConditionGreaterThanOrEqualTo
+from sagemaker.workflow.condition_step import ConditionStep
+from sagemaker.workflow.fail_step import FailStep
+from sagemaker.workflow.functions import JsonGet
+from sagemaker.workflow.pipeline_context import PipelineSession
+from sagemaker.model import Model
+
+pipeline_session = PipelineSession()
+
+# STEP 1: PROCESSING STEP
+step_process = ProcessingStep(
+    name="TelcoChurnProcessStep",
+    processor=sklearn_processor,
+    inputs=[
+        ProcessingInput(
+            source=f"s3://{bucket_name}/raw/",
+            destination="/opt/ml/processing/input"
+        )
+    ],
+    outputs=[
+        ProcessingOutput(output_name="train_data", source="/opt/ml/processing/output/train", destination=f"{output_s3_uri}/train"),
+        ProcessingOutput(output_name="validation_data", source="/opt/ml/processing/output/validation", destination=f"{output_s3_uri}/validation"),
+        ProcessingOutput(output_name="test_data", source="/opt/ml/processing/output/test", destination=f"{output_s3_uri}/test")
+    ],
+    code="preprocessing.py"
+)
+
+train_data_uri = step_process.properties.ProcessingOutputConfig.Outputs["train_data"].S3Output.S3Uri
+val_data_uri = step_process.properties.ProcessingOutputConfig.Outputs["validation_data"].S3Output.S3Uri
+test_data_uri = step_process.properties.ProcessingOutputConfig.Outputs["test_data"].S3Output.S3Uri
+
+# STEP 2: TUNING STEP
+step_tuning = TuningStep(
+    name="TelcoChurnHpoStep",
+    tuner=tuner,
+    inputs={
+        "train": TrainingInput(s3_data=train_data_uri, content_type="text/csv"),
+        "validation": TrainingInput(s3_data=val_data_uri, content_type="text/csv")
+    }
+)
+
+# STEP 3: EVALUATION STEP
+evaluation_report = PropertyFile(
+    name="EvaluationReport",
+    output_name="evaluation",
+    path="evaluation.json"
+)
+
+best_model_s3_uri = step_tuning.get_top_model_s3_uri(top_k=0, s3_bucket=f"{bucket_name}/models/xgboost-hpo")
+
+step_eval = ProcessingStep(
+    name="TelcoChurnEvalStep",
+    processor=xgb_eval_processor,
+    code="evaluate.py",
+    inputs=[
+        ProcessingInput(source=best_model_s3_uri, destination="/opt/ml/processing/model"),
+        ProcessingInput(source=test_data_uri, destination="/opt/ml/processing/test")
+    ],
+    outputs=[
+        ProcessingOutput(output_name="evaluation", source="/opt/ml/processing/evaluation")
+    ],
+    property_files=[evaluation_report]
+)
+
+# STEP 4: REGISTER & FAIL STEPS
+model = Model(
+    image_uri=xgb_hpo_estimator.image_uri,
+    model_data=best_model_s3_uri,
+    sagemaker_session=pipeline_session,
+    role=role
+)
+
+step_register = ModelStep(
+    name="TelcoChurnRegisterModelStep",
+    step_args=model.register(
+        content_types=["text/csv"],
+        response_types=["text/csv"],
+        inference_instances=["ml.m5.large"],
+        transform_instances=["ml.m5.large"],
+        model_package_group_name="TelcoChurnModelGroup",
+        approval_status="Approved"
+    )
+)
+
+step_fail = FailStep(
+    name="TelcoChurnAUCFailStep",
+    error_message=" Retrain failed: New model AUC is lower than allowed threshold (0.80)!"
+)
+
+# CONDITION STEP
+cond_gte = ConditionGreaterThanOrEqualTo(
+    left=JsonGet(
+        step_name=step_eval.name,
+        property_file=evaluation_report,
+        json_path="binary_classification_metrics.auc.value"
+    ),
+    right=0.80 
+)
+
+step_cond = ConditionStep(
+    name="TelcoChurnCheckAUCThreshold",
+    conditions=[cond_gte],
+    if_steps=[step_register], 
+    else_steps=[step_fail]    
+)
+
+# PIPELINE UPSERT & START
+pipeline_name = "TelcoChurnMLOpsPipeline"
+pipeline = Pipeline(
+    name=pipeline_name,
+    steps=[step_process, step_tuning, step_eval, step_cond],
+    sagemaker_session=sagemaker_session
+)
+
+pipeline.upsert(role_arn=role)
+print(f" Successfully initialized 4-step SageMaker Pipeline: {pipeline_name}")
+
+execution = pipeline.start()
+print(f" Pipeline is executing automatically! Execution ARN: {execution.arn}")
+```
+![deploy](../../../../static/images/5-Workshop/5.3-Implementation/pipeline.png)

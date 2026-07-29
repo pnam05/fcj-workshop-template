@@ -1,57 +1,33 @@
 ---
-title: "Week 7 Worklog"
-date: 2024-01-01
-weight: 1
+title: "Worklog Week 7"
+date: 2026-07-27
+weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 7 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Deepen AWS Cloud knowledge in API Management & Operational Excellence: Deep dive into **Amazon API Gateway** (REST API vs HTTP API), **Amazon CloudWatch Alarms**, and **Amazon SNS Notifications**.
+* Deploy public REST API gateway for Real-time Inference using **API Gateway (HTTP API)** combined with AWS Lambda function `TelcoChurnPredictHandler` connecting directly to SageMaker Serverless Endpoint.
+* Configure automated monitoring and incident alert system: Capture Pipeline completion events via EventBridge Rule and send status notification emails via Amazon SNS, setting up CloudWatch Alarms for 5XX errors.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to implement this week:
 
+| Day | Task | Start Date | Completion Date | Reference Documentation |
+| --- | --- | --- | --- | --- |
+| Mon | - Advanced learning on **Amazon API Gateway**: <br>&emsp; + Compare HTTP API vs REST API (HTTP API is >70% more cost-effective and reduces latency for Serverless workloads) <br>&emsp; + Payload Format Version types (v1.0 vs v2.0) in Lambda Proxy Integration <br>&emsp; + Manage Stages, Throttling, and CORS Security | 27/07/2026 | 27/07/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Tue | - Program AWS Lambda Predict Handler function (`telco-churn-api-handler`): <br>&emsp; + Extract features array from HTTP request body <br>&emsp; + Call `sagemaker_runtime.invoke_endpoint()` sending CSV payload <br>&emsp; + Receive Churn probability, format JSON result (`churn_probability`, `prediction: "CHURN"/"RETAIN"`) <br> - **Hands-on:** Create Amazon API Gateway (HTTP API), create route `POST /predict` linked to Lambda Predict Handler | 28/07/2026 | 28/07/2026 | AWS API Gateway & Lambda Docs |
+| Wed | - Learn **Operational Monitoring & Alerting** on Cloud: <br>&emsp; + Manage Log Groups, Metric Filters in Amazon CloudWatch Logs <br>&emsp; + Set up CloudWatch Alarms based on performance metrics (Latency, Invocation Errors) <br>&emsp; + Integrate Amazon SNS Topic to send automated email alerts to operations team | 29/07/2026 | 29/07/2026 | AWS CloudWatch User Guide |
+| Thu | - Configure second EventBridge Rule (`TelcoChurnPipelineStatusRule`): <br>&emsp; + Capture `SageMaker Model Building Pipeline Execution Status Change` events <br>&emsp; + Filter terminal execution states (`Succeeded`, `Failed`, `Stopped`) <br>&emsp; + Configure Target sending directly to Amazon SNS Topic `TelcoChurnAlerts` to shoot automated Retrain result emails to Gmail | 30/07/2026 | 30/07/2026 | EventBridge Target Options |
+| Fri | - Configure **CloudWatch Alarm** (`Invocation5XXErrors > 0`) on SageMaker Endpoint connected to SNS Topic <br> - **Hands-on testing:** <br>&emsp; + Send cURL request via PowerShell to HTTP API Gateway URL (`https://c6kbjaktj9.execute-api.ap-southeast-1.amazonaws.com/predict`) <br>&emsp; + Inspect execution logs on CloudWatch Logs to measure processing latency and confirm successful response return | 31/07/2026 | 31/07/2026 | CloudWatch Logs Console |
 
-### Week 7 Achievements:
+### Week 7 Accomplishments:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Mastered knowledge of setting up real-time API communication gateways and operational monitoring architecture on AWS Cloud, understanding reasons for choosing HTTP API to optimize costs and performance.
+* Successfully built and deployed **Real-time Inference API**:
+  * Seamlessly integrated **API Gateway (HTTP API)** $\rightarrow$ **Lambda Predict Handler** $\rightarrow$ **SageMaker Serverless Endpoint**.
+  * Successfully received prediction requests and returned accurate results (`churn_probability: 0.0406`, `prediction: "RETAIN"`).
+* Finalized **Monitoring & Notification System**:
+  * Automatically sent Email notifications of SageMaker Pipeline Retrain execution results (`Succeeded`/`Failed`) to Gmail inbox via Amazon SNS.
+  * Established CloudWatch Alarms ready to trigger alerts when the system encounters 5XX error incidents or abnormal latency increases.

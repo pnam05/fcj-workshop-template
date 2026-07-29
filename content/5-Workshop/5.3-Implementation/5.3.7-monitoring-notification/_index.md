@@ -1,40 +1,34 @@
 ---
-title : "Create a gateway endpoint"
-date : 2024-01-01 
-weight : 1
+title : "Configure Monitoring & Notification (CloudWatch & SNS)"
+date : 2026-07-27 
+weight : 7
 chapter : false
-pre : " <b> 5.3.1 </b> "
+pre : " <b> 5.3.7 </b> "
 ---
-
-1. Open the [Amazon VPC console](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#Home:)
-2. In the navigation pane, choose **Endpoints**, then click **Create Endpoint**:
-
-{{% notice note %}}
-You will see **6 existing VPC endpoints** that support **AWS Systems Manager (SSM)**. These endpoints were deployed automatically by the **CloudFormation Templates** for this workshop.
-{{% /notice %}}
-
-![endpoint](/images/5-Workshop/5.3-S3-vpc/endpoints.png)
-
-3. In the Create endpoint console:
-+ Specify name of the endpoint: ```s3-gwe```
-+ In service category, choose **AWS services**
-
-![endpoint](/images/5-Workshop/5.3-S3-vpc/create-s3-gwe1.png)
-
-+ In **Services**, type ```s3``` in the search box and choose the service with type **gateway**
-
-![endpoint](/images/5-Workshop/5.3-S3-vpc/services.png)
-
-+ For VPC, select **VPC Cloud** from the drop-down.
-+ For **Configure route tables**, select the route table that is already associated with **two subnets** (note: this is not the main route table for the VPC, but a second route table created by CloudFormation).
-
-![endpoint](/images/5-Workshop/5.3-S3-vpc/vpc.png)
-
-+ **For Policy**, leave the default option, **Full Access**, to allow full access to the service. You will deploy **a VPC endpoint policy** in a later lab module to demonstrate restricting access to **S3 buckets** based on policies.
-
-![endpoint](/images/5-Workshop/5.3-S3-vpc/policy.png)
-
-+ Do not add a tag to the VPC endpoint at this time.
-+ Click **Create endpoint**, then click x after receiving a successful creation message.
-
-![endpoint](/images/5-Workshop/5.3-S3-vpc/complete.png)
+#### Create SNS Topic
+- Go to Amazon SNS $\rightarrow$ Topics $\rightarrow$ Click Create topic named TelcoChurnAlerts.
+- Click Create subscription $\rightarrow$ Protocol: Email $\rightarrow$ Enter your Gmail address $\rightarrow$ Confirm email in your inbox.
+![sns](../../../../static/images/5-Workshop/5.3-Implementation/sns.png)
+#### Create Alarm
+- In the **CloudWatch Console** interface, navigate to **Alarms** and select **Create alarm**.
+- Click the orange **Select metric** button under the **Metric** section.
+![metric](../../../../static/images/5-Workshop/5.3-Implementation/metric.png)
+- In the **Select metric** window that appears, on the **Browse** tab, select **Lambda** $\rightarrow$ **By Function Name** $\rightarrow$ **telco-churn-api-handler** $\rightarrow$ **Select metric**.
+![metric-name](../../../../static/images/5-Workshop/5.3-Implementation/metric-name.png)
+- After selecting the metric, the interface will return to the configuration page. Scroll down to the **Conditions** section:
+   + **Threshold type**: Select **Static**
+   + **Whenever Errors is...**: Select **Greater/Equal** (`>= threshold`)
+   + **than...**: Enter threshold value `1`
+ ![cond](../../../../static/images/5-Workshop/5.3-Implementation/cond.png)
+- Under **Notification**:
+   + **Alarm state trigger**: Select **In alarm** (Execute action when metric exceeds alarm threshold).
+   + **Send a notification to the following SNS topic**: Select **Select an existing SNS topic**.
+   + **Send a notification to...**: Select pre-created SNS Topic from dropdown menu (e.g. `Telco-Churn-Alarm-Topic`).
+   + Check Email information receiving notifications displayed in **Email (endpoints)** below (e.g. `trungnam2682005@gmail.com`).
+   + Scroll to bottom of page and click **Next**.
+    ![notice](../../../../static/images/5-Workshop/5.3-Implementation/notice.png)
+- Under **Name and description**:
+   + **Alarm name**: Enter alarm name, e.g.: `Telco-Churn-API-Error-Alarm`.
+   + **Alarm description - optional**: Enter alarm description if necessary.
+   + Click **Next** at bottom of page.
+    ![alarm-name](../../../../static/images/5-Workshop/5.3-Implementation/alarm-name.png)

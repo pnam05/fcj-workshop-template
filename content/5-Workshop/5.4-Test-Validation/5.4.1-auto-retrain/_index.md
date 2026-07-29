@@ -1,57 +1,42 @@
 ---
-title : "Prepare the environment"
-date : 2024-01-01
+title : "Test Retrain & Automated Deployment Flow"
+date : 2026-07-29
 weight : 1
 chapter : false
 pre : " <b> 5.4.1 </b> "
 ---
 
-To prepare for this part of the workshop you will need to:
-+ Deploying a CloudFormation stack 
-+ Modifying a VPC route table. 
+#### 1. Simulate Uploading New Data File to S3
+- Go to S3 Console $\rightarrow$ Buckets $\rightarrow$ telco-churn-mlops-fcaj $\rightarrow$
+raw/ -> Upload.
+- Upload new data file
+![new](../../../../static/images/5-Workshop/5.4-Test-Validation/up-newdata.png)
 
-These components work together to simulate on-premises DNS forwarding and name resolution.
+#### 2. Check Data Drift Alert & Trigger Pipeline (Lambda Drift Checker)
+- Open AWS Lambda $\rightarrow$ select function TelcoChurnDriftChecker $\rightarrow$ select Monitor tab $\rightarrow$ View CloudWatch logs.
+- Inspect the latest execution log:
+  - Expected log: Lambda detects new file raw/new_telecom_data.csv, performs drift check, shoots email via SNS and calls start_pipeline_execution().
+  ![log](../../../../static/images/5-Workshop/5.4-Test-Validation/newdata-log.png)
+- Open Gmail inbox to check warning Email from Amazon SNS.
+  ![newdata-gmail](../../../../static/images/5-Workshop/5.4-Test-Validation/newdata-gmail.png)
 
-#### Deploy the CloudFormation stack
+#### 3. Monitor Execution Progress of SageMaker Pipeline
+- Access Amazon SageMaker $\rightarrow$ select Pipelines $\rightarrow$ select TelcoChurnPipeline.
+- Click on the latest execution run (Execution ID) to observe the 4-step execution graph:
+  - TelcoChurnProcessStep (Succeeded) $\rightarrow$ TelcoChurnHpoStep (Succeeded) $\rightarrow$ TelcoChurnEvalStep (Succeeded) $\rightarrow$ TelcoChurnCheckAUCThreshold (True) $\rightarrow$ TelcoChurnRegisterModelStep (Approved).
+  
+![pipeline](../../../../static/images/5-Workshop/5.4-Test-Validation/pipeline.png)
+- Confirm Pipeline result Email: When Pipeline completes, EventBridge Rule (TelcoChurnPipelineStatusRule) captures event and sends confirmation email:
+ ![done-gmail](../../../../static/images/5-Workshop/5.4-Test-Validation/done-gmail.png)
 
-The CloudFormation template will create additional services to support an on-premises simulation:
-+ One Route 53 Private Hosted Zone that hosts Alias records for the PrivateLink S3 endpoint
-+ One Route 53 Inbound Resolver endpoint that enables "VPC Cloud" to resolve inbound DNS resolution requests to the Private Hosted Zone
-+ One Route 53 Outbound Resolver endpoint that enables "VPC On-prem" to forward DNS requests for S3 to "VPC Cloud"
-
-![route 53 diagram](/images/5-Workshop/5.4-S3-onprem/route53.png)
-
-1. Click the following link to open the [AWS CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.amazonaws.com/reinvent-endpoints-builders-session/R53CF.yaml&stackName=PLOnpremSetup). The required template will be pre-loaded into the menu. Accept all default and click Create stack.
-
-![Create stack](/images/5-Workshop/5.4-S3-onprem/create-stack.png)
-
-![Button](/images/5-Workshop/5.4-S3-onprem/create-stack-button.png)
-
-It may take a few minutes for stack deployment to complete. You can continue with the next step without waiting for the deployemnt to finish.
-
-#### Update on-premise private route table
-
-This workshop uses a strongSwan VPN running on an EC2 instance to simulate connectivty between an on-premises datacenter and the AWS cloud. Most of the required components are provisioned before your start. To finalize the VPN configuration, you will modify the "VPC On-prem" routing table to direct traffic destined for the cloud to the strongSwan VPN instance.
-
-1. Open the Amazon EC2 console 
-
-2. Select the instance named infra-vpngw-test. From the Details tab, copy the Instance ID and paste this into your text editor
-
-![ec2 id](/images/5-Workshop/5.4-S3-onprem/ec2-onprem-id.png)
-
-3. Navigate to the VPC menu by using the Search box at the top of the browser window.
-
-4. Click on Route Tables, select the RT Private On-prem route table, select the Routes tab, and click Edit Routes.
-
-![rt](/images/5-Workshop/5.4-S3-onprem/rt.png)
-
-5. Click Add route.
-+ Destination: your Cloud VPC cidr range
-+ Target: ID of your infra-vpngw-test instance (you saved in your editor at step 1)
-
-![add route](/images/5-Workshop/5.4-S3-onprem/add-route.png)
-
-6. Click Save changes
-
-
-
+#### 4. Confirm Automated Deployment to Serverless Endpoint (Lambda Deployer)
+- Access Amazon SageMaker $\rightarrow$ select Model Registry $\rightarrow$ TelcoChurnModelGroup.
+  - You will see the new model registered with the latest version (Version) and Approved status.
+   ![model-registry](../../../../static/images/5-Workshop/5.4-Test-Validation/model-registry.png)
+- EventBridge Rule (TelcoChurnModelApprovedRule) captures Approved event and automatically triggers TelcoChurnAutoDeployer.
+- Check logs of Lambda Deployer (TelcoChurnAutoDeployer):
+    ![deploy-logs](../../../../static/images/5-Workshop/5.4-Test-Validation/deploy-logs.png)
+- Access Amazon SageMaker $\rightarrow$ Endpoints $\rightarrow$ telco-churn-serverless-endpoint:
+  - Endpoint status will transition from Updating to InService with the new EndpointConfig pointing to the retrained model Version!
+  
+![inservice](../../../../static/images/5-Workshop/5.4-Test-Validation/inservice.png)

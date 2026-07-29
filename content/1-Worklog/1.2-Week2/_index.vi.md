@@ -1,59 +1,30 @@
 ---
 title: "Worklog Tuần 2"
-date: 2024-01-01
-weight: 1
+date: 2026-06-22
+weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 2:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Khám phá, làm sạch dữ liệu (EDA) và xây dựng mô hình thử nghiệm (Baseline Model XGBoost) cho bài toán Telco Customer Churn.
+* Viết script tiền xử lý dữ liệu chuẩn hóa (`preprocessing.py`) để chuẩn bị tích hợp vào SageMaker Processing Step.
+* Hoàn thiện bản Đề xuất Dự án (Proposal) chi tiết về kiến trúc MLOps Platform trình Mentor phê duyệt.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Tải tập dữ liệu Telco Customer Churn (`WA_Fn-UseC_-Telco-Customer-Churn.csv`) về Jupyter Notebook local/colab <br> - Tiến hành Exploratory Data Analysis (EDA): Phân tích phân phối biến target `Churn`, xử lý giá trị thiếu (missing values) ở cột `TotalCharges` và mã hóa các biến định tính (Categorical Features) | 22/06/2026 | 22/06/2026 | Pandas / Scikit-Learn Docs |
+| 3 | - Thử nghiệm huấn luyện mô hình dự đoán rời bỏ dịch vụ với thuật toán XGBoost <br> - Đánh giá hiệu năng mô hình baseline bằng các chỉ số Machine Learning: ROC-AUC, Accuracy, Precision, Recall <br> - Xác định threshold AUC tối thiểu cho Quality Gate ($AUC \ge 0.80$) | 23/06/2026 | 23/06/2026 | XGBoost Documentation |
+| 4 | - Đóng gói logic tiền xử lý dữ liệu thành script Python độc lập `preprocessing.py` <br> - Xử lý ép kiểu dữ liệu, One-Hot Encoding, đưa cột target `Churn` lên đầu chuỗi (đúng chuẩn định dạng input của XGBoost) và chia tập dữ liệu thành Train (70%), Validation (15%), Test (15%) | 24/06/2026 | 24/06/2026 | SageMaker Python SDK |
+| 5 | - Soạn thảo tài liệu Bản đề xuất dự án (**Proposal**) bằng Tiếng Việt và Tiếng Anh: <br>&emsp; + Tóm tắt điều hành & Tuyên bố bài toán <br>&emsp; + Kiến trúc giải pháp MLOps Event-Driven trên AWS <br>&emsp; + Danh sách dịch vụ AWS sử dụng (SageMaker, S3, Lambda, EventBridge, API Gateway, SNS, CloudWatch) <br>&emsp; + Ước tính ngân sách & Lộ trình triển khai 8 tuần | 25/06/2026 | 25/06/2026 | AWS MLOps Framework |
+| 6 | - Kiểm thử chạy script `preprocessing.py` trên môi trường cục bộ để đảm bảo dữ liệu sau xuất ra dạng CSV tương thích với SageMaker <br> - Trình bày Proposal dự án với Mentor, tiếp thu nhận xét và cập nhật lại sơ đồ kiến trúc hệ thống MLOps | 26/06/2026 | 26/06/2026 | Feedback từ Mentor |
 
 ### Kết quả đạt được tuần 2:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Complete phần phân tích dữ liệu EDA bài toán Telco Customer Churn: Phát hiện và xử lý thành công 11 giá trị trống ở cột `TotalCharges`, chuyển đổi biến `Churn` từ kiểu chuỗi (`Yes`/`No`) sang định dạng nhị phân (`1`/`0`).
+* Huấn luyện thành công mô hình Baseline XGBoost trên tập dữ liệu đã làm sạch, đạt chỉ số **ROC-AUC ~0.84** (vượt ngưỡng mục tiêu 0.80).
+* Xây dựng xong file script Python `preprocessing.py` hoàn chỉnh, hỗ trợ nhận tham số từ `SKLearnProcessor` của SageMaker để tự động chia dữ liệu thành 3 tập `train.csv`, `validation.csv`, và `test.csv`.
+* Hoàn thiện và xuất bản file Proposal cho dự án **MLOps Platform for Telco Customer Churn Prediction** lên hệ thống báo cáo thực tập, sẵn sàng cho giai đoạn đóng gói tự động hóa trên AWS Cloud.

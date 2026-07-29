@@ -1,57 +1,32 @@
 ---
-title: "Week 4 Worklog"
-date: 2024-01-01
-weight: 1
+title: "Worklog Week 4"
+date: 2026-07-06
+weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 4 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Deepen AWS Cloud knowledge in Machine Learning Managed Services ecosystem: Learn container image management mechanisms on ECR, SageMaker Estimators, Hyperparameter Tuning Jobs, and integration with Amazon CloudWatch Logs for debugging jobs.
+* Build and package Automated Training & Hyperparameter Optimization step (`TelcoChurnHpoStep`) using `HyperparameterTuner` with XGBoost algorithm.
+* Write model evaluation script `evaluate.py` and package Performance Evaluation step (`TelcoChurnEvalStep`), extracting ROC-AUC metric into `evaluation.json`.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to implement this week:
 
+| Day | Task | Start Date | Completion Date | Reference Documentation |
+| --- | --- | --- | --- | --- |
+| Mon | - Advanced learning on Machine Learning & Analytics services on AWS: <br>&emsp; + SageMaker Training Jobs architecture & pulling built-in containers from Amazon ECR mechanism <br>&emsp; + Hyperparameter Optimization strategies (Random, Bayesian, Hyperband Search) <br>&emsp; + Centralized Log Management for Training Jobs with Amazon CloudWatch Logs <br> - **Hands-on:** Check XGBoost v1.5-1 ECR Image URI in region `ap-southeast-1` | 06/07/2026 | 06/07/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Tue | - Initialize `Estimator` object for XGBoost with fixed hyperparameters (`objective='binary:logistic'`, `eval_metric='auc'`) <br> - Configure hyperparameter search space ranges (`HyperparameterRanges`): `max_depth` (3-10), `eta` (0.01-0.2), `min_child_weight` (1-6) <br> - Package into `HyperparameterTuner` (running 6 total jobs, 2 parallel jobs on `ml.m5.large`) and create `TuningStep` (`TelcoChurnHpoStep`) | 07/07/2026 | 07/07/2026 | SageMaker SDK Documentation |
+| Wed | - Run trial independent HPO Job to verify data reading capability from `s3://.../processed/train` and `s3://.../processed/validation` <br> - Monitor Tuning Jobs progress and read `validation:auc` metrics directly on SageMaker Console & CloudWatch Logs | 08/07/2026 | 08/07/2026 | AWS SageMaker Console |
+| Thu | - Program Python script file `evaluate.py`: <br>&emsp; + Automatically extract the best `model.tar.gz` file from HPO Job <br>&emsp; + Download test dataset from `s3://.../processed/test/test.csv` <br>&emsp; + Predict Churn probabilities and compute ROC-AUC Score <br>&emsp; + Package AUC metric into standard JSON format (`evaluation.json`) | 09/07/2026 | 09/07/2026 | Scikit-Learn / XGBoost Docs |
+| Fri | - Create `ScriptProcessor` object packaging `evaluate.py` into `TelcoChurnEvalStep` <br> - Set up `PropertyFile` (`evaluation.json`) to extract AUC metric serving the condition check step (Condition Gate) for next week <br> - Successfully test sequential execution flow: `ProcessingStep` $\rightarrow$ `TuningStep` $\rightarrow$ `EvalStep` | 10/07/2026 | 10/07/2026 | AWS Hands-on Labs |
 
-### Week 4 Achievements:
+### Week 4 Accomplishments:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Mastered operating mechanisms of SageMaker Training/HPO Jobs, understood how SageMaker automatically pulls Docker Containers from Amazon ECR and pushes logs to CloudWatch Logs.
+* Successfully built `TelcoChurnHpoStep`:
+  * Automatically executed 6 hyperparameter optimization training jobs in parallel.
+  * Found optimal XGBoost hyperparameter set for Telco Churn dataset, exporting `model.tar.gz` model file stored securely at `s3://telco-churn-mlops-fcaj/models/`.
+* Completed building `evaluate.py` script and packaged into `TelcoChurnEvalStep` using `ScriptProcessor`.
+* Successfully extracted `evaluation.json` file containing Test AUC value (~0.84), ready as input for `ConditionStep` for automated model evaluation.

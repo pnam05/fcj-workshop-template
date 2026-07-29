@@ -1,57 +1,30 @@
 ---
-title: "Week 2 Worklog"
-date: 2024-01-01
-weight: 1
+title: "Worklog Week 2"
+date: 2026-06-22
+weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 2 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Explore and clean data (EDA) and build an experimental baseline model (XGBoost Baseline Model) for the Telco Customer Churn problem.
+* Write a standardized data preprocessing script (`preprocessing.py`) to prepare for integration into SageMaker Processing Step.
+* Finalize a detailed Project Proposal on the MLOps Platform architecture for Mentor approval.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to implement this week:
 
+| Day | Task | Start Date | Completion Date | Reference Documentation |
+| --- | --- | --- | --- | --- |
+| Mon | - Download Telco Customer Churn dataset (`WA_Fn-UseC_-Telco-Customer-Churn.csv`) to local Jupyter Notebook/Colab <br> - Perform Exploratory Data Analysis (EDA): Analyze `Churn` target variable distribution, handle missing values in `TotalCharges` column, and encode categorical features | 22/06/2026 | 22/06/2026 | Pandas / Scikit-Learn Docs |
+| Tue | - Experiment with training churn prediction model using XGBoost algorithm <br> - Evaluate baseline model performance using Machine Learning metrics: ROC-AUC, Accuracy, Precision, Recall <br> - Determine minimum AUC threshold for Quality Gate ($AUC \ge 0.80$) | 23/06/2026 | 23/06/2026 | XGBoost Documentation |
+| Wed | - Package data preprocessing logic into an independent Python script `preprocessing.py` <br> - Handle data type casting, One-Hot Encoding, move target column `Churn` to the first column (following XGBoost input format standard), and split dataset into Train (70%), Validation (15%), Test (15%) | 24/06/2026 | 24/06/2026 | SageMaker Python SDK |
+| Thu | - Draft Project Proposal document in both Vietnamese and English: <br>&emsp; + Executive Summary & Problem Statement <br>&emsp; + Event-Driven MLOps Solution Architecture on AWS <br>&emsp; + List of AWS services used (SageMaker, S3, Lambda, EventBridge, API Gateway, SNS, CloudWatch) <br>&emsp; + Budget Estimation & 8-Week Implementation Roadmap | 25/06/2026 | 25/06/2026 | AWS MLOps Framework |
+| Fri | - Test running `preprocessing.py` script in local environment to ensure output CSV data is compatible with SageMaker <br> - Present project Proposal to Mentor, incorporate feedback, and update MLOps system architecture diagram | 26/06/2026 | 26/06/2026 | Mentor Feedback |
 
-### Week 2 Achievements:
+### Week 2 Accomplishments:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Completed EDA data analysis for Telco Customer Churn problem: Successfully identified and handled 11 missing values in `TotalCharges` column, converted `Churn` variable from string (`Yes`/`No`) to binary format (`1`/`0`).
+* Successfully trained Baseline XGBoost model on cleaned dataset, achieving **ROC-AUC ~0.84** (exceeding target threshold of 0.80).
+* Built a complete Python script file `preprocessing.py`, supporting arguments from SageMaker's `SKLearnProcessor` to automatically split data into 3 sets: `train.csv`, `validation.csv`, and `test.csv`.
+* Finalized and published Proposal file for **MLOps Platform for Telco Customer Churn Prediction** project on the internship reporting system, ready for the automated packaging stage on AWS Cloud.
