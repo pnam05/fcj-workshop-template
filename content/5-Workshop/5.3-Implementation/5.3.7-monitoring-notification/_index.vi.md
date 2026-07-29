@@ -31,4 +31,4 @@ pre : " <b> 5.3.7 </b> "
    + **Alarm name**: Nhập tên cho cảnh báo, ví dụ: `Telco-Churn-API-Error-Alarm`.
    + **Alarm description - optional**: Nhập mô tả cho cảnh báo nếu cần thiết.
    + Nhấn **Next** ở cuối trang.
-    ![metric-name](../../../../static/images/5-Workshop/5.3-Implementation/metric-name.png)
+    ![alarm-name](../../../../static/images/5-Workshop/5.3-Implementation/alarm-name.png)
