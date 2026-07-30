@@ -226,3 +226,12 @@ div.notices.info p {
   border-top: 30px solid #fd9827;
   background: #fff2db;
 }
+
+.select-style select {
+  color: var(--MENU-SECTIONS-LINK-color) !important;
+}
+
+.select-style select option {
+  color: #333 !important;
+  background: #fff !important;
+}

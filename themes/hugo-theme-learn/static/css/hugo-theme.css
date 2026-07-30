@@ -249,6 +249,12 @@ figcaption h4 {
   margin: auto;
   margin-left: 0px;
   margin-right: -20px;
+  color: var(--MENU-SECTIONS-LINK-color, #ccc);
+}
+
+.select-style select option {
+  color: #333;
+  background: #fff;
 }
 
 .select-style select:focus {
