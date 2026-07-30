@@ -1,5 +1,5 @@
 ---
-title: "Nhật ký công việc (Worklog)"
+title: "Nhật ký công việc"
 date: 2026-07-29
 weight: 1
 chapter: false

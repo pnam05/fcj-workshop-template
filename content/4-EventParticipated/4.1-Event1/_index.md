@@ -1,126 +1,89 @@
 ---
 title: "Event 1"
-date: 2024-01-01
+date: 2026-07-20
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+# EVENT SUMMARY REPORT: AWS COMMUNITY DAY & TECH WORKSHOP
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+**Event Name:** AWS Community Day & Tech Workshop  
+**Main Topics:** Web App Security with AWS Security Agent, AWS CLF-C02 Certification Roadmap, & Customer-Centric SLA Monitoring  
 
-### Event Objectives
+---
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+### PART I: DETAILED TOPIC PRESENTATIONS
 
-### Speakers
+#### 1. Topic 1: Securing Your Web Apps With AWS Security Agent
+* **Speaker:** Thinh Nguyen (DevOps/DevSecOps/Cloud Engineer – Styl Solutions)
+* **The Security Bottleneck:**
+  * Manual penetration testing (pentesting) takes weeks, incurs high costs ($5,000 – $20,000/round), and yields inconsistent results depending on individual tester mindset and skill.
+* **AWS Security Agent Solution (Frontier Agent):**
+  * Automates reasoning powered by **Amazon Bedrock** to plan and execute security reviews.
+  * **Full Lifecycle Coverage:**
+    * **Design Security Review:** Evaluates architecture documents (Markdown/Terraform) against PCI DSS, NIST CSF, and AWS Well-Architected frameworks (Free Tier: 200 tasks/month).
+    * **Code Security Review:** Scans Pull Requests (PRs) on GitHub/GitLab, comments directly on code lines, and suggests automated fixes (Free Tier: 1,000 PRs/month).
+    * **Automated Pentesting:** Simulates real-world exploit chains (e.g., IDOR $\rightarrow$ XSS) and validates vulnerabilities.
+* **Pricing Reality:**
+  * 2-month free trial (400 task-hours/month); pay-as-you-go rate at $50/task-hour.
+  * In real projects, total pentesting cost ranges from **$1,500 – $2,500**, offering massive cost savings compared to traditional $10,000 manual pentesting engagements.
+* **Limitations to Note:**
+  * Blocked by advanced authentication mechanisms (MFA, Biometrics, mTLS).
+  * Struggles with complex business logic flaws without deep context.
+  * Requires strict task-hour tracking to prevent unexpected cost overruns.
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+---
 
-### Key Highlights
+#### 2. Topic 2: Inside The Exam: AWS Cloud Practitioner (CLF-C02)
+* **Speaker:** Ngo Le Tan Huy
+* **Exam Overview:**
+  * Foundational-level exam suitable for beginners, focusing on high-level cloud concepts without requiring deep coding or technical configurations.
+  * **Format:** 65 multiple-choice questions, 90-minute duration (+30 minutes ESL accommodation), passing score of 700/1000, 3-year validity.
+* **4 Content Domains:**
+  * **Cloud Concepts (24%):** Digital transformation mindset, 6 Cloud benefits, AWS WAF, AWS CAF.
+  * **Security and Compliance (30%):** Shared Responsibility Model, IAM, Security Groups, NACLs, AWS Shield, AWS WAF, AWS Artifact.
+  * **Cloud Technology and Services (34%):** Global Infrastructure (Regions, AZs, Edge Locations) and core services for Compute (EC2, Lambda), Storage/DB (S3, EBS, RDS, DynamoDB), Networking (VPC, Route 53).
+  * **Billing, Pricing, and Support (12%):** EC2 Pricing Models, AWS Cost Explorer, AWS Budgets, Support Plans.
+* **Study Insights & Exam Tips:**
+  * **Strategy:** Learn via *Keyword Thinking*, thoroughly analyze mock test explanations, and gain hands-on experience using the AWS Free Tier.
+  * **Exam Tactics:** Use elimination (2 options are usually distractors), keep solutions simple, watch for trap keywords (`NOT`, `Least cost`), and use *Flag for review* to revisit tough questions.
 
-#### Identifying the drawbacks of legacy application architecture
+---
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+#### 3. Topic 3: SLA and Monitoring: From SLA to Monitoring What Really Matters
+* **Speaker:** Nguyen Huynh Son (Ex-Infrastructure Reliability Engineer)
+* **Role of Service Level Agreements (SLA):**
+  * Sets clear service expectations with customers, assigns operational accountability, and manages system risk.
+* **Monitoring Reality:**
+  * **Healthy infrastructure $\neq$ Happy users.**
+  * *Real-world example:* `/health` returns 200 OK and EC2 CPU runs at a cool 18%, but RDS database connection issues prevent users from logging in (`/login` fails).
+* **The Monitoring Pyramid:**
+  * Monitor top-down rather than focusing solely on lower-level infrastructure:
+    1. **Customer Experience:** Can users log in / complete purchases?
+    2. **Business Metrics:** Login success rate, order count, revenue.
+    3. **Application:** Latency spikes, error rates.
+    4. **Infrastructure:** CPU, Memory, Disk, Network.
+    5. **Cloud Provider:** AWS service status (EC2, RDS, ALB).
+* **Core Message & Operational Philosophy:**
+  * Monitor what users actually do (Login, Checkout, Payment), rather than relying only on server metrics.
+  * **Shared Responsibility SLA Model:** AWS ensures Cloud infrastructure availability, while you remain accountable for Customer Experience.
+  * Philosophy from Dr. Werner Vogels (CTO Amazon): *"Everything fails all the time, so plan for failure and nothing fails"*.
 
-#### Transitioning to modern application architecture – Microservices
+---
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+### PART II: PERSONAL TAKEAWAYS & IMPRESSIONS AS AN ATTENDEE
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+As an audience member attending the event presentations, I gained practical operational insights and valuable lessons:
 
-#### Domain-Driven Design (DDD)
+#### 1. Security & DevSecOps Automation Takeaways
+* Understood how Generative AI tools (AWS Security Agent) automate architecture and code reviews, lowering traditional pentesting costs while upholding security standards.
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+#### 2. Certification Preparation Strategy
+* Mastered the CLF-C02 exam structure, keyword thinking approach, and test-taking strategies to build a solid foundation for acquiring the AWS Cloud Practitioner certification.
 
-#### Event-Driven Architecture
+#### 3. Customer-Centric Monitoring Mindset
+* Shifted from pure infrastructure monitoring to **user-experience-centric monitoring**, realizing that green infrastructure metrics are only meaningful when core user journeys (Login, Payment) function seamlessly.
+#### 4. Event Photos
+![FCAJ Community Day - AABW Showcase](/images/event1.png)
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
-
-#### Amazon Q Developer
-
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
-
-### Key Takeaways
-
-#### Design Mindset
-
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
-
-#### Technical Architecture
-
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
-
-### Event Experience
-
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
-
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
-
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.

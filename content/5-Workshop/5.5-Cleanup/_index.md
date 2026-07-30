@@ -10,9 +10,9 @@ To avoid incurring unnecessary charges on your AWS account after completing work
 
 #### Delete SageMaker Serverless Endpoint & Configurations
 - Access Amazon SageMaker Studio $\rightarrow$ Deployments $\rightarrow$ Endpoints: Select telco-churn-serverless-endpoint $\rightarrow$ Delete.
-![clean-server](/images/5-Workshop/5.4-Test-Validation/clean-server.png)
+![clean-server](/images/5-Workshop/5.5-Cleanup/clean-server.png)
 - Select JumpStart / Models: Select TelcoChurnModelGroup $\rightarrow$ Delete.
-![clean-group](/images/5-Workshop/5.4-Test-Validation/clean-group.png)
+![clean-group](/images/5-Workshop/5.5-Cleanup/clean-group.png)
 
 #### Delete SageMaker Pipeline
 - In SageMaker Console, open Pipelines section.

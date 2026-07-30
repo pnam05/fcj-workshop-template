@@ -1,125 +1,103 @@
 ---
-title: "Event 2"
-date: 2024-01-01
-weight: 1
+title: "Sự kiện 2"
+date: 2026-07-15
+weight: 2
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# BÁO CÁO THU HOẠCH SỰ KIỆN: AGENTIC AI BUILD WEEK (AABW) HACKATHON
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+**Tên sự kiện:** Agentic AI Build Week (AABW) Hackathon  
+**Chủ đề chính:** Giới thiệu giải pháp AI/AWS thực tế và Chia sẻ kinh nghiệm thực chiến trong 24 giờ thi Hackathon  
 
-### Mục Đích Của Sự Kiện
+---
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+### PHẦN I: GIỚI THIỆU GIẢI PHÁP & BÀI THI TỪ CÁC ĐỘI
 
-### Danh Sách Diễn Giả
+#### 1. Đội Plan V – Dự án: Solution Architect Professional AI Native App
+* **Thành viên:** Phạm Tiến Thuận, Phát Huỳnh Hoàng Long, Lê Minh Nghĩa, Trần Đại Vĩ, Nguyễn An.
+* **Vấn đề đặt ra (Problem):**
+  * Các Solution Architect (SA) mất nhiều thời gian thủ công phân tích yêu cầu từ tài liệu của khách hàng (BRD/PRD).
+  * Quy trình thiết kế sơ đồ kiến trúc, viết code Infrastructure as Code (IaC - Terraform) và tính toán chi phí đám mây thường phải xây dựng lại từ đầu, phụ thuộc lớn vào kinh nghiệm cá nhân.
+* **Giải pháp (Solution):**
+  * Xây dựng ứng dụng AI-Native dành riêng cho SA:
+    * Phân tích văn bản tự nhiên và trích xuất danh mục yêu cầu (Requirements Catalogue) trong vài phút.
+    * Tự động tạo bản thảo kiến trúc đám mây (hỗ trợ Hybrid-Cloud) tuân thủ tiêu chuẩn doanh nghiệp.
+    * Sinh sơ đồ kiến trúc có thể chỉnh sửa (`Draw.io` và biểu tượng chuẩn AWS).
+    * Dự toán chi phí AWS theo từng vùng (vd: `ap-southeast-1`).
+    * Tương tác và tinh chỉnh thông qua Chatbot Sidebar.
+* **Kiến trúc kỹ thuật & Tech Stack:**
+  * **AI & Retrieval:** Amazon Bedrock, Knowledge Base, Draw.io MCP, AWS Pricing MCP.
+  * **Hạ tầng AWS:** ECS Fargate (Backend & Agent Services), Amazon EFS, S3, PostgreSQL, CloudFront, Application Load Balancer (ALB), AWS Cognito, CloudWatch, ECR, Terraform.
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+---
 
-### Nội Dung Nổi Bật
+#### 2. Đội Dream AI Team – Dự án: Signal Scout
+* **Thành viên:** Lê Tấn Lực, Đỗ Hoàng Hiếu, Triệu Quốc Hào, Nguyễn Văn Duy Khiêm, Nguyễn Công Minh, Nguyễn Trần Minh Quân.
+* **Bài toán & Giá trị mang lại (Value Proposition):**
+  * Giúp các đội ngũ chiến lược, quản trị rủi ro và phân tích đối thủ phát hiện sớm các tín hiệu thay đổi chiến lược doanh nghiệp (tái cấu trúc, biến động chỉ số tài chính/vận hành).
+  * Thu thập dữ liệu rải rác và tổng hợp thành báo cáo minh bạch có trích dẫn bằng chứng cụ thể (cited evidence), hỗ trợ ban điều hành ra quyết định: *Maintain (Duy trì)*, *Adapt (Thích ứng)*, hoặc *Accelerate (Đẩy nhanh)*.
+* **Công nghệ & Tối ưu chi phí:**
+  * **Tech Stack:** Amazon Bedrock, AgentCore Runtime & Short-Term Memory, AWS Amplify, WAF, DynamoDB, AWS Lambda, API Gateway, Route53, S3 Intelligent-Tiering, cùng Langfuse, Apify, TinyFish.
+  * **Tối ưu chi phí:** Đưa ra bảng ngân sách linh hoạt theo quy mô sử dụng (dao động từ ~$81/tháng ở mức cơ bản đến ~$359/tháng ở quy mô cao).
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+---
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+#### 3. Đội 3KA – Dự án: S.H.E.P.H.E.R.D.
+*(Smart Human-flow Evaluation, Prediction, Hazard Detection, Response, and Dispatch)*
+* **Thành viên:** Huỳnh An Khương, Nguyễn Quốc Huy, Ngô Quang Khôi, Hoàng Lê Thành Đức, Đặng Nguyễn Phước Lộc, Đặng Trường Hưng.
+* **Bối cảnh & Bài toán:**
+  * Xuất phát từ ý tưởng Đồ án tốt nghiệp (Capstone), đội đem dự án tới Hackathon để kiểm chứng bản MVP thực tế dưới áp lực thời gian.
+  * Giám sát sự kiện và địa điểm đông người theo thời gian thực (real-time) để phát hiện ùn tắc sớm thay vì xử lý thụ động.
+* **Tính năng cốt lõi & Kiến trúc:**
+  * Phân tích video camera live stream: Đếm/theo dõi luồng người, đo mật độ đám đông, đánh giá tình trạng hàng chờ, phát hiện nguy cơ ùn tắc và gợi ý hành động điều phối.
+  * **Computer Vision:** YOLO + ByteTrack (nhận diện & theo dõi đối tượng).
+  * **AI & Platform:** Amazon SageMaker, Amazon Bedrock AgentCore + Strands Agent (Agentic AI Layer với *Autonomous Monitor* theo dõi tự động và *Operator Copilot* hỗ trợ hỏi đáp dữ liệu real-time), Dashboard React.
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+---
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+### PHẦN II: CHIA SẺ KINH NGHIỆM THI HACKATHON (HACKATHON JOURNEY)
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+Bên cạnh giải pháp kỹ thuật, đại diện các đội thi đã chia sẻ hành trình 24 giờ thi đấu với nhiều bài học thực chiến giá trị:
 
-#### Domain-Driven Design (DDD)
+#### 1. Thách thức & Sự cố thực tế
+* **Rào cản chuyên môn & Thời gian:** Nhiều thành viên lần đầu tiếp xúc với AI và dịch vụ AWS, phải hoàn thiện sản phẩm chạy được (MVP) chỉ trong đúng 24 giờ.
+* **Sự cố kỹ thuật:** Xử lý video real-time bị giật lag, mất tracking giữa các khung hình, thức xuyên đêm debug tới 3 giờ sáng, hay sự cố vô tình push file chứa thông tin bảo mật (`.env`) lên GitHub.
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+#### 2. Trải nghiệm đáng nhớ
+* Không khí 24 giờ thức trắng làm việc nhóm, cùng thảo luận phân công công việc, đi dạo nạp năng lượng đêm khuya và tinh thần đồng đội gắn kết.
+* Mở rộng mạng lưới kết nối (networking) với các kỹ sư, chuyên gia và dàn Mentor giàu kinh nghiệm từ AWS.
 
-#### Event-Driven Architecture
+#### 3. Lời khuyên xương máu cho người tham gia Hackathon
+1. **Chuẩn bị trước cuộc thi (Preparation):** Xác định rõ tiêu chí hoàn thành (definition of done), chuẩn bị sẵn mẫu template/tài khoản và phân công vai trò rõ ràng (coding, UI/UX, pitching).
+2. **Quản lý phạm vi dự án (Scope it tiny):** Tập trung hoàn thiện xuất sắc **1 tính năng cốt lõi**. Một sản phẩm nhỏ chạy mượt mà luôn đánh bại một ý tưởng hoành tráng nhưng dở dang hoặc nhiều lỗi.
+3. **Tận dụng sự trợ giúp từ Mentor:** Chủ động hỏi đáp và lắng nghe góp ý từ các Mentor chuyên môn.
+4. **Mạnh dạn dấn thân (Just sign up):** Đừng chờ tới khi "cảm thấy đủ giỏi", bước vào phòng thi đã là một bước tiến lớn.
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+---
 
-#### Compute Evolution
+### PHẦN III: TỔNG KẾT (KEY TAKEAWAYS)
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+* **Sự dấn thân là bước khởi đầu:** Dám đăng ký và tham gia cuộc thi đã giúp nâng cao vượt bậc kỹ năng thực chiến.
+* **Tính thực tế và chỉn chu:** Sản phẩm hoạt động ổn định quan trọng hơn quy mô ý tưởng.
+* **Giá trị kết nối:** Cuộc thi mang me cơ hội rèn luyện áp lực cao và tìm kiếm những đồng đội cùng chí hướng trong cộng đồng Cloud & AI.
 
-#### Amazon Q Developer
+---
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+### PHẦN IV: BÀI HỌC VÀ CẢM NHẬN CỦA BẢN THÂN KHI THAM DỰ BUỔI CHIA SẺ
 
-### Những Gì Học Được
+Với vai trò là người tham dự lắng nghe các đội thi trình bày dự án và chia sẻ kinh nghiệm thực chiến từ cuộc thi Hackathon **Agentic AI Build Week (AABW)**, bản thân em đã gặt hái được nhiều góc nhìn mới mẻ cùng những bài học quý giá:
 
-#### Tư Duy Thiết Kế
+#### 1. Góc nhìn Kỹ thuật & Tư duy Kiến trúc Cloud / AI
+* **Tư duy thiết kế ứng dụng Agentic AI thực tế:** Qua việc theo dõi các sản phẩm của đội Plan V, Dream AI và 3KA, em đã hình dung rõ ràng hơn cách tích hợp các mô hình Generative AI (Amazon Bedrock, AgentCore) với hạ tầng đám mây (ECS Fargate, Lambda, SageMaker, DynamoDB) để giải quyết các bài toán tự động hóa thực tế của doanh nghiệp.
+* **Chiến lược tối ưu chi phí & Hạ tầng:** Học hỏi cách các đội thi phân tích ngân sách vận hành chi tiết, kết hợp linh hoạt giữa các dịch vụ Serverless, S3 Intelligent-Tiering và DynamoDB on-demand để tối ưu chi phí hạ tầng Cloud.
+* **Tích hợp Computer Vision với Machine Learning Pipeline:** Hiểu thêm phương pháp kết hợp mô hình YOLO + ByteTrack với Amazon SageMaker và Bedrock Agent trong bài toán xử lý video thời gian thực và tự động đưa ra cảnh báo điều phối.
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+#### 2. Cảm nhận & Bài học Thực tiễn từ Kinh nghiệm của Các Đội thi
+* **Bài học về quản lý phạm vi (Scope Management):** Lắng nghe chia sẻ của các anh/chị thi trước giúp em nhận ra tầm quan trọng của việc tập trung làm thật chỉn chu một **tính năng cốt lõi (MVP)** thay vì ôm đồm quá nhiều ý tưởng dở dang khi triển khai dự án công nghệ.
+* **Tinh thần làm việc nhóm dưới áp lực cao:** Dù không trực tiếp tham gia thi đấu 24 giờ, những câu chuyện thực tế về cách các đội phối hợp ăn ý, cùng vượt qua sự cố kỹ thuật khẩn cấp xuyên đêm và tinh thần dấn thân đã truyền cho em nhiều cảm hứng và động lực học hỏi.
+* **Giá trị từ sự kết nối & Giao lưu cộng đồng:** Buổi chia sẻ tạo cơ hội tuyệt vời để em mở rộng góc nhìn, lắng nghe những góp ý chuyên môn sâu sắc từ dàn Mentor AWS, đồng thời học hỏi được tư duy xử lý vấn đề của các kỹ sư đi trước.
 
-#### Kiến Trúc Kỹ Thuật
-
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
-
-#### Chiến Lược Hiện Đại Hóa
-
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
-
-### Ứng Dụng Vào Công Việc
-
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
-
-### Trải nghiệm trong event
-
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
-
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
-
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
-
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+#### 3. Hình Ảnh Sự Kiện
+![FCAJ Community Day - AABW Showcase](/images/event2.png)

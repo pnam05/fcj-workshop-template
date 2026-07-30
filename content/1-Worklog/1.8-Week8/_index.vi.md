@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 8"
-date: 2026-08-03
+date: 2026-07-30
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
@@ -17,8 +17,8 @@ pre: " <b> 1.8. </b> "
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
 | 2 | - Học nâng cao về **AWS Well-Architected Framework** (5 trụ cột: Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization) <br> - Phân tích chi phí vận hành hệ thống qua **AWS Cost Explorer** và thiết lập **AWS Budgets Alarm** cảnh báo khi chi phí vượt $10 USD/tháng <br> - Đánh giá các giải pháp tối ưu chi phí Serverless (Auto-scaling, Concurrency limits) | 03/08/2026 | 03/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - **Kiểm thử End-to-End Kịch bản 1 (Automated Retrain Flow):** <br>&emsp; + Giả lập Admin upload file dữ liệu mới vào `s3://.../raw/` <br>&emsp; + Xác nhận Lambda Drift Checker kích hoạt SageMaker Pipeline <br>&emsp; + Kiểm tra Pipeline 4 bước chạy báo xanh, gửi Email SNS thông báo `Succeeded` <br>&emsp; + Kiểm tra EventBridge kích hoạt Lambda Deployer tự động cập nhật Serverless Endpoint | 04/08/2026 | 04/08/2026 | AWS Console Testing |
-| 4 | - **Kiểm thử End-to-End Kịch bản 2 (Real-time Inference Flow):** <br>&emsp; + Gửi nhiều mẫu payload JSON kiểm thử qua API Gateway HTTP Endpoint bằng cURL/Postman <br>&emsp; + Kiểm tra các trường hợp dự đoán Churn (`Yes`/`No`) và đánh giá độ trễ (Latency) <br>&emsp; + Lập bảng Tổng kết Kết quả Kiểm thử (**Validation Matrix**) đầy đủ các tiêu chí | 05/08/2026 | 05/08/2026 | Postman / cURL Tests |
+| 3 | - **Kiểm thử End-to-End Kịch bản 1 (Automated Retrain Flow):** <br>&emsp; + Giả lập Admin upload file dữ liệu mới vào s3://.../raw/ <br>&emsp; + Xác nhận Lambda Drift Checker kích hoạt SageMaker Pipeline <br>&emsp; + Kiểm tra Pipeline 4 bước chạy báo xanh, gửi Email SNS thông báo Succeeded <br>&emsp; + Kiểm tra EventBridge kích hoạt Lambda Deployer tự động cập nhật Serverless Endpoint | 04/08/2026 | 04/08/2026 | AWS Console Testing |
+| 4 | - **Kiểm thử End-to-End Kịch bản 2 (Real-time Inference Flow):** <br>&emsp; + Gửi nhiều mẫu payload JSON kiểm thử qua API Gateway HTTP Endpoint bằng cURL/Postman <br>&emsp; + Kiểm tra các trường hợp dự đoán Churn (Yes/No) và đánh giá độ trễ (Latency) <br>&emsp; + Lập bảng Tổng kết Kết quả Kiểm thử (**Validation Matrix**) đầy đủ các tiêu chí | 05/08/2026 | 05/08/2026 | Postman / cURL Tests |
 | 5 | - Rà soát và hoàn thiện toàn bộ tài liệu báo cáo thực tập & tài liệu Workshop trên website Hugo: <br>&emsp; + Kiểm tra tính đầy đủ của cả 2 ngôn ngữ (**Tiếng Việt** và **Tiếng Anh**) <br>&emsp; + Bổ sung sơ đồ kiến trúc, hình ảnh bằng chứng (Proof of Work) từ CloudWatch Logs và cURL response <br> - Báo cáo nghiệm thu kết quả dự án cá nhân với Mentor | 06/08/2026 | 06/08/2026 | Website Template FCAJ |
 | 6 | - **Thực hiện Dọn dẹp Tài nguyên (Clean-up):** <br>&emsp; + Xóa SageMaker Serverless Endpoint & Configurations <br>&emsp; + Làm rỗng và xóa S3 Data Lake Bucket <br>&emsp; + Xóa các hàm AWS Lambda, API Gateway, EventBridge Rules & SNS Topic <br> - Tổng kết kỳ thực tập và đóng Worklog | 07/08/2026 | 07/08/2026 | Workshop Clean-up Guide |
 
