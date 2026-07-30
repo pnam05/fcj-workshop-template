@@ -9,10 +9,10 @@ pre : " <b> 5.3.4 </b> "
 Hàm Lambda này được đính kèm với sự kiện S3 Event Notification (ObjectCreated). Mỗi khi Admin upload một file dữ liệu CSV mới vào folder raw/, Lambda sẽ tự động chạy để kiểm tra Data Drift, gửi thông báo qua Amazon SNS và gọi pipeline.start() để bắt đầu Retrain.
 
 #### Lập trình Hàm Lambda (TelcoChurnDriftChecker)
-- Vào AWS Lambda $\rightarrow$ chọn Create function.
+- Vào AWS Lambda => chọn Create function.
 - Function name: TelcoChurnDriftChecker | Runtime: Python 3.11.
 - Gán Role có các quyền: AmazonS3ReadOnlyAccess, AmazonSageMakerFullAccess, AmazonSNSFullAccess.
-- Trong tab Configuration $\rightarrow$ General configuration, chỉnh Timeout thành 2 min 0 sec.
+- Trong tab Configuration => General configuration, chỉnh Timeout thành 2 min 0 sec.
 - Điều chỉnh Environment variables và Layers như bên dưới.
 ![ev](/images/5-Workshop/5.3-Implementation/ev.png)
 ![layers](/images/5-Workshop/5.3-Implementation/layers.png)
@@ -193,8 +193,8 @@ def lambda_handler(event, context):
 
 #### Gán S3 Event Notification kết nối với Lambda
 Để khi S3 nhận file mới thì Lambda tự động chạy:
-- Mở dịch vụ Amazon S3 $\rightarrow$ Click chọn Bucket telco-churn-mlops-fcaj.
-- Chuyển sang tab Properties $\rightarrow$ Kéo xuống mục Event notifications $\rightarrow$ Bấm Create event notification.
+- Mở dịch vụ Amazon S3 => Click chọn Bucket telco-churn-mlops-fcaj.
+- Chuyển sang tab Properties => Kéo xuống mục Event notifications => Bấm Create event notification.
 ![event-s3](/images/5-Workshop/5.3-Implementation/event-s3.png)
 - Thiết lập:
   - Event name: NewRawCsvUploaded.

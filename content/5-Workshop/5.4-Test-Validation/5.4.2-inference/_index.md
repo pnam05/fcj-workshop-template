@@ -49,7 +49,7 @@ Successful result (HTTP 200 OK):
 
 
 #### 4. Inspect Logs & Metrics on Amazon CloudWatch
-- Access CloudWatch $\rightarrow$ Log groups $\rightarrow$ open logs for /aws/lambda/telco-churn-api-handler
+- Access CloudWatch => Log groups => open logs for /aws/lambda/telco-churn-api-handler
    ![api-logs](/images/5-Workshop/5.4-Test-Validation/api-logs.png)
 - Init Duration: 442.40 ms: 
   - This is the execution environment initialization time (Cold Start) for the first time Lambda runs

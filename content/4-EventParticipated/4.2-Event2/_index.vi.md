@@ -1,103 +1,94 @@
 ---
 title: "Sự kiện 2"
-date: 2026-07-15
+date: 2026-07-04
 weight: 2
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-# BÁO CÁO THU HOẠCH SỰ KIỆN: AGENTIC AI BUILD WEEK (AABW) HACKATHON
+# BÁO CÁO THU HOẠCH SỰ KIỆN: SWINBURNE CLOUD MASTERY – BUỔI CHIA SẺ SỰ NGHIỆP
 
-**Tên sự kiện:** Agentic AI Build Week (AABW) Hackathon  
-**Chủ đề chính:** Giới thiệu giải pháp AI/AWS thực tế và Chia sẻ kinh nghiệm thực chiến trong 24 giờ thi Hackathon  
-
----
-
-### PHẦN I: GIỚI THIỆU GIẢI PHÁP & BÀI THI TỪ CÁC ĐỘI
-
-#### 1. Đội Plan V – Dự án: Solution Architect Professional AI Native App
-* **Thành viên:** Phạm Tiến Thuận, Phát Huỳnh Hoàng Long, Lê Minh Nghĩa, Trần Đại Vĩ, Nguyễn An.
-* **Vấn đề đặt ra (Problem):**
-  * Các Solution Architect (SA) mất nhiều thời gian thủ công phân tích yêu cầu từ tài liệu của khách hàng (BRD/PRD).
-  * Quy trình thiết kế sơ đồ kiến trúc, viết code Infrastructure as Code (IaC - Terraform) và tính toán chi phí đám mây thường phải xây dựng lại từ đầu, phụ thuộc lớn vào kinh nghiệm cá nhân.
-* **Giải pháp (Solution):**
-  * Xây dựng ứng dụng AI-Native dành riêng cho SA:
-    * Phân tích văn bản tự nhiên và trích xuất danh mục yêu cầu (Requirements Catalogue) trong vài phút.
-    * Tự động tạo bản thảo kiến trúc đám mây (hỗ trợ Hybrid-Cloud) tuân thủ tiêu chuẩn doanh nghiệp.
-    * Sinh sơ đồ kiến trúc có thể chỉnh sửa (`Draw.io` và biểu tượng chuẩn AWS).
-    * Dự toán chi phí AWS theo từng vùng (vd: `ap-southeast-1`).
-    * Tương tác và tinh chỉnh thông qua Chatbot Sidebar.
-* **Kiến trúc kỹ thuật & Tech Stack:**
-  * **AI & Retrieval:** Amazon Bedrock, Knowledge Base, Draw.io MCP, AWS Pricing MCP.
-  * **Hạ tầng AWS:** ECS Fargate (Backend & Agent Services), Amazon EFS, S3, PostgreSQL, CloudFront, Application Load Balancer (ALB), AWS Cognito, CloudWatch, ECR, Terraform.
+**Tên sự kiện:** Swinburne Cloud Mastery – Buổi Chia Sẻ Sự Nghiệp  
+**Thời gian:** 04 Tháng 7, 2026  
+**Địa điểm:** Tầng 26, tòa nhà Bitexco, TP. Hồ Chí Minh  
+**Chủ đề chính:** Định hướng thị trường việc làm trong kỷ nguyên AI, Hành trình Data Engineer, Bí quyết tạo cơ hội & Góc nhìn tuyển dụng  
 
 ---
 
-#### 2. Đội Dream AI Team – Dự án: Signal Scout
-* **Thành viên:** Lê Tấn Lực, Đỗ Hoàng Hiếu, Triệu Quốc Hào, Nguyễn Văn Duy Khiêm, Nguyễn Công Minh, Nguyễn Trần Minh Quân.
-* **Bài toán & Giá trị mang lại (Value Proposition):**
-  * Giúp các đội ngũ chiến lược, quản trị rủi ro và phân tích đối thủ phát hiện sớm các tín hiệu thay đổi chiến lược doanh nghiệp (tái cấu trúc, biến động chỉ số tài chính/vận hành).
-  * Thu thập dữ liệu rải rác và tổng hợp thành báo cáo minh bạch có trích dẫn bằng chứng cụ thể (cited evidence), hỗ trợ ban điều hành ra quyết định: *Maintain (Duy trì)*, *Adapt (Thích ứng)*, hoặc *Accelerate (Đẩy nhanh)*.
-* **Công nghệ & Tối ưu chi phí:**
-  * **Tech Stack:** Amazon Bedrock, AgentCore Runtime & Short-Term Memory, AWS Amplify, WAF, DynamoDB, AWS Lambda, API Gateway, Route53, S3 Intelligent-Tiering, cùng Langfuse, Apify, TinyFish.
-  * **Tối ưu chi phí:** Đưa ra bảng ngân sách linh hoạt theo quy mô sử dụng (dao động từ ~$81/tháng ở mức cơ bản đến ~$359/tháng ở quy mô cao).
+### PHẦN I: NỘI DUNG CHI TIẾT CÁC CHỦ ĐỀ TRÌNH BÀY
+
+#### 1. Chủ đề 1: Định hướng thị trường việc làm trong kỷ nguyên AI
+* **Diễn giả:** Mr. Nguyễn Gia Hưng
+* **Thực trạng khắc nghiệt của thị trường:**
+  * Thế hệ hiện nay đang đối mặt với một thị trường việc làm ngày càng cạnh tranh, đòi hỏi phải tận dụng mọi lợi thế có thể – đặc biệt là **Internal Referral** (giới thiệu nội bộ) thông qua các cộng đồng công nghệ như AWS, Rennova, NAB,...
+* **Mô hình kim tự tháp ngược của AI trong tuyển dụng:**
+  * Khi AI tự động hóa các công việc cấp thấp (entry-level), các doanh nghiệp đang dịch chuyển nhu cầu tuyển dụng về phía nhân sự cấp cao (Senior), tạo nên mô hình kim tự tháp ngược trong cơ cấu nhân sự.
+* **Lý thuyết Jensen Paradox:**
+  * Bất chấp sự phát triển của AI, nhu cầu tổng thể về nhân lực công nghệ không giảm mà thay đổi hình thái. AI giúp tăng năng suất lao động nhưng đồng thời mở ra các danh mục công việc mới, ngăn ngừa tình trạng mất việc làm ròng.
+* **Tăng tính Visibility & Sức mạnh của Referral:**
+  * Trong thị trường cạnh tranh, chỉ giỏi kỹ thuật là chưa đủ. Cần chủ động tham gia cộng đồng, chia sẻ dự án để xây dựng sự hiện diện nghề nghiệp (Visibility).
+  * Giới thiệu nội bộ (Referral) là "siêu năng lực sự nghiệp", giúp tăng đáng kể tỷ lệ trúng tuyển.
 
 ---
 
-#### 3. Đội 3KA – Dự án: S.H.E.P.H.E.R.D.
-*(Smart Human-flow Evaluation, Prediction, Hazard Detection, Response, and Dispatch)*
-* **Thành viên:** Huỳnh An Khương, Nguyễn Quốc Huy, Ngô Quang Khôi, Hoàng Lê Thành Đức, Đặng Nguyễn Phước Lộc, Đặng Trường Hưng.
-* **Bối cảnh & Bài toán:**
-  * Xuất phát từ ý tưởng Đồ án tốt nghiệp (Capstone), đội đem dự án tới Hackathon để kiểm chứng bản MVP thực tế dưới áp lực thời gian.
-  * Giám sát sự kiện và địa điểm đông người theo thời gian thực (real-time) để phát hiện ùn tắc sớm thay vì xử lý thụ động.
-* **Tính năng cốt lõi & Kiến trúc:**
-  * Phân tích video camera live stream: Đếm/theo dõi luồng người, đo mật độ đám đông, đánh giá tình trạng hàng chờ, phát hiện nguy cơ ùn tắc và gợi ý hành động điều phối.
-  * **Computer Vision:** YOLO + ByteTrack (nhận diện & theo dõi đối tượng).
-  * **AI & Platform:** Amazon SageMaker, Amazon Bedrock AgentCore + Strands Agent (Agentic AI Layer với *Autonomous Monitor* theo dõi tự động và *Operator Copilot* hỗ trợ hỏi đáp dữ liệu real-time), Dashboard React.
+#### 2. Chủ đề 2: Hành trình của một Data Engineer
+* **Diễn giả:** Mr. Vinh Bành
+* **Hành trình nghề nghiệp & Sức mạnh của Referral:**
+  * Chia sẻ những bước ngoặt thực tế trong sự nghiệp Data Engineer. Tiếp tục củng cố thông điệp: mạng lưới quan hệ và cơ chế giới thiệu nội bộ đóng vai trò quyết định trong việc mở ra cơ hội nghề nghiệp.
+* **Giao tiếp là một kỹ năng kỹ thuật (Communication as a Technical Skill):**
+  * Thách thức quan niệm xem kỹ năng mềm tách biệt với kỹ thuật. Khả năng giao tiếp hiệu quả với đồng nghiệp, stakeholder và quản lý là năng lực cốt lõi của một kỹ sư Data Engineer giỏi.
+* **Tầm quan trọng của kiến thức nền tảng:**
+  * Các môn học nền tảng ở đại học (Toán học, Cấu trúc dữ liệu & Thuật toán, Lý thuyết máy tính) là bệ phóng thiết thực cho công việc Data Engineering thực tế.
+* **Nền tảng & Giao tiếp trong kỷ nguyên AI:**
+  * Khi AI ngày càng giỏi sinh mã nguồn (code generation), giá trị khác biệt của kỹ sư nằm ở chiều sâu hiểu biết nền tảng và khả năng truyền đạt giải pháp – hai yếu tố AI không thể thay thế.
 
 ---
 
-### PHẦN II: CHIA SẺ KINH NGHIỆM THI HACKATHON (HACKATHON JOURNEY)
-
-Bên cạnh giải pháp kỹ thuật, đại diện các đội thi đã chia sẻ hành trình 24 giờ thi đấu với nhiều bài học thực chiến giá trị:
-
-#### 1. Thách thức & Sự cố thực tế
-* **Rào cản chuyên môn & Thời gian:** Nhiều thành viên lần đầu tiếp xúc với AI và dịch vụ AWS, phải hoàn thiện sản phẩm chạy được (MVP) chỉ trong đúng 24 giờ.
-* **Sự cố kỹ thuật:** Xử lý video real-time bị giật lag, mất tracking giữa các khung hình, thức xuyên đêm debug tới 3 giờ sáng, hay sự cố vô tình push file chứa thông tin bảo mật (`.env`) lên GitHub.
-
-#### 2. Trải nghiệm đáng nhớ
-* Không khí 24 giờ thức trắng làm việc nhóm, cùng thảo luận phân công công việc, đi dạo nạp năng lượng đêm khuya và tinh thần đồng đội gắn kết.
-* Mở rộng mạng lưới kết nối (networking) với các kỹ sư, chuyên gia và dàn Mentor giàu kinh nghiệm từ AWS.
-
-#### 3. Lời khuyên xương máu cho người tham gia Hackathon
-1. **Chuẩn bị trước cuộc thi (Preparation):** Xác định rõ tiêu chí hoàn thành (definition of done), chuẩn bị sẵn mẫu template/tài khoản và phân công vai trò rõ ràng (coding, UI/UX, pitching).
-2. **Quản lý phạm vi dự án (Scope it tiny):** Tập trung hoàn thiện xuất sắc **1 tính năng cốt lõi**. Một sản phẩm nhỏ chạy mượt mà luôn đánh bại một ý tưởng hoành tráng nhưng dở dang hoặc nhiều lỗi.
-3. **Tận dụng sự trợ giúp từ Mentor:** Chủ động hỏi đáp và lắng nghe góp ý từ các Mentor chuyên môn.
-4. **Mạnh dạn dấn thân (Just sign up):** Đừng chờ tới khi "cảm thấy đủ giỏi", bước vào phòng thi đã là một bước tiến lớn.
+#### 3. Chủ đề 3: Làm thế nào để trở thành "Steve Jobs Việt Nam" – Chủ động tạo ra cơ hội
+* **Diễn giả:** Ms. Như Trần
+* **Hình thức chia sẻ cởi mở (Talkshow Format):**
+  * Buổi trò chuyện cởi mở, truyền năng lượng tích cực và cảm hứng chủ động cho các bạn trẻ.
+* **Công thức nắm bắt cơ hội thành công:**
+  * **Chủ động + Tích cực + Đối diện nỗi sợ + Không ngại chia sẻ.**
+* **Tư duy chủ động tìm kiếm cơ hội:**
+  * Cơ hội không tự nhiên đến hay được trao sẵn; việc chờ đợi thụ động "thời điểm thích hợp" sẽ làm lỡ mất cơ hội.
+* **Networking là gieo mầm cho tương lai:**
+  * Tham gia tích cực các sự kiện, meetup và cộng đồng công nghệ chính là đầu tư gieo mầm cho background sự nghiệp tương lai. Những kết nối hiện tại sẽ mở ra cánh cửa nghề nghiệp trong nhiều năm sau.
+* **Tự tin chia sẻ thành quả & bài học:**
+  * Không ngần ngại chia sẻ dự án, ý tưởng và trải nghiệm cá nhân để khuếch đại hình ảnh bản thân và thu hút cơ hội mới.
 
 ---
 
-### PHẦN III: TỔNG KẾT (KEY TAKEAWAYS)
-
-* **Sự dấn thân là bước khởi đầu:** Dám đăng ký và tham gia cuộc thi đã giúp nâng cao vượt bậc kỹ năng thực chiến.
-* **Tính thực tế và chỉn chu:** Sản phẩm hoạt động ổn định quan trọng hơn quy mô ý tưởng.
-* **Giá trị kết nối:** Cuộc thi mang me cơ hội rèn luyện áp lực cao và tìm kiếm những đồng đội cùng chí hướng trong cộng đồng Cloud & AI.
+#### 4. Chủ đề 4: Đi học vs. Đi làm, AI & Góc nhìn Tuyển dụng
+* **Diễn giả:** Mr. Khang Nguyễn
+* **Khoảng cách giữa Học thuật và Thực tế:**
+  * Trường học cung cấp các bài toán đã định nghĩa sẵn lời giải; môi trường đi làm yêu cầu kỹ sư phải tự định nghĩa vấn đề, xử lý sự mơ hồ và chịu trách nhiệm về kết quả.
+* **Sử dụng AI có ý thức (Conscious AI Usage):**
+  * Vạch ra ranh giới rõ ràng giữa việc dùng AI có ý thức (để đào sâu hiểu biết) và dùng AI mù quáng (lấy câu trả lời mà không hiểu bản chất, dẫn đến việc không giải thích được mã nguồn của chính mình).
+* **Góc nhìn nhà tuyển dụng:**
+  * Nhà tuyển dụng không chỉ tìm kiếm kỹ năng kỹ thuật thuần túy, mà đánh giá cao tư duy tiếp cận bài toán, thái độ học hỏi và tiềm năng phát triển lâu dài.
+* **Phân biệt Kinh nghiệm vs. Trải nghiệm:**
+  * *Số năm kinh nghiệm* (thời gian làm việc) không quan trọng bằng *Trải nghiệm thực sự* (bài học rút ra và khả năng phản tư sau mỗi dự án).
+* **Thông điệp cốt lõi:**
+  * *"Luck is for people who try the hardest."* (May mắn chỉ đến với những người nỗ lực hết mình).
 
 ---
 
-### PHẦN IV: BÀI HỌC VÀ CẢM NHẬN CỦA BẢN THÂN KHI THAM DỰ BUỔI CHIA SẺ
+### PHẦN II: BÀI HỌC VÀ CẢM NHẬN CỦA BẢN THÂN KHI THAM DỰ BUỔI EVENT
 
-Với vai trò là người tham dự lắng nghe các đội thi trình bày dự án và chia sẻ kinh nghiệm thực chiến từ cuộc thi Hackathon **Agentic AI Build Week (AABW)**, bản thân em đã gặt hái được nhiều góc nhìn mới mẻ cùng những bài học quý giá:
+Với vai trò là người tham dự lắng nghe các diễn giả chia sẻ tại sự kiện **Swinburne Cloud Mastery**, bản thân em đã rút ra nhiều bài học thực tiễn và định hướng quan trọng cho sự nghiệp:
 
-#### 1. Góc nhìn Kỹ thuật & Tư duy Kiến trúc Cloud / AI
-* **Tư duy thiết kế ứng dụng Agentic AI thực tế:** Qua việc theo dõi các sản phẩm của đội Plan V, Dream AI và 3KA, em đã hình dung rõ ràng hơn cách tích hợp các mô hình Generative AI (Amazon Bedrock, AgentCore) với hạ tầng đám mây (ECS Fargate, Lambda, SageMaker, DynamoDB) để giải quyết các bài toán tự động hóa thực tế của doanh nghiệp.
-* **Chiến lược tối ưu chi phí & Hạ tầng:** Học hỏi cách các đội thi phân tích ngân sách vận hành chi tiết, kết hợp linh hoạt giữa các dịch vụ Serverless, S3 Intelligent-Tiering và DynamoDB on-demand để tối ưu chi phí hạ tầng Cloud.
-* **Tích hợp Computer Vision với Machine Learning Pipeline:** Hiểu thêm phương pháp kết hợp mô hình YOLO + ByteTrack với Amazon SageMaker và Bedrock Agent trong bài toán xử lý video thời gian thực và tự động đưa ra cảnh báo điều phối.
+#### 1. Bài học về Định hướng Sự nghiệp & Tăng tính Visibility
+* Hiểu rõ thực trạng thị trường tuyển dụng trong kỷ nguyên AI. Nhận thức tầm quan trọng của việc chủ động xây dựng sự hiện diện cá nhân (Visibility) qua dự án thực tế và tích cực tham gia mạng lưới cộng đồng công nghệ (AWS, FCAJ) để tận dụng cơ hội giới thiệu nội bộ (Referral).
 
-#### 2. Cảm nhận & Bài học Thực tiễn từ Kinh nghiệm của Các Đội thi
-* **Bài học về quản lý phạm vi (Scope Management):** Lắng nghe chia sẻ của các anh/chị thi trước giúp em nhận ra tầm quan trọng của việc tập trung làm thật chỉn chu một **tính năng cốt lõi (MVP)** thay vì ôm đồm quá nhiều ý tưởng dở dang khi triển khai dự án công nghệ.
-* **Tinh thần làm việc nhóm dưới áp lực cao:** Dù không trực tiếp tham gia thi đấu 24 giờ, những câu chuyện thực tế về cách các đội phối hợp ăn ý, cùng vượt qua sự cố kỹ thuật khẩn cấp xuyên đêm và tinh thần dấn thân đã truyền cho em nhiều cảm hứng và động lực học hỏi.
-* **Giá trị từ sự kết nối & Giao lưu cộng đồng:** Buổi chia sẻ tạo cơ hội tuyệt vời để em mở rộng góc nhìn, lắng nghe những góp ý chuyên môn sâu sắc từ dàn Mentor AWS, đồng thời học hỏi được tư duy xử lý vấn đề của các kỹ sư đi trước.
+#### 2. Định hình Tư duy Kỹ thuật & Kỹ năng Giao tiếp
+* Nhận ra giao tiếp hiệu quả chính là một phần của năng lực kỹ thuật cốt lõi. Nắm vững kiến thức nền tảng (Cấu trúc dữ liệu, Thuật toán) kết hợp với kỹ năng truyền đạt là chìa khóa tạo nên sự khác biệt khi làm việc với AI.
 
-#### 3. Hình Ảnh Sự Kiện
-![FCAJ Community Day - AABW Showcase](/images/event2.png)
+#### 3. Tư duy Chủ động & Dùng AI có Ý thức
+* Học được tinh thần chủ động tạo ra cơ hội, không ngại đối mặt với khó khăn và chủ động chia sẻ tri thức. Đồng thời, biết cách ứng dụng các công cụ AI một cách thông minh – xem AI là trợ lý học tập để hiểu sâu bản chất thay vì phụ thuộc mù quáng.
+
+#### 4. Chuyển hóa Kinh nghiệm thành Trải nghiệm Thực chất
+* Thấm nhuần tư duy phản tư (Reflection) sau mỗi dự án và kỳ thực tập: chuyển hóa thời gian làm việc thành những trải nghiệm, bài học thực tế có giá trị để sẵn sàng đáp ứng kỳ vọng khắt khe của nhà tuyển dụng.
+
+#### 5. Hình Ảnh Sự Kiện
+![FCAJ Community Day](/images/event2.png)

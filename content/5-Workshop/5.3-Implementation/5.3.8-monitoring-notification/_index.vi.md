@@ -6,14 +6,14 @@ chapter : false
 pre : " <b> 5.3.8 </b> "
 ---
 #### Tạo topic SNS
-- Vào Amazon SNS $\rightarrow$ Topics $\rightarrow$ Bấm Create topic tên TelcoChurnAlerts.
-- Bấm Create subscription $\rightarrow$ Protocol: Email $\rightarrow$ Nhập địa chỉ Gmail của bạn $\rightarrow$ Xác nhận email trong hộp thư đến.
+- Vào Amazon SNS => Topics => Bấm Create topic tên TelcoChurnAlerts.
+- Bấm Create subscription => Protocol: Email => Nhập địa chỉ Gmail của bạn => Xác nhận email trong hộp thư đến.
 ![sns](/images/5-Workshop/5.3-Implementation/sns.png)
 #### Tạo alarm
 - Trong giao diện **CloudWatch Console**, chuyển đến **Alarms** và chọn **Create alarm**.
 - Nhấn nút **Select metric** màu cam bên dưới mục **Metric**.
 ![metric](/images/5-Workshop/5.3-Implementation/metric.png)
-- Trong cửa sổ **Select metric** hiện ra, ở tab **Browse**, chọn **Lambda** $\rightarrow$ **By Function Name** $\rightarrow$ **telco-churn-api-handler** $\rightarrow$ **Select metric**.
+- Trong cửa sổ **Select metric** hiện ra, ở tab **Browse**, chọn **Lambda** => **By Function Name** => **telco-churn-api-handler** => **Select metric**.
 ![metric-name](/images/5-Workshop/5.3-Implementation/metric-name.png)
 - Sau khi chọn metric, giao diện sẽ quay trở lại trang cấu hình. Kéo xuống mục **Conditions**:
    + **Threshold type**: Chọn **Static**

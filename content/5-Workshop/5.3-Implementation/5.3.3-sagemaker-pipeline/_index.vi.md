@@ -3,7 +3,7 @@ title : "Xây dựng & Khởi chạy SageMaker Pipeline"
 date : 2026-07-27 
 weight : 3
 chapter : false
-pre : " <b> 5.3.1 </b> "
+pre : " <b> 5.3.3 </b> "
 ---
 
  Trong phần này, chúng ta sẽ thực hành toàn bộ quy trình MLOps trên Amazon SageMaker, từ bước chuẩn bị dữ liệu, huấn luyện đơn lẻ, tinh chỉnh siêu tham số (HPO), đăng ký mô hình, triển khai Serverless Endpoint cho tới việc đóng gói tự động thành một **SageMaker Pipeline 4 bước**.

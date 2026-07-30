@@ -1,89 +1,97 @@
 ---
 title: "Event 1"
-date: 2026-07-20
+date: 2026-06-27
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-# EVENT SUMMARY REPORT: AWS COMMUNITY DAY & TECH WORKSHOP
+# EVENT SUMMARY REPORT: FCAJ COMMUNITY DAY
 
-**Event Name:** AWS Community Day & Tech Workshop  
-**Main Topics:** Web App Security with AWS Security Agent, AWS CLF-C02 Certification Roadmap, & Customer-Centric SLA Monitoring  
+**Event Name:** FCAJ Community Day  
+**Date:** June 27th 2026  
+**Location:** 26th & 36th Floor, Bitexco Financial Tower, Ho Chi Minh City  
+**Main Topics:** Cloud Computing, AI Agents, Voice AI for Vietnamese, DevOps AI Agents, AI in Enterprise HR, & Private Security for Enterprise AI  
 
 ---
 
 ### PART I: DETAILED TOPIC PRESENTATIONS
 
-#### 1. Topic 1: Securing Your Web Apps With AWS Security Agent
-* **Speaker:** Thinh Nguyen (DevOps/DevSecOps/Cloud Engineer – Styl Solutions)
-* **The Security Bottleneck:**
-  * Manual penetration testing (pentesting) takes weeks, incurs high costs ($5,000 – $20,000/round), and yields inconsistent results depending on individual tester mindset and skill.
-* **AWS Security Agent Solution (Frontier Agent):**
-  * Automates reasoning powered by **Amazon Bedrock** to plan and execute security reviews.
-  * **Full Lifecycle Coverage:**
-    * **Design Security Review:** Evaluates architecture documents (Markdown/Terraform) against PCI DSS, NIST CSF, and AWS Well-Architected frameworks (Free Tier: 200 tasks/month).
-    * **Code Security Review:** Scans Pull Requests (PRs) on GitHub/GitLab, comments directly on code lines, and suggests automated fixes (Free Tier: 1,000 PRs/month).
-    * **Automated Pentesting:** Simulates real-world exploit chains (e.g., IDOR $\rightarrow$ XSS) and validates vulnerabilities.
-* **Pricing Reality:**
-  * 2-month free trial (400 task-hours/month); pay-as-you-go rate at $50/task-hour.
-  * In real projects, total pentesting cost ranges from **$1,500 – $2,500**, offering massive cost savings compared to traditional $10,000 manual pentesting engagements.
-* **Limitations to Note:**
-  * Blocked by advanced authentication mechanisms (MFA, Biometrics, mTLS).
-  * Struggles with complex business logic flaws without deep context.
-  * Requires strict task-hour tracking to prevent unexpected cost overruns.
+#### 1. Topic 1: Cloud Agentic & Cloud Engineering Career Direction
+* **Speaker:** Steve Tran (Founder of Cloud Thinker, ex-AWS Solution Architect)
+* **Market Evolution & Demand:**
+  * Rapid Cloud migration led to complex Microservices architectures, introducing tech debt and operational complexity.
+* **Changing Talent Standards:**
+  * AI reduces demand for traditional coders while increasing demand for Senior engineers who understand architecture and leverage AI for productivity gains.
+* **AI Agent Operational Solutions:**
+  * Cloud Thinker Agentic Platform aids incident handling across 4 key areas: *Incident Investigation* (log analysis in minutes), automated *IaC Code Review*, *FinOps* cost optimization, and *Penetration Testing* for API vulnerabilities.
+* **Single Agent vs. Multi-Agent Architecture Trade-offs:**
+  * A well-designed Single Agent handles >95% of routine tasks. Multi-Agent systems excel at cost optimization (small models for simple tasks, large models for reasoning) and Role-Based Access Control (RBAC) within enterprise security boundaries.
 
 ---
 
-#### 2. Topic 2: Inside The Exam: AWS Cloud Practitioner (CLF-C02)
-* **Speaker:** Ngo Le Tan Huy
-* **Exam Overview:**
-  * Foundational-level exam suitable for beginners, focusing on high-level cloud concepts without requiring deep coding or technical configurations.
-  * **Format:** 65 multiple-choice questions, 90-minute duration (+30 minutes ESL accommodation), passing score of 700/1000, 3-year validity.
-* **4 Content Domains:**
-  * **Cloud Concepts (24%):** Digital transformation mindset, 6 Cloud benefits, AWS WAF, AWS CAF.
-  * **Security and Compliance (30%):** Shared Responsibility Model, IAM, Security Groups, NACLs, AWS Shield, AWS WAF, AWS Artifact.
-  * **Cloud Technology and Services (34%):** Global Infrastructure (Regions, AZs, Edge Locations) and core services for Compute (EC2, Lambda), Storage/DB (S3, EBS, RDS, DynamoDB), Networking (VPC, Route 53).
-  * **Billing, Pricing, and Support (12%):** EC2 Pricing Models, AWS Cost Explorer, AWS Budgets, Support Plans.
-* **Study Insights & Exam Tips:**
-  * **Strategy:** Learn via *Keyword Thinking*, thoroughly analyze mock test explanations, and gain hands-on experience using the AWS Free Tier.
-  * **Exam Tactics:** Use elimination (2 options are usually distractors), keep solutions simple, watch for trap keywords (`NOT`, `Least cost`), and use *Flag for review* to revisit tough questions.
+#### 2. Topic 2: Voice AI for Vietnamese Language
+* **Speakers:** Hieu Nghi (Renova Cloud), Kiet (AWS Student Builder), Trung Do (CEO of R AI)
+* **Voice AI Architecture:**
+  * Vietnamese Voice AI uses a 3-tier bridged pipeline: Speech-to-Text (STT) => LLM Context Processing => Text-to-Speech (TTS) using continuous streaming to minimize latency.
+* **Vietnamese Processing Challenges:**
+  * As a low-resource language, challenges include regional accent recognition (10-20% local dataset), real-time gender detection for proper honorifics, and handling natural user interruptions.
+* **Applications & Live Demos:**
+  * Live Demo of an Apple product inquiry Voice Agent using Amazon Bedrock Agent Core & Knowledge Base. Practical deployments at VPBank and VIB for automated debt collection and urgent card lock calls via Tool Calling.
 
 ---
 
-#### 3. Topic 3: SLA and Monitoring: From SLA to Monitoring What Really Matters
-* **Speaker:** Nguyen Huynh Son (Ex-Infrastructure Reliability Engineer)
-* **Role of Service Level Agreements (SLA):**
-  * Sets clear service expectations with customers, assigns operational accountability, and manages system risk.
-* **Monitoring Reality:**
-  * **Healthy infrastructure $\neq$ Happy users.**
-  * *Real-world example:* `/health` returns 200 OK and EC2 CPU runs at a cool 18%, but RDS database connection issues prevent users from logging in (`/login` fails).
-* **The Monitoring Pyramid:**
-  * Monitor top-down rather than focusing solely on lower-level infrastructure:
-    1. **Customer Experience:** Can users log in / complete purchases?
-    2. **Business Metrics:** Login success rate, order count, revenue.
-    3. **Application:** Latency spikes, error rates.
-    4. **Infrastructure:** CPU, Memory, Disk, Network.
-    5. **Cloud Provider:** AWS service status (EC2, RDS, ALB).
-* **Core Message & Operational Philosophy:**
-  * Monitor what users actually do (Login, Checkout, Payment), rather than relying only on server metrics.
-  * **Shared Responsibility SLA Model:** AWS ensures Cloud infrastructure availability, while you remain accountable for Customer Experience.
-  * Philosophy from Dr. Werner Vogels (CTO Amazon): *"Everything fails all the time, so plan for failure and nothing fails"*.
+#### 3. Topic 3: DevOps AI Agent
+* **Speakers:** Bao & Nguyen Nguyen (Cloud Engineers at Cloud Kinetics)
+* **Enterprise Operations Challenges:**
+  * Fragmented monitoring data (CloudWatch, CloudTrail, Grafana) increases MTTD and MTTR during system incidents.
+* **4-Step Operational Mechanism:**
+  1. *Triage:* Automatically synthesizes alert data upon incident trigger.
+  2. *Investigation:* Constructs system Topology Graphs and identifies Root Cause Analysis.
+  3. *Mitigation:* Generates step-by-step remediation scripts for human approval (Human-in-the-loop).
+  4. *Prevention:* Recommends long-term system enhancements based on incident history.
+* **Live Demo & Case Studies:**
+  * Simulated 1,000 req/sec DDoS attack on ECS application. The Agent identified overloaded tasks and provided exact terminal commands for recovery. Real-world case studies include WGU (77% MTTR reduction from 2 hours to 28 minutes) and KDDI Japan (incident handling reduced from weeks to days).
+
+---
+
+#### 4. Topic 4: AI in Enterprise Human Resources
+* **Speakers:** Truong & Minh Anh (Noventic)
+* **Traditional HR Bottlenecks:**
+  * Manual CV screening loses candidates, biased evaluations, prolonged Time-to-Hire, and security risks from pushing candidate data to public AI.
+* **Amazon Q Solution & Live Recruitment Demo:**
+  * Created dedicated data spaces on Amazon Q connected to S3, OneDrive, Jira.
+  * Automated JD creation, OCR CV data extraction, candidate benchmark scoring/classification, and HTML report generation with salary recommendations.
+
+---
+
+#### 5. Topic 5: Secure Enterprise AI Deployment (Private Security for Amazon Q)
+* **Speakers:** Toan Nguyen (AWS Security Builder) & Hieu Nghi (Renova Cloud)
+* **Public AI Security Risks:**
+  * DoS attacks, exposed attack surfaces, and data leaks over public Internet connections.
+* **Private Network Security Architecture:**
+  * Zero Trust compliance: Placed Model Context Protocol (MCP) Servers entirely within Private Subnets.
+* **Technical Workflow:**
+  * Amazon Q connects via VPC Interface Endpoints and Route 53 Private DNS pointing to ALB with ACM TLS certificates. Data traffic remains completely isolated within AWS network infrastructure, bypassing the public Internet.
 
 ---
 
 ### PART II: PERSONAL TAKEAWAYS & IMPRESSIONS AS AN ATTENDEE
 
-As an audience member attending the event presentations, I gained practical operational insights and valuable lessons:
+As an audience member attending the **FCAJ Community Day** event, I gained valuable practical insights and operational lessons:
 
-#### 1. Security & DevSecOps Automation Takeaways
-* Understood how Generative AI tools (AWS Security Agent) automate architecture and code reviews, lowering traditional pentesting costs while upholding security standards.
+#### 1. Shifting Engineering Mindset in Cloud & AI
+* AI does not replace engineers; it replaces engineers who do not leverage AI. Cloud and software engineers must focus on system architecture design and mastering AI Agents to boost operational efficiency.
 
-#### 2. Certification Preparation Strategy
-* Mastered the CLF-C02 exam structure, keyword thinking approach, and test-taking strategies to build a solid foundation for acquiring the AWS Cloud Practitioner certification.
+#### 2. Human-in-the-Loop Principle in Production
+* For critical production infrastructure, AI Agents serve as investigation and recommendation tools, while execution authority remains strictly with human engineers to ensure safety.
 
-#### 3. Customer-Centric Monitoring Mindset
-* Shifted from pure infrastructure monitoring to **user-experience-centric monitoring**, realizing that green infrastructure metrics are only meaningful when core user journeys (Login, Payment) function seamlessly.
-#### 4. Event Photos
-![FCAJ Community Day - AABW Showcase](/images/event1.png)
+#### 3. Importance of Data Quality & Observability
+* The reasoning power of DevOps AI Agents relies directly on Observability maturity. Clear logs, metrics, and alarms are essential prerequisites for accurate AI diagnostics.
 
+#### 4. Enterprise Private Security Standards
+* Deploying AI in enterprise environments requires isolated network architectures (Private VPC, AWS PrivateLink, MCP Servers in Private Subnets) to safeguard sensitive data against security threats.
+
+#### 5. Event Photos
+![FCAJ Community Day](/images/event11.png)
+![FCAJ Community Day](/images/event12.png)

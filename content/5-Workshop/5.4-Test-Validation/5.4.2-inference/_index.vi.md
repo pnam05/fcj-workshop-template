@@ -49,7 +49,7 @@ Kết quả thành công (HTTP 200 OK):
 
 
 #### 4. Kiểm tra Logs & Metrics trên Amazon CloudWatch
-- Truy cập CloudWatch $\rightarrow$ Log groups $\rightarrow$ mở log của /aws/lambda/telco-churn-api-handler
+- Truy cập CloudWatch => Log groups => mở log của /aws/lambda/telco-churn-api-handler
    ![api-logs](/images/5-Workshop/5.4-Test-Validation/api-logs.png)
 - Init Duration: 442.40 ms: 
   - Đây là thời gian khởi tạo môi trường thực thi (Cold Start) lần đầu tiên của Lambda

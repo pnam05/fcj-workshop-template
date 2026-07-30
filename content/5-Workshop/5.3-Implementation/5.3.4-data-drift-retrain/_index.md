@@ -9,10 +9,10 @@ pre : " <b> 5.3.4 </b> "
 This Lambda function is attached to the S3 Event Notification (ObjectCreated) event. Every time an Admin uploads a new CSV data file to the raw/ folder, Lambda will automatically run to check for Data Drift, send notifications via Amazon SNS, and call pipeline.start() to begin Retraining.
 
 #### Program Lambda Function (TelcoChurnDriftChecker)
-- Go to AWS Lambda $\rightarrow$ select Create function.
+- Go to AWS Lambda => select Create function.
 - Function name: TelcoChurnDriftChecker | Runtime: Python 3.11.
 - Assign Role with permissions: AmazonS3ReadOnlyAccess, AmazonSageMakerFullAccess, AmazonSNSFullAccess.
-- In Configuration tab $\rightarrow$ General configuration, adjust Timeout to 2 min 0 sec.
+- In Configuration tab => General configuration, adjust Timeout to 2 min 0 sec.
 - Adjust Environment variables and Layers as shown below.
 ![ev](/images/5-Workshop/5.3-Implementation/ev.png)
 ![layers](/images/5-Workshop/5.3-Implementation/layers.png)
@@ -193,8 +193,8 @@ def lambda_handler(event, context):
 
 #### Attach S3 Event Notification Connected to Lambda
 To automatically trigger Lambda when S3 receives a new file:
-- Open Amazon S3 service $\rightarrow$ Click to select Bucket telco-churn-mlops-fcaj.
-- Switch to Properties tab $\rightarrow$ Scroll down to Event notifications section $\rightarrow$ Click Create event notification.
+- Open Amazon S3 service => Click to select Bucket telco-churn-mlops-fcaj.
+- Switch to Properties tab => Scroll down to Event notifications section => Click Create event notification.
 ![event-s3](/images/5-Workshop/5.3-Implementation/event-s3.png)
 - Set up:
   - Event name: NewRawCsvUploaded.

@@ -6,14 +6,14 @@ chapter : false
 pre : " <b> 5.3.8 </b> "
 ---
 #### Create SNS Topic
-- Go to Amazon SNS $\rightarrow$ Topics $\rightarrow$ Click Create topic named TelcoChurnAlerts.
-- Click Create subscription $\rightarrow$ Protocol: Email $\rightarrow$ Enter your Gmail address $\rightarrow$ Confirm email in your inbox.
+- Go to Amazon SNS => Topics => Click Create topic named TelcoChurnAlerts.
+- Click Create subscription => Protocol: Email => Enter your Gmail address => Confirm email in your inbox.
 ![sns](/images/5-Workshop/5.3-Implementation/sns.png)
 #### Create Alarm
 - In the **CloudWatch Console** interface, navigate to **Alarms** and select **Create alarm**.
 - Click the orange **Select metric** button under the **Metric** section.
 ![metric](/images/5-Workshop/5.3-Implementation/metric.png)
-- In the **Select metric** window that appears, on the **Browse** tab, select **Lambda** $\rightarrow$ **By Function Name** $\rightarrow$ **telco-churn-api-handler** $\rightarrow$ **Select metric**.
+- In the **Select metric** window that appears, on the **Browse** tab, select **Lambda** => **By Function Name** => **telco-churn-api-handler** => **Select metric**.
 ![metric-name](/images/5-Workshop/5.3-Implementation/metric-name.png)
 - After selecting the metric, the interface will return to the configuration page. Scroll down to the **Conditions** section:
    + **Threshold type**: Select **Static**

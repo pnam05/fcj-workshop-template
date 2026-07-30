@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 5.3.1 </b> "
 ---
 
-1. Open [Amazon S3 console](https://ap-southeast-1.console.aws.amazon.com/s3/home?region=ap-southeast-1) $\rightarrow$ Click Create bucket.
+1. Open [Amazon S3 console](https://ap-southeast-1.console.aws.amazon.com/s3/home?region=ap-southeast-1) => Click Create bucket.
 2. Bucket name: Enter telco-churn-mlops-fcaj (or a unique name with your account ID).
 3. Keep default settings and click Create bucket.
 ![createS3](/images/5-Workshop/5.3-Implementation/s3name.png)

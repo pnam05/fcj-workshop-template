@@ -13,7 +13,6 @@ During our internship at FCAJ, our team conducted technical research, engaged in
 
 An in-depth analysis of the **Connection Exhaustion** issue when combining Serverless architectures (AWS Lambda) with traditional relational databases (Amazon RDS). The article details root causes of connection bottlenecks when thousands of Lambda instances scale concurrently, and presents **Amazon RDS Proxy** as the solution built on three core pillars: Multiplexing, Graceful Failover, and IAM Authentication.
 
-> **Authors:** Thanh Nhan, Nguyen Canh Nguyen, Nguyen Trong Nhan, Nam Phan, Nguyen Ba Nam
 
 ---
 
@@ -21,10 +20,4 @@ An in-depth analysis of the **Connection Exhaustion** issue when combining Serve
 
 A comprehensive guide covering 5 essential security principles for developing and deploying applications on AWS: Secure credential management, enforcing **Least Privilege**, network segmentation via Public/Private Subnets, application-layer defense with **AWS WAF**, and continuous threat detection using **GuardDuty, Inspector, and Security Hub**. Includes practical solutions for real-world challenges such as traffic spikes and stateless storage design.
 
-> **Authors:** Thanh Nhan, Nguyen Ba Nam, Nam Phan, Nguyen Trong Nhan
 
----
-
-{{% notice info %}}
-Both technical blogs have been officially published on the [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj) community forum—a collaborative platform for cloud engineers to exchange knowledge and share AWS expertise.
-{{% /notice %}}

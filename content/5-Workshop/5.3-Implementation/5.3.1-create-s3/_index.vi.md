@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 5.3.1 </b> "
 ---
 
-1. Mở [Amazon S3 console](https://ap-southeast-1.console.aws.amazon.com/s3/home?region=ap-southeast-1) $\rightarrow$ Bấm Create bucket.
+1. Mở [Amazon S3 console](https://ap-southeast-1.console.aws.amazon.com/s3/home?region=ap-southeast-1) => Bấm Create bucket.
 2. Bucket name: Nhập telco-churn-mlops-fcaj (hoặc tên duy nhất kèm ID tài khoản của bạn).
 3. Giữ nguyên các thiết lập mặc định và bấm Create bucket.
 ![createS3](/images/5-Workshop/5.3-Implementation/s3name.png)

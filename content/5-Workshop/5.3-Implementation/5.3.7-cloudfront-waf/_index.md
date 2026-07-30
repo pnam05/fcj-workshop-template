@@ -10,7 +10,7 @@ Create a CDN distribution in front of API Gateway to optimize content delivery p
 
 #### General Information Setup
 
-- Go to the **CloudFront** service $\rightarrow$ select **Create distribution**.
+- Go to the **CloudFront** service => select **Create distribution**.
 - In the **Distribution options** section:
   - **Distribution name**: Enter `telco-churn-cloudfront-waf`.
   - **Distribution type**: Select **Single website or app**.

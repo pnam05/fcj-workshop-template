@@ -23,8 +23,8 @@ Hệ thống kết hợp sức mạnh của kiến trúc Event-Driven Automation
 
 #### Nội dung chi tiết Workshop
 
-1. [1. Tổng quan (Workshop Overview)](5.1-Workshop-overview/)
-2. [2. Các bước chuẩn bị (Prerequisites)](5.2-Prerequiste/)
-3. [3. Triển khai Kỹ thuật Chi tiết (Step-by-Step Implementation)](5.3-Implementation/)
-4. [4. Kiểm thử Toàn bộ Hệ thống (Test & Validation)](5.4-Test-Validation/)
-5. [5. Dọn dẹp tài nguyên (Clean-up)](5.5-Cleanup/)
+1. [Tổng quan (Workshop Overview)](5.1-Workshop-overview/)
+2. [Các bước chuẩn bị (Prerequisites)](5.2-Prerequiste/)
+3. [Triển khai Kỹ thuật Chi tiết (Step-by-Step Implementation)](5.3-Implementation/)
+4. [Kiểm thử Toàn bộ Hệ thống (Test & Validation)](5.4-Test-Validation/)
+5. [Dọn dẹp tài nguyên (Clean-up)](5.5-Cleanup/)

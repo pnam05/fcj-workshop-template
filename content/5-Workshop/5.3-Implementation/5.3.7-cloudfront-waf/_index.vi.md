@@ -10,7 +10,7 @@ Tạo CDN distribution phía trước API Gateway để tối ưu hiệu năng t
 
 #### Thiết lập thông tin chung 
 
-- Truy cập dịch vụ **CloudFront** $\rightarrow$ chọn **Create distribution**.
+- Truy cập dịch vụ **CloudFront** => chọn **Create distribution**.
 - Tại mục **Distribution options**:
   - **Distribution name**: Nhập `telco-churn-cloudfront-waf`.
   - **Distribution type**: Chọn **Single website or app**.

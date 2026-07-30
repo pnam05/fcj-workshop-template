@@ -13,23 +13,23 @@ Throughout the 8 weeks of internship in the **First Cloud AI Journey (FCAJ)** pr
 
 ### 1. Overall Program Evaluation
 
-#### **1. Work & Learning Environment**
+#### 1. Work & Learning Environment
 The environment at FCAJ is extremely dynamic, open, and technology-focused. There is no better space for an intern passionate about Cloud/AI than being granted the opportunity to work directly with advanced services on the **AWS Cloud** platform. Members always respect each other and are ready to support when facing technical difficulties.
 
-#### **2. Support from Mentors & Admin Team**
+#### 2. Support from Mentors & Admin Team
 * **Mentors:** Very dedicated and possess deep technical expertise. Instead of simply providing direct answers, Mentors guide mindsets, suggest ways to look up AWS Documentation, and instruct how to read CloudWatch Logs to solve problems independently (Troubleshooting). This helped me train my troubleshooting mindset exceptionally well.
 * **Admin Team:** Enthusiastically supported administrative procedures, AWS accounts, and created the best conditions for students to complete personal projects on schedule.
 
-#### **3. Alignment between Tasks and Specialization**
+#### 3. Alignment between Tasks and Specialization
 The **Automated MLOps Platform** project is closely aligned with the career direction of Computer Science / Multimedia Engineering students. The program helped me bridge the gap between theoretical Machine Learning at university and putting models into real-world production (Productionizing ML) on the cloud.
 
-#### **4. Learning & Skill Development Opportunities**
+#### 4. Learning & Skill Development Opportunities
 After 8 weeks, I not only mastered core AWS services (SageMaker, Lambda, EventBridge, API Gateway, S3, CloudWatch) but also developed an **Event-Driven Architecture** design mindset, Serverless cost optimization skills, and professional technical guide writing (Workshop) standards.
 
-#### **5. Culture & Team Spirit**
+#### 5. Culture & Team Spirit
 The proactiveness and Knowledge Sharing culture were promoted very well. Everyone did not hesitate to discuss encountered errors (CORS, IAM PassRole, Cold Start) to collectively find optimal solutions.
 
-#### **6. Learning Resources & Infrastructure**
+#### 6. Learning Resources & Infrastructure
 The organizing committee provided an AWS Free Tier environment and adequate hands-on practice resource support, giving me confidence to deploy SageMaker Pipeline models and Serverless Endpoints without infrastructure barrier concerns.
 
 ---

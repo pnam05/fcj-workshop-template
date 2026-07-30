@@ -12,23 +12,23 @@ Trong suốt 8 tuần thực tập tại chương trình **First Cloud AI Journe
 
 ### 1. Đánh giá chung về Chương trình
 
-#### **1. Môi trường làm việc & Học tập**
+#### 1. Môi trường làm việc & Học tập
 Môi trường tại FCAJ cực kỳ năng động, cởi mở và đậm chất công nghệ. Không không gian nào tuyệt vời hơn cho một thực tập sinh đam mê Cloud/AI khi được trao cơ hội làm việc trực tiếp với các dịch vụ tiên tiến trên nền tảng **AWS Cloud**. Các thành viên luôn tôn trọng lẫn nhau, sẵn sàng hỗ trợ khi gặp khó khăn về kỹ thuật.
 
-#### **2. Sự hỗ trợ của Mentor & Team Admin**
+#### 2. Sự hỗ trợ của Mentor & Team Admin
 * **Mentor:** Rất tâm huyết và có trình độ chuyên môn sâu. Thay vì chỉ đưa ra đáp án trực tiếp, Mentor định hướng tư duy, gợi ý cách tra cứu AWS Documentation và hướng dẫn cách đọc CloudWatch Logs để tự giải quyết vấn đề (Troubleshooting). Điều này giúp tôi rèn luyện được tư duy giải quyết sự cố rất tốt.
 * **Team Admin:** Hỗ trợ nhiệt tình về mặt quy trình, tài khoản AWS, tạo điều kiện thuận lợi nhất để sinh viên hoàn thành dự án cá nhân đúng tiến độ.
 
-#### **3. Sự phù hợp giữa Công việc và Chuyên ngành**
+#### 3. Sự phù hợp giữa Công việc và Chuyên ngành
 Dự án **Automated MLOps Platform** rất sát với định hướng nghề nghiệp của sinh viên chuyên ngành Khoa học Máy tính / Kỹ thuật Đa phương tiện. Chương trình giúp tôi thu hẹp khoảng cách giữa lý thuyết Machine Learning trên trường và bài toán đưa mô hình vào vận hành thực tế (Productionizing ML) trên đám mây.
 
-#### **4. Cơ hội Học hỏi & Phát triển Kỹ năng**
+#### 4. Cơ hội Học hỏi & Phát triển Kỹ năng
 Sau 8 tuần, tôi không chỉ làm chủ được các dịch vụ cốt lõi của AWS (SageMaker, Lambda, EventBridge, API Gateway, S3, CloudWatch) mà còn phát triển tư duy kiến trúc **Event-Driven Architecture**, kỹ năng tối ưu chi phí Serverless và cách viết tài liệu hướng dẫn kỹ thuật (Workshop) theo tiêu chuẩn chuyên nghiệp.
 
-#### **5. Văn hóa & Tinh thần đồng đội**
+#### 5. Văn hóa & Tinh thần đồng đội
 Văn hóa chủ động và chia sẻ kiến thức (Knowledge Sharing) được phát huy rất tốt. Mọi người không ngần ngại trao đổi về các lỗi gặp phải (CORS, IAM PassRole, Cold Start) để cùng nhau tìm ra giải pháp tối ưu nhất.
 
-#### **6. Tài nguyên & Hạ tầng phục vụ Học tập**
+#### 6. Tài nguyên & Hạ tầng phục vụ Học tập
 Ban tổ chức cung cấp môi trường AWS Free Tier và hỗ trợ tài nguyên thực hành đầy đủ, giúp tôi tự tin triển khai các mô hình SageMaker Pipeline và Serverless Endpoints mà không lo ngại về rào cản hạ tầng.
 
 ---

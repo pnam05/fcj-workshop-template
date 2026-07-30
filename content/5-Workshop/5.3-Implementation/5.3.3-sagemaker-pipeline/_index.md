@@ -3,7 +3,7 @@ title : "Build & Launch SageMaker Pipeline"
 date : 2026-07-27 
 weight : 3
 chapter : false
-pre : " <b> 5.3.1 </b> "
+pre : " <b> 5.3.3 </b> "
 ---
 
  In this section, we will practice the complete MLOps workflow on Amazon SageMaker, from data preparation, standalone training, hyperparameter tuning (HPO), model registration, Serverless Endpoint deployment to automated packaging into a **4-step SageMaker Pipeline**.

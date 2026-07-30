@@ -8,7 +8,7 @@ pre : " <b> 5.3.5 </b> "
 
 #### Create AWS Lambda Auto-Deployer
 This Lambda function receives events from Model Registry when the model reaches Approved status to automatically create EndpointConfig and update Serverless Endpoint.
-- Go to AWS Lambda $\rightarrow$ select Create function.
+- Go to AWS Lambda => select Create function.
 - Name: TelcoChurnAutoDeployer | Runtime: Python 3.11.
 - In Permissions tab, assign Role with AmazonSageMakerFullAccess permissions and attach Inline Policy iam:PassRole for SageMaker-Telco-Churn-Role.
 ![inline-policy](/images/5-Workshop/5.3-Implementation/inline-policy.png)
@@ -106,7 +106,7 @@ def lambda_handler(event, context):
 ```
 #### Configure Amazon EventBridge Rule
 Set up "watchdog" capturing model approval events to call Lambda Deployer automatically.
-- Go to Amazon EventBridge $\rightarrow$ Rules $\rightarrow$ Click Create rule.
+- Go to Amazon EventBridge => Rules => Click Create rule.
 - Name: TelcoChurnModelApprovedRule.
 ![bridge-name](/images/5-Workshop/5.3-Implementation/bridge-name.png)
 - Event pattern: Select Custom pattern (JSON editor) and paste:
@@ -122,14 +122,14 @@ Set up "watchdog" capturing model approval events to call Lambda Deployer automa
 }
 ```
 - ![event-name](/images/5-Workshop/5.3-Implementation/event-pattern.png)
-- Select Target: Select Lambda function $\rightarrow$ Select TelcoChurnAutoDeployer.
+- Select Target: Select Lambda function => Select TelcoChurnAutoDeployer.
 - ![target](/images/5-Workshop/5.3-Implementation/target.png)
 - Click Create rule.
 
 #### Configure EventBridge Rule notifying SageMaker Pipeline results via Email
 When SageMaker Pipeline finishes (succeeded, failed, or stopped), this EventBridge Rule will immediately capture the event and send an Email via Amazon SNS.
 ##### Create EventBridge Rule (TelcoChurnPipelineStatusRule)
-- Access Amazon EventBridge $\rightarrow$ Rules $\rightarrow$ Click Create rule.
+- Access Amazon EventBridge => Rules => Click Create rule.
 - Name: TelcoChurnPipelineSuccessRule.
 ![success-event-name](/images/5-Workshop/5.3-Implementation/success-event-name.png)
 - Under Event pattern, select Custom pattern (JSON editor) and paste your exact JSON snippet:
@@ -151,8 +151,8 @@ When SageMaker Pipeline finishes (succeeded, failed, or stopped), this EventBrid
   - Select a target: Select SNS topic.
   - Topic: Select SNS Topic created previously (TelcoChurnAlerts).
     ![success-target](/images/5-Workshop/5.3-Implementation/success-target.png)
-- Open Additional settings $\rightarrow$ Target input transformer if you wish to reformat the Email content for readability (Optional):
-  - Target input: Select Input transformer $\rightarrow$ Click Configure input transformer.
+- Open Additional settings => Target input transformer if you wish to reformat the Email content for readability (Optional):
+  - Target input: Select Input transformer => Click Configure input transformer.
   - Input path:
    ```json
     {
@@ -171,4 +171,4 @@ When SageMaker Pipeline finishes (succeeded, failed, or stopped), this EventBrid
         "Execution ARN: <executionArn>"
     ```
     ![target-template](/images/5-Workshop/5.3-Implementation/target-template.png)
-- Click Next $\rightarrow$ Next $\rightarrow$ Create rule.
+- Click Next => Next => Create rule.

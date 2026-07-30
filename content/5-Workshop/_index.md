@@ -23,8 +23,8 @@ The system combines the power of Event-Driven Automation architecture and AWS Se
 
 #### Detailed Workshop Contents
 
-1. [1. Overview (Workshop Overview)](5.1-Workshop-overview/)
-2. [2. Prerequisites](5.2-Prerequiste/)
-3. [3. Step-by-Step Implementation](5.3-Implementation/)
-4. [4. Test & Validation](5.4-Test-Validation/)
-5. [5. Resource Clean-up](5.5-Cleanup/)
+1. [Overview (Workshop Overview)](5.1-Workshop-overview/)
+2. [Prerequisites](5.2-Prerequiste/)
+3. [Step-by-Step Implementation](5.3-Implementation/)
+4. [Test & Validation](5.4-Test-Validation/)
+5. [Resource Clean-up](5.5-Cleanup/)
