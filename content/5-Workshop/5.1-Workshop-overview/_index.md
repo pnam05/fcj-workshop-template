@@ -8,26 +8,27 @@ pre: " <b> 5.1. </b> "
 
 # Workshop Overview: MLOps Platform for Telco Customer Churn Prediction
 
-## Problem Introduction
-In the telecommunications industry (Telco), the cost of acquiring a new customer is typically 5 to 25 times higher than the cost of retaining an existing one. Early prediction of customer churn risk allows customer support teams to proactively offer timely promotion and support policies.
+## Problem Statement
+In the telecommunications industry (Telco), acquiring a new customer typically costs 5 to 25 times more than retaining an existing one. Predicting early churn risks enables customer care teams to proactively launch promotional campaigns and timely support to retain subscribers.
 
-However, real-world Machine Learning models often face **Data Drift / Model Drift** — prediction quality degrades over time as user habits change. Furthermore, manual training and deployment of models from Jupyter Notebooks to Production is time-consuming and prone to operational errors.
+However, real-world Machine Learning models frequently suffer from **Data Drift / Model Drift** — where prediction accuracy degrades over time due to changing consumer habits. Furthermore, manual training and deployment from Jupyter Notebooks to Production environments are time-consuming, error-prone, and often lack essential firewall protections for public-facing APIs.
 
-This Workshop will build an **End-to-End Automated MLOps Platform** on **AWS Cloud**, thoroughly solving these challenges.
+This workshop walks you through building an **End-to-End Automated MLOps Platform** on **AWS Cloud**, fully secured and optimized using **Amazon CloudFront** and **AWS WAF**, to address these operational and infrastructure challenges.
 
 ---
 
 ## Workshop Objectives
-After completing this lab, you will master and deploy:
-1. **Real-time Inference:** Integrate Amazon API Gateway, AWS Lambda, and AWS SageMaker Serverless Endpoint to process requests and return immediate churn probabilities at an optimal cost ($0 when there is no traffic).
-2. **Event-Driven Trigger:** Automatically detect when an Admin uploads new data to Amazon S3, check for Data Drift, and launch the Retrain workflow.
-3. **MLOps Workflow (SageMaker Pipeline - 4 steps):**
-   - TelcoChurnProcessStep: Preprocess data and split into Train/Validation/Test sets (SKLearnProcessor).
-   - TelcoChurnHpoStep: Train & Hyperparameter Optimize automatically with XGBoost model (HyperparameterTuner).
-   - TelcoChurnEvalStep: Evaluate model quality on Test set (ScriptProcessor).
-   - ConditionStep: Check quality threshold ($AUC \ge 0.80$). If qualifying, automatically register into SageMaker Model Registry with Approved status.
-4. **Continuous Deployment (CD):** Use Amazon EventBridge to listen for Approved state changes from Model Registry to trigger AWS Lambda Deployer automatically updating the Serverless Endpoint with Zero-Downtime Deployment.
-5. **Monitoring & Alerting:** Centralized log storage via CloudWatch Logs, set up CloudWatch Alarm, and send automated email alerts to mailbox via Amazon SNS.
+Upon completing this lab, you will master and deploy:
+1. **API Security & Acceleration (CloudFront & AWS WAF):** Configure Amazon CloudFront as a public Edge Location in front of API Gateway to accelerate API response times, combined with AWS WAF firewall rules (Rate Limiting) to mitigate malicious traffic and protect backend infrastructure.
+2. **Real-time Inference:** Integrate Amazon API Gateway, AWS Lambda, and AWS SageMaker Serverless Endpoint to process requests and deliver instantaneous churn predictions with cost-efficient infrastructure ($0 when idle).
+3. **Event-Driven Automation:** Automatically detect new dataset uploads to Amazon S3, evaluate Data Drift, and trigger retraining workflows.
+4. **MLOps Workflow (4-Step SageMaker Pipeline):**
+   - **TelcoChurnProcessStep**: Data preprocessing and Train/Validation/Test splitting (SKLearnProcessor).
+   - **TelcoChurnHpoStep**: Automatic training & Hyperparameter Optimization using XGBoost (HyperparameterTuner).
+   - **TelcoChurnEvalStep**: Model evaluation on the Test set (ScriptProcessor).
+   - **ConditionStep**: Quality threshold evaluation ($AUC \ge 0.80$). If met, automatically registers the model in the SageMaker Model Registry under the Approved state.
+5. **Continuous Deployment (CD):** Use Amazon EventBridge to capture Approved events from the Model Registry, triggering an AWS Lambda Deployer to update the Serverless Endpoint with Zero-Downtime Deployment.
+6. **Monitoring & Alerting:** Centralized log storage via CloudWatch Logs, CloudWatch Alarms setup, and automated SNS email notifications.
 
 ---
 
@@ -36,17 +37,18 @@ After completing this lab, you will master and deploy:
 ![AWS MLOps Architecture Diagram](../../../static/images/5-Workshop/5.1-Workshop-overview/architecture.png)
 
 ### AWS Services Used:
-- **Amazon S3:** Stores raw data, processed data, and Model Artifacts.
-- **Amazon API Gateway & AWS Lambda:** Provides REST API endpoints and processes real-time request data preprocessing.
-- **AWS SageMaker Serverless Endpoint:** Deploys XGBoost model in Serverless mode, auto-scaling.
-- **AWS SageMaker Pipelines:** Manages and orchestrates automated 4-step ML workflow.
-- **AWS SageMaker Model Registry:** Stores and manages centralized model versions.
-- **Amazon EventBridge:** Listens for state transition events from Pipeline and Model Registry.
-- **Amazon SNS:** Sends Email notifications for Retrain results and automated incident alerts.
-- **Amazon CloudWatch:** Stores system logs, monitors metrics, and triggers error alarms.
+- **Amazon S3:** Stores raw data, processed datasets, and Model Artifacts.
+- **Amazon CloudFront & AWS WAF:** Serves as a public Edge Location CDN to accelerate API response latency and enforce Web Application Firewall rules (Rate Limiting) against DoS/DDoS threats.
+- **Amazon API Gateway & AWS Lambda:** Provides REST API endpoints and performs real-time request preprocessing.
+- **AWS SageMaker Serverless Endpoint:** Hosts the XGBoost model in a serverless, auto-scaling configuration.
+- **AWS SageMaker Pipelines:** Manages and orchestrates the automated 4-step ML pipeline.
+- **AWS SageMaker Model Registry:** Centralized model versioning and approval management.
+- **Amazon EventBridge:** Listens for state transition events from Pipelines and Model Registry.
+- **Amazon SNS:** Sends automated email alerts for retraining status and error notifications.
+- **Amazon CloudWatch:** System logging, metric tracking, and operational alarm dispatching.
 
 ---
 
 ## Estimated Time & Cost
-- **Execution Time:** ~60 - 90 minutes.
-- **Infrastructure Cost:** ~$0.50 - $1.00 USD (If resources are cleaned up following the Clean-up step at the end of the lab, most services fall within AWS Free Tier).
+- **Duration:** ~60 - 90 minutes.
+- **Infrastructure Cost:** ~$0.50 - $1.00 USD (Provided you clean up resources according to the Clean-up step at the end of the lab, most services remain within the AWS Free Tier).

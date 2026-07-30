@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 7. </b> "
 ---
 
-# Feedback & Suggestions
 
 Throughout the 8 weeks of internship in the **First Cloud AI Journey (FCAJ)** program, I received immense support from Mentors, the Organizing Committee, and fellow interns of the cohort. Below are my objective evaluations, shares, and sincere suggestions to help the FCAJ program become increasingly complete in upcoming cohorts.
 

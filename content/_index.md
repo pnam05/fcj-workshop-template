@@ -1,12 +1,10 @@
 ---
 title: "Internship Report"
-date: 2026-07-27
+date: 2026-07-29
 weight: 1
 chapter: false
 ---
 
-    
-# Internship Report
 
 ### Student Information:
 &emsp; **Full Name:** Phan Tran Trung Nam

@@ -1,9 +1,9 @@
 ---
 title : "Configure Monitoring & Notification (CloudWatch & SNS)"
 date : 2026-07-27 
-weight : 7
+weight : 8
 chapter : false
-pre : " <b> 5.3.7 </b> "
+pre : " <b> 5.3.8 </b> "
 ---
 #### Create SNS Topic
 - Go to Amazon SNS $\rightarrow$ Topics $\rightarrow$ Click Create topic named TelcoChurnAlerts.

@@ -35,9 +35,9 @@ Tạo file payload.json chứa các tính năng (features) của một khách h�
 ```
 
 #### 2. Thực thi Request qua cURL / Postman
-Mở Terminal và gửi yêu cầu POST tới API Gateway Invoke URL vừa triển khai:
+Mở Terminal và gửi yêu cầu POST tới CloudFront Domain URL đã tích hợp bảo mật:
 ```powershell
-curl.exe -X POST https://c6kbjaktj9.execute-api.ap-southeast-1.amazonaws.com/predict \
+curl.exe -X POST https://d1jj1dyq01crgf.cloudfront.net/predict \
          -H "Content-Type: application/json" \
          -d "@payload.json"
 ```

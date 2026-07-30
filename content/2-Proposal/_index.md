@@ -7,70 +7,74 @@ pre: " <b> 2. </b> "
 ---
 
 # MLOps Platform for Telco Customer Churn Prediction
-## Automated MLOps system for training, evaluating, and deploying telco customer churn prediction models on AWS
+## An automated MLOps system for training, evaluating, and deploying telecommunications churn prediction models on AWS
 
 ### 1. Executive Summary  
-The Telco Customer Churn MLOps Platform project is designed to build a closed End-to-End MLOps Pipeline automating the entire lifecycle of Machine Learning models. The platform handles data processing, training/hyperparameter optimization (HPO), model quality evaluation, registration into Model Registry, and automated deployment to a Serverless Endpoint as soon as a model is Approved. The system helps telecom enterprises proactively detect customers at risk of churning, thereby enabling timely retention policies at optimal operational costs.
+The Telco Customer Churn MLOps Platform project is designed to build an End-to-End MLOps Pipeline that automates the entire lifecycle of a Machine Learning model. The platform handles everything from data preprocessing, model training/hyperparameter optimization (HPO), and model quality evaluation, to registering models in the Model Registry and automatically deploying them to a Serverless Endpoint once approved. The entire real-time API interface is protected and optimized using Amazon CloudFront combined with the AWS WAF firewall, enabling telecom enterprises to proactively identify customers at risk of churning in a secure, robust, and cost-optimized manner.
 
 ### 2. Problem Statement  
-*Current Issue*  
-Traditional Churn prediction models are often developed manually in local environments (Local Notebooks), causing Model Drift when real-world data changes over time. Manual deployment workflows from Notebooks to Production take a long time, are prone to operational errors, and lack an automated retraining mechanism when model performance degrades.
+*Current Issues*  
+Traditional churn prediction models are typically developed manually in local environments (Local Notebooks), leading to Model Drift as production data evolves over time. Manual deployment from Notebooks to Production is time-consuming, prone to operational errors, and lacks an automated retraining mechanism when model performance degrades. Furthermore, exposing public APIs directly to the Internet without protective firewall layers leaves the system vulnerable to DoS/DDoS attacks or unauthorized exploitation.
 
 *Solution*  
-Build an MLOps system on the AWS SageMaker Workflow (Pipeline) platform combined with Event-Driven Automation architecture. When an Admin uploads new data to Amazon S3, AWS Lambda checks for Data Drift and sends notifications via SNS. If retraining is needed, SageMaker Pipeline runs a 4-step workflow (Processing, HPO, Evaluation, Condition Check with AUC >= 0.80). When the model qualifies and transitions to Approved status in SageMaker Model Registry, Amazon EventBridge triggers Lambda Deployer to automatically update the Serverless Endpoint without service interruption (Zero-downtime Deployment).
+Build an MLOps platform on AWS SageMaker Workflow (Pipelines) combined with Event-Driven Automation architecture. When an Administrator uploads new data to Amazon S3, an AWS Lambda function checks for Data Drift and sends notifications via SNS. If retraining is required, the SageMaker Pipeline executes a 4-step workflow (Processing, HPO, Evaluation, Condition Check with AUC $\ge$ 0.80). Once the model meets the criteria and reaches the Approved state in the SageMaker Model Registry, Amazon EventBridge triggers the Lambda Deployer to automatically update the Serverless Endpoint without service interruption (Zero-downtime Deployment). The system uses **Amazon CloudFront** as an Edge Location to optimize API latency and integrates **AWS WAF** with Rate Limiting rules to mitigate malicious traffic.
 
 *Benefits & Return on Investment (ROI)*  
-- **Technical:** Reduces time from Training to Deployment from several days down to a few hours. The Serverless Endpoint mechanism optimizes infrastructure costs as it only charges per inference request.  
-- **Business:** Early detection of churning customers, protecting enterprise revenue.  
-- **Estimated Cost:** ~$2.5 - $4.0 USD/month for pipeline retrain runs and serverless inference.  
+- **Technical:** Reduces time-to-market from training to deployment from days to hours. Enhances security and reduces API latency for clients via CloudFront & AWS WAF. The Serverless Endpoint architecture optimizes infrastructure costs by billing only during active inference requests.  
+- **Business:** Early detection of churning customers helps retain revenue streams while ensuring high system availability against potential cyber threats.
+- **Estimated Cost:** ~$2.57 - $4.00 USD/month for pipeline retraining runs and serverless inference (including baseline WAF protection).
 
 ### 3. Solution Architecture  
 
 ![Architecture](/images/2-Proposal/architecture.png)
 
 *AWS Services Used*  
-- *Amazon S3*: Stores raw data, processed data, and Model Artifacts.  
-- *Amazon API Gateway & AWS Lambda (Inference)*: Receives prediction requests from Clients via REST API, performing real-time data preprocessing.  
-- *AWS SageMaker Serverless Endpoint*: Provides real-time inference API with XGBoost model, auto-scaling based on traffic.  
-- *AWS Lambda (Drift Checker & Trigger)*: Checks Data Drift when new data lands on S3 and triggers SageMaker Pipeline.  
-- *AWS SageMaker Pipelines*: Orchestrates 4-step MLOps workflow (Processing, Tuning, Evaluation, Condition & Register).  
-- *AWS SageMaker Model Registry*: Manages model versions and approval statuses.  
-- *Amazon EventBridge & AWS Lambda (Deployer)*: Listens for Model Approved events to automatically update Serverless Endpoint.  
-- *Amazon CloudWatch & Amazon SNS*: Stores Logs, sets Alarms for API/Endpoint errors, and sends automated Email notifications to Gmail.  
+- *Amazon S3*: Stores raw data, processed datasets, and Model Artifacts.
+- *Amazon CloudFront & AWS WAF*: Acts as a public Edge Location CDN to accelerate API delivery and apply Web Application Firewall rules (Rate Limiting) to protect against DDoS/Layer 7 attacks.
+- *Amazon API Gateway & AWS Lambda (Inference)*: Receives prediction requests from CloudFront via REST API and executes real-time data preprocessing.
+- *AWS SageMaker Serverless Endpoint*: Provides a real-time inference API hosting the XGBoost model, auto-scaling seamlessly based on incoming traffic.
+- *AWS Lambda (Drift Checker & Trigger)*: Inspects Data Drift upon new data uploads to S3 and triggers the SageMaker Pipeline.
+- *AWS SageMaker Pipelines*: Orchestrates the 4-step MLOps workflow (Processing, Tuning, Evaluation, Condition & Register).
+- *AWS SageMaker Model Registry*: Manages model versions and approval statuses.
+- *Amazon EventBridge & AWS Lambda (Deployer)*: Listens for Model Approved events to automatically update the Serverless Endpoint.  
+- *Amazon CloudWatch & Amazon SNS*: Stores logs, sets alarm thresholds for API/Endpoint errors, and sends automated email notifications to Gmail.
 
 ### 4. Technical Implementation  
 *Implementation Phases*  
 
-1. *Data Exploration & Trial Training*: Analyze Telco Customer Churn dataset. Preprocess data using SKLearnProcessor. Trial train standalone XGBoost model and evaluate AUC metric.  
-2. *Pipeline Automation & MLOps Workflow*: Configure Hyperparameter Tuning Job for XGBoost. Write evaluation script exporting evaluation.json file containing AUC metric. Build complete SageMaker Pipeline with ConditionStep (only register model if AUC $\ge$ 0.80).  
-3. *Event-Driven Automated Deployment*: Program AWS Lambda Deployer handling flexible Endpoint updates. Configure EventBridge Rule capturing events from Model Registry. Integrate CloudWatch Alarm and SNS Email Alert.  
+1. *Data Exploration & Baseline Training*: Analyze the Telco Customer Churn dataset. Preprocess data using SKLearnProcessor. Train a single baseline XGBoost model and evaluate its AUC metric.  
+2. *Pipeline Automation & MLOps Workflow*: Configure Hyperparameter Tuning Jobs for XGBoost. Write an evaluation script that outputs an evaluation.json file containing AUC metrics. Build a complete SageMaker Pipeline with a ConditionStep (registers the model only if AUC $\ge$ 0.80).    
+3. *Event-Driven Automated Deployment & Public API Security*: Develop the AWS Lambda Deployer to handle flexible Endpoint updates. Configure EventBridge Rules to capture events from the Model Registry. Set up an Amazon CloudFront Distribution pointing to API Gateway and enable AWS WAF (Rate Limiting set to 100 requests per 5 minutes). Integrate CloudWatch Alarms and SNS Email Alerts.
 
-### 5. Roadmap & Implementation Milestones  
-- Week 1 – Week 2: Survey problem context, process Telco Churn data, and build XGBoost Baseline Model.  
-- Week 3 – Week 4: Package data processing and training workflow into SageMaker Pipelines.  
-- Week 5 – Week 6: Automate model evaluation phase and integrate SageMaker Model Registry.  
-- Week 7: Set up EventBridge, Lambda Function to realize Auto-Deploy feature to Serverless Endpoint.  
-- Week 8: End-to-End system testing, cost optimization, Endpoint latency evaluation, and report finalization.  
+### 5. Roadmap & Key Milestones  
+- Weeks 1 – 2: Survey business requirements, process Telco Churn data, and build the XGBoost Baseline Model.
+- Weeks 3 – 4: Package data processing and training workflows into SageMaker Pipelines.  
+- Weeks 5 – 6: Automate model evaluation and integrate SageMaker Model Registry.  
+- Week 7: Configure EventBridge and Lambda functions to implement Auto-Deploy to the Serverless Endpoint. Configure CloudFront & AWS WAF for API protection.
+- Week 8: End-to-end system testing, cost optimization, Endpoint/WAF latency evaluation, and final documentation.  
 
 ### 6. Budget Estimation  
-- AWS Lambda & Amazon EventBridge: $0.00 USD/month (Within Free Tier).  
-- Amazon S3: ~$0.12/month (~5 GB including Artifacts & Data).  
-- AWS SageMaker Processing & Training: ~$0.35/month (ml.m5.large instance).  
-- AWS SageMaker Hyperparameter Tuning: ~$0.80/month (6 parallel Tuning Jobs on ml.m5.large).  
+- AWS Lambda & Amazon EventBridge: $0.00 USD/month (Covered by AWS Free Tier).  
+- Amazon S3: ~$0.12/month (~5 GB storage including artifacts & datasets).  
+- AWS SageMaker Processing & Training: ~$0.35/month (using `ml.m5.large` instances).  
+- AWS SageMaker Hyperparameter Tuning: ~$0.80/month (6 parallel tuning jobs on `ml.m5.large`).  
 - AWS SageMaker Serverless Endpoint: ~$1.20/month (2048 MB Memory, ~10,000 requests/month).  
+- Amazon CloudFront & AWS WAF: Costs depend on actual traffic (Free Tier covers 1TB CloudFront data transfer; short-term testing WAF costs ~$0.00 - $15.00/month depending on scope).  
 - Amazon CloudWatch & SNS: ~$0.10/month.  
 
-*Total*: ~$2.57 - $4.00 USD/month  
+*Total*: ~$2.57 - $4.00 USD/month (Baseline operational cost excluding large-scale WAF scaling)
 
 ### 7. Risk Assessment  
 *Risk Matrix*  
 - Model Performance Drift: High impact, medium probability.  
-- Uncontrolled resource cost occurrence: Medium impact, low probability.  
+- Distributed Denial of Service (DDoS) or spam requests overloading the API: High impact, medium probability.  
+- Uncontrolled resource cost spikes: Medium impact, low probability.  
 
 *Mitigation Strategies*  
-- Model performance: Place condition check step (ConditionStep) in Pipeline. If new model AUC $< 0.80$, Pipeline triggers FailStep and immediately stops registration to Registry.  
-- Cost control: Use Serverless Endpoint (only incurs charges during invocations, zero idle waiting fee). Set AWS Budgets Alarm warning when cost exceeds $10 USD/month.  
+- Model Performance: Enforce a condition check step (ConditionStep) within the Pipeline. If a new model yields AUC $< 0.80$, the Pipeline triggers a FailStep and immediately halts registration into the Model Registry.  
+- API Security: Deploy AWS WAF with Rate Limiting (blocking IPs exceeding 100 requests/5 minutes) behind CloudFront to protect the backend service from malicious or spam requests.  
+- Cost Control: Utilize Serverless Endpoints (incurring costs strictly per invocation with zero idle fees). Set up AWS Budgets Alarms to alert when monthly spend exceeds $10.00 USD.  
 
 ### 8. Expected Outcomes  
-- Technical: Successfully deploy 100% automated closed MLOps workflow: Data Upload -> Drift Check -> Pipeline -> Model Registry -> Auto-Deploy -> Serverless Endpoint.  
-- Operational: Reduce manual effort by 95% for Data/MLOps Engineers when deploying new model versions.  
+- Technical: Successfully deploy a 100% automated, closed-loop MLOps pipeline: Data Upload $\rightarrow$ Drift Check $\rightarrow$ Pipeline $\rightarrow$ Model Registry $\rightarrow$ Auto-Deploy $\rightarrow$ Serverless Endpoint $\rightarrow$ CloudFront (WAF).
+- Operational & Security: Reduce manual operational effort for Data/MLOps Engineers by 95% during new model releases, while guaranteeing that the real-time API remains secure, reliable, and performant for client requests.

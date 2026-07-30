@@ -6,8 +6,6 @@ chapter: false
 pre: " <b> 7. </b> "
 ---
 
-# Chia sẻ & Đóng góp ý kiến (Feedback & Suggestions)
-
 Trong suốt 8 tuần thực tập tại chương trình **First Cloud AI Journey (FCAJ)**, tôi đã nhận được sự hỗ trợ rất lớn từ Mentor, Ban tổ chức và các bạn thực tập sinh cùng khóa. Dưới đây là những chia sẻ, đánh giá khách quan và các góp ý chân thành của tôi nhằm giúp chương trình FCAJ ngày càng hoàn thiện hơn trong các khóa tiếp theo.
 
 ---

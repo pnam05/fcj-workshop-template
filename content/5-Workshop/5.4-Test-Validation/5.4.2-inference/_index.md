@@ -35,9 +35,9 @@ Create payload.json file containing features of a telecom customer needing Churn
 ```
 
 #### 2. Execute Request via cURL / Postman
-Open Terminal and send POST request to the deployed API Gateway Invoke URL:
+Open your Terminal and send a POST request to the secured CloudFront Domain URL:
 ```powershell
-curl.exe -X POST https://c6kbjaktj9.execute-api.ap-southeast-1.amazonaws.com/predict \
+curl.exe -X POST https://d1jj1dyq01crgf.cloudfront.net/predict \
          -H "Content-Type: application/json" \
          -d "@payload.json"
 ```

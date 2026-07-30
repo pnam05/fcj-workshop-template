@@ -10,7 +10,7 @@ pre: " <b> 6. </b> "
 
 Throughout my internship at **First Cloud AI Journey (FCAJ)** from **June 15, 2026** to **August 07, 2026**, I had the opportunity to learn, practice, and apply Computer Science specialized knowledge equipped at Ho Chi Minh City University of Technology (HCMCUT - VNU-HCM) into a practical Cloud Computing work environment.
 
-I participated in researching and building the complete personal project **Automated MLOps Platform for Telco Customer Churn Prediction on AWS**, thereby significantly improving my professional skills in MLOps, AWS Cloud Infrastructure, Python SDK programming (`boto3`, `sagemaker`), Event-Driven Architecture design mindset, as well as technical reporting and bilingual Workshop documentation presentation skills.
+I participated in researching and building the complete personal project **Automated MLOps Platform for Telco Customer Churn Prediction on AWS**, thereby significantly improving my professional skills in MLOps, AWS Cloud Infrastructure, Python SDK programming (boto3, sagemaker), Event-Driven Architecture design mindset, as well as technical reporting and bilingual Workshop documentation presentation skills.
 
 Regarding work attitude, I always strived to accomplish assigned objectives on time, strictly obeyed work discipline, and proactively communicated with my Mentor and team members to improve work efficiency.
 

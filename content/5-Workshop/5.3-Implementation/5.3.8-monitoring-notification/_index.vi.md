@@ -1,9 +1,9 @@
 ---
 title : "Cấu hình Monitoring & Notification (CloudWatch & SNS)"
 date : 2026-07-27 
-weight : 7
+weight : 8
 chapter : false
-pre : " <b> 5.3.7 </b> "
+pre : " <b> 5.3.8 </b> "
 ---
 #### Tạo topic SNS
 - Vào Amazon SNS $\rightarrow$ Topics $\rightarrow$ Bấm Create topic tên TelcoChurnAlerts.
