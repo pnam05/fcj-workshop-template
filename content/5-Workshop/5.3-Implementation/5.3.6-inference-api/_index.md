@@ -10,7 +10,7 @@ Build a public HTTPS communication gateway for Client applications to send predi
 
 - Create new Lambda function named telco-churn-api-handler.
 - Paste code processing real-time request preprocessing and invoking Serverless Endpoint:
-![inline-policy](../../../../static/images/5-Workshop/5.3-Implementation/inline-policy.png)
+![inline-policy](/images/5-Workshop/5.3-Implementation/inline-policy.png)
 ```python
 import os
 import json
@@ -145,9 +145,9 @@ def lambda_handler(event, context):
 #### Configure Amazon API Gateway
 - Go to API Gateway $\rightarrow$ Create API $\rightarrow$ Select HTTP API (Build)..
 - API Name: telco-churn-api.
-![api-name](../../../../static/images/5-Workshop/5.3-Implementation/api-name.png)
+![api-name](/images/5-Workshop/5.3-Implementation/api-name.png)
 - Create Resource /predict $\rightarrow$ Create Method POST.
 - Integration type: Select Lambda Function $\rightarrow$ Select telco-churn-api.
-![post-api](../../../../static/images/5-Workshop/5.3-Implementation/post-api.png)
+![post-api](/images/5-Workshop/5.3-Implementation/post-api.png)
 - Click Next and Deploy API.
 - Copy Invoke URL string format: https://<api-id>[.execute-api.ap-southeast-1.amazonaws.com/predict](https://c6kbjaktj9.execute-api.ap-southeast-1.amazonaws.com/predict)

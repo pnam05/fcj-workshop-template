@@ -14,8 +14,8 @@ This Lambda function is attached to the S3 Event Notification (ObjectCreated) ev
 - Assign Role with permissions: AmazonS3ReadOnlyAccess, AmazonSageMakerFullAccess, AmazonSNSFullAccess.
 - In Configuration tab $\rightarrow$ General configuration, adjust Timeout to 2 min 0 sec.
 - Adjust Environment variables and Layers as shown below.
-![ev](../../../../static/images/5-Workshop/5.3-Implementation/ev.png)
-![layers](../../../../static/images/5-Workshop/5.3-Implementation/layers.png)
+![ev](/images/5-Workshop/5.3-Implementation/ev.png)
+![layers](/images/5-Workshop/5.3-Implementation/layers.png)
 - Paste the code snippet below into lambda_function.py and click Deploy:
 
 ```python
@@ -195,14 +195,14 @@ def lambda_handler(event, context):
 To automatically trigger Lambda when S3 receives a new file:
 - Open Amazon S3 service $\rightarrow$ Click to select Bucket telco-churn-mlops-fcaj.
 - Switch to Properties tab $\rightarrow$ Scroll down to Event notifications section $\rightarrow$ Click Create event notification.
-![event-s3](../../../../static/images/5-Workshop/5.3-Implementation/event-s3.png)
+![event-s3](/images/5-Workshop/5.3-Implementation/event-s3.png)
 - Set up:
   - Event name: NewRawCsvUploaded.
   - Prefix: raw/ (only capture events in raw folder).
   - Suffix: .csv
-  ![event-s3](../../../../static/images/5-Workshop/5.3-Implementation/event-conf.png)
+  ![event-s3](/images/5-Workshop/5.3-Implementation/event-conf.png)
   - Event types: Check All object create events (s3:ObjectCreated:*).
-    ![event-s3](../../../../static/images/5-Workshop/5.3-Implementation/event-type.png)
+    ![event-s3](/images/5-Workshop/5.3-Implementation/event-type.png)
 - In the Destination section at the bottom of the page:
   - Select Lambda function.
   - Lambda function: Select TelcoChurnDriftChecker.

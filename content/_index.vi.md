@@ -23,7 +23,7 @@ chapter: false
 
 &emsp; **Thời gian thực tập:** Từ ngày 15/06/2026 đến ngày 14/08/2026
 
-![Avatar](/static/images/avatar.png)
+![Avatar](/images/avatar.png)
 
 
 

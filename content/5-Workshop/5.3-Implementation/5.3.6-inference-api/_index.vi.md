@@ -10,7 +10,7 @@ Xây dựng cổng giao tiếp HTTPS công khai cho ứng dụng Client gửi re
 
 - Tạo hàm Lambda mới tên telco-churn-api-handler.
 - Dán đoạn code xử lý tiền xử lý request real-time và invoke Serverless Endpoint:
-![inline-policy](../../../../static/images/5-Workshop/5.3-Implementation/inline-policy.png)
+![inline-policy](/images/5-Workshop/5.3-Implementation/inline-policy.png)
 ```python
 import os
 import json
@@ -145,9 +145,9 @@ def lambda_handler(event, context):
 #### Cấu hình Amazon API Gateway
 - Vào API Gateway $\rightarrow$ Create API $\rightarrow$ Chọn HTTP API (Build)..
 - API Name: telco-churn-api.
-![api-name](../../../../static/images/5-Workshop/5.3-Implementation/api-name.png)
+![api-name](/images/5-Workshop/5.3-Implementation/api-name.png)
 - Tạo Resource /predict $\rightarrow$ Tạo Method POST.
 - Integration type: Chọn Lambda Function $\rightarrow$ Chọn telco-churn-api.
-![post-api](../../../../static/images/5-Workshop/5.3-Implementation/post-api.png)
+![post-api](/images/5-Workshop/5.3-Implementation/post-api.png)
 - Bấm Next và Deploy API.
 - Sao chép đường dẫn Invoke URL dạng: https://<api-id>[.execute-api.ap-southeast-1.amazonaws.com/predict](https://c6kbjaktj9.execute-api.ap-southeast-1.amazonaws.com/predict)

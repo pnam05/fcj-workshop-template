@@ -34,7 +34,7 @@ Upon completing this lab, you will master and deploy:
 
 ## System Architecture Diagram
 
-![AWS MLOps Architecture Diagram](../../../static/images/5-Workshop/5.1-Workshop-overview/architecture.png)
+![AWS MLOps Architecture Diagram](/images/5-Workshop/5.1-Workshop-overview/architecture.png)
 
 ### AWS Services Used:
 - **Amazon S3:** Stores raw data, processed datasets, and Model Artifacts.

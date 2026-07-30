@@ -11,7 +11,7 @@ Hàm Lambda này nhận sự kiện từ Model Registry khi mô hình đạt nh�
 - Vào AWS Lambda $\rightarrow$ chọn Create function.
 - Name: TelcoChurnAutoDeployer | Runtime: Python 3.11.
 - Trong tab Permissions, gán Role có quyền AmazonSageMakerFullAccess và đính kèm Inline Policy iam:PassRole cho SageMaker-Telco-Churn-Role.
-![inline-policy](../../../../static/images/5-Workshop/5.3-Implementation/inline-policy.png)
+![inline-policy](/images/5-Workshop/5.3-Implementation/inline-policy.png)
 - Dán đoạn code dưới đây vào lambda_function.py và bấm Deploy:
 
 ```python
@@ -108,7 +108,7 @@ def lambda_handler(event, context):
 Thiết lập "mắt thần" bắt sự kiện phê duyệt mô hình để gọi Lambda Deployer tự động.
 - Vào Amazon EventBridge $\rightarrow$ Rules $\rightarrow$ Bấm Create rule.
 - Name: TelcoChurnModelApprovedRule.
-![bridge-name](../../../../static/images/5-Workshop/5.3-Implementation/bridge-name.png)
+![bridge-name](/images/5-Workshop/5.3-Implementation/bridge-name.png)
 - Event pattern: Chọn Custom pattern (JSON editor) và dán:
 
 ```json
@@ -121,9 +121,9 @@ Thiết lập "mắt thần" bắt sự kiện phê duyệt mô hình để gọ
   }
 }
 ```
-- ![event-name](../../../../static/images/5-Workshop/5.3-Implementation/event-pattern.png)
+- ![event-name](/images/5-Workshop/5.3-Implementation/event-pattern.png)
 - Select Target: Chọn Lambda function $\rightarrow$ Chọn TelcoChurnAutoDeployer.
-- ![target](../../../../static/images/5-Workshop/5.3-Implementation/target.png)
+- ![target](/images/5-Workshop/5.3-Implementation/target.png)
 - Bấm Create rule.
 
 #### Cấu hình EventBridge Rule thông báo kết quả SageMaker Pipeline qua Email
@@ -131,7 +131,7 @@ Khi SageMaker Pipeline kết thúc (thành công, thất bại, hoặc bị dừ
 ##### Tạo EventBridge Rule (TelcoChurnPipelineStatusRule)
 - Truy cập Amazon EventBridge $\rightarrow$ Rules $\rightarrow$ Bấm Create rule.
 - Name: TelcoChurnPipelineSuccessRule.
-![success-event-name](../../../../static/images/5-Workshop/5.3-Implementation/success-event-name.png)
+![success-event-name](/images/5-Workshop/5.3-Implementation/success-event-name.png)
 - Tại mục Event pattern, chọn Custom pattern (JSON editor) và dán chính xác đoạn JSON của bạn:
 
 ```json
@@ -144,13 +144,13 @@ Khi SageMaker Pipeline kết thúc (thành công, thất bại, hoặc bị dừ
   }
 }
 ```
-- ![success-json](../../../../static/images/5-Workshop/5.3-Implementation/success-json.png)
+- ![success-json](/images/5-Workshop/5.3-Implementation/success-json.png)
 ##### Cấu hình Target gửi sang SNS Topic
 - Tại mục Select a target:
   - Target 1: Chọn AWS service.
   - Select a target: Chọn SNS topic.
   - Topic: Chọn SNS Topic đã tạo trước đó (TelcoChurnAlerts).
-    ![success-target](../../../../static/images/5-Workshop/5.3-Implementation/success-target.png)
+    ![success-target](/images/5-Workshop/5.3-Implementation/success-target.png)
 - Mở phần Additional settings $\rightarrow$ Target input transformer nếu muốn định dạng lại nội dung Email cho dễ đọc (Option):
   - Target input: Chọn Input transformer $\rightarrow$ Bấm Configure input transformer.
   - Input path:
@@ -161,7 +161,7 @@ Khi SageMaker Pipeline kết thúc (thành công, thất bại, hoặc bị dừ
         "time": "$.time"
     }
     ```
-    ![target-input](../../../../static/images/5-Workshop/5.3-Implementation/target-input.png)
+    ![target-input](/images/5-Workshop/5.3-Implementation/target-input.png)
     - Template:
     ```
         "Cảnh báo SageMaker Pipeline Execution:"
@@ -170,5 +170,5 @@ Khi SageMaker Pipeline kết thúc (thành công, thất bại, hoặc bị dừ
         "Thời gian: <time>"
         "Execution ARN: <executionArn>"
     ```
-    ![target-template](../../../../static/images/5-Workshop/5.3-Implementation/target-template.png)
+    ![target-template](/images/5-Workshop/5.3-Implementation/target-template.png)
 - Bấm Next $\rightarrow$ Next $\rightarrow$ Create rule.

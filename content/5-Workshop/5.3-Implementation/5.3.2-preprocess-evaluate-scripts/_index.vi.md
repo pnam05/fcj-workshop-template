@@ -11,7 +11,7 @@ pre : " <b> 5.3.2 </b> "
 1. Trong giao diện **Amazon SageMaker AI Console**, ở menu bên trái dưới mục **Applications and IDEs**, chọn **Notebooks**.
 2. Chọn tab **Notebook instances** và nhấn vào nút **Create notebook instance** màu cam.
 
-![create](../../../../static/images/5-Workshop/5.3-Implementation/create-notebook.png)
+![create](/images/5-Workshop/5.3-Implementation/create-notebook.png)
 
 #### Cấu hình Notebook Instance
 
@@ -27,7 +27,7 @@ pre : " <b> 5.3.2 </b> "
 
 3. Kéo xuống cuối trang và nhấn **Create notebook instance** để khởi tạo.
 
-![create](../../../../static/images/5-Workshop/5.3-Implementation/conf-notebook.png)
+![create](/images/5-Workshop/5.3-Implementation/conf-notebook.png)
 
 
 

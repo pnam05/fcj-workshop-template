@@ -14,8 +14,8 @@ Hàm Lambda này được đính kèm với sự kiện S3 Event Notification (O
 - Gán Role có các quyền: AmazonS3ReadOnlyAccess, AmazonSageMakerFullAccess, AmazonSNSFullAccess.
 - Trong tab Configuration $\rightarrow$ General configuration, chỉnh Timeout thành 2 min 0 sec.
 - Điều chỉnh Environment variables và Layers như bên dưới.
-![ev](../../../../static/images/5-Workshop/5.3-Implementation/ev.png)
-![layers](../../../../static/images/5-Workshop/5.3-Implementation/layers.png)
+![ev](/images/5-Workshop/5.3-Implementation/ev.png)
+![layers](/images/5-Workshop/5.3-Implementation/layers.png)
 - Dán đoạn code dưới đây vào lambda_function.py và bấm Deploy:
 
 ```python
@@ -195,14 +195,14 @@ def lambda_handler(event, context):
 Để khi S3 nhận file mới thì Lambda tự động chạy:
 - Mở dịch vụ Amazon S3 $\rightarrow$ Click chọn Bucket telco-churn-mlops-fcaj.
 - Chuyển sang tab Properties $\rightarrow$ Kéo xuống mục Event notifications $\rightarrow$ Bấm Create event notification.
-![event-s3](../../../../static/images/5-Workshop/5.3-Implementation/event-s3.png)
+![event-s3](/images/5-Workshop/5.3-Implementation/event-s3.png)
 - Thiết lập:
   - Event name: NewRawCsvUploaded.
   - Prefix: raw/ (chỉ bắt sự kiện trong thư mục raw).
   - Suffix: .csv
-  ![event-s3](../../../../static/images/5-Workshop/5.3-Implementation/event-conf.png)
+  ![event-s3](/images/5-Workshop/5.3-Implementation/event-conf.png)
   - Event types: Tick chọn All object create events (s3:ObjectCreated:*).
-    ![event-s3](../../../../static/images/5-Workshop/5.3-Implementation/event-type.png)
+    ![event-s3](/images/5-Workshop/5.3-Implementation/event-type.png)
 - Tại phần Destination ở cuối trang:
   - Chọn Lambda function.
   - Lambda function: Chọn TelcoChurnDriftChecker.

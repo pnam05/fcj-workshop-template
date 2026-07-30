@@ -17,7 +17,7 @@ Create a CDN distribution in front of API Gateway to optimize content delivery p
 - In the **Domain** section:
   - Leave the **Route 53 managed domain** field empty.
 
-![cloudfront-get-started](../../../../static/images/5-Workshop/5.3-Implementation/cdn-name.png)
+![cloudfront-get-started](/images/5-Workshop/5.3-Implementation/cdn-name.png)
 
 #### Configure Origin & Cache Settings
 
@@ -29,7 +29,7 @@ Create a CDN distribution in front of API Gateway to optimize content delivery p
   - **Origin settings**: Select **Use recommended origin settings**.
   - **Cache settings**: Select **Use recommended cache settings tailored to serving API Gateway content**.
 
-![cloudfront-origin-settings](../../../../static/images/5-Workshop/5.3-Implementation/origin.png)
+![cloudfront-origin-settings](/images/5-Workshop/5.3-Implementation/origin.png)
 
 #### Configure AWS WAF Security (Enable security)
 
@@ -39,4 +39,4 @@ Create a CDN distribution in front of API Gateway to optimize content delivery p
   - Set **When rate exceeds...**: `100` requests per IP address per 5-minute period.
 - Click **Next**, review all configurations, and then click **Create distribution**.
 
-![cloudfront-security-waf](../../../../static/images/5-Workshop/5.3-Implementation/waf.png)
+![cloudfront-security-waf](/images/5-Workshop/5.3-Implementation/waf.png)

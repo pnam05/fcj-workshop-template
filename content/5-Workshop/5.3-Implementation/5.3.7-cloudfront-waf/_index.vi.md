@@ -17,7 +17,7 @@ Tạo CDN distribution phía trước API Gateway để tối ưu hiệu năng t
 - Tại mục **Domain**:
   - Để trống mục **Route 53 managed domain**
 
-![cloudfront-get-started](../../../../static/images/5-Workshop/5.3-Implementation/cdn-name.png)
+![cloudfront-get-started](/images/5-Workshop/5.3-Implementation/cdn-name.png)
 
 #### Cấu hình Origin & Cache Settings
 
@@ -29,7 +29,7 @@ Tạo CDN distribution phía trước API Gateway để tối ưu hiệu năng t
   - **Origin settings**: Chọn **Use recommended origin settings**.
   - **Cache settings**: Chọn **Use recommended cache settings tailored to serving API Gateway content**.
 
-![cloudfront-origin-settings](../../../../static/images/5-Workshop/5.3-Implementation/origin.png)
+![cloudfront-origin-settings](/images/5-Workshop/5.3-Implementation/origin.png)
 
 #### Cấu hình Bảo mật AWS WAF (Enable security)
 
@@ -39,4 +39,4 @@ Tạo CDN distribution phía trước API Gateway để tối ưu hiệu năng t
   - Nhập thông số **When rate exceeds...**: `100` requests per IP address per 5-minute period.
 - Nhấn **Next** và kiểm tra lại toàn bộ cấu hình trước khi nhấn **Create distribution**.
 
-![cloudfront-security-waf](../../../../static/images/5-Workshop/5.3-Implementation/waf.png)
+![cloudfront-security-waf](/images/5-Workshop/5.3-Implementation/waf.png)

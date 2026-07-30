@@ -11,7 +11,7 @@ pre : " <b> 5.3.2 </b> "
 1. In the **Amazon SageMaker AI Console**, under **Applications and IDEs** on the left menu, select **Notebooks**.
 2. Select the **Notebook instances** tab and click the orange **Create notebook instance** button.
 
-![create](../../../../static/images/5-Workshop/5.3-Implementation/create-notebook.png)
+![create](/images/5-Workshop/5.3-Implementation/create-notebook.png)
 
 #### Configure Notebook Instance
 
@@ -27,7 +27,7 @@ pre : " <b> 5.3.2 </b> "
 
 3. Scroll to the bottom of the page and click **Create notebook instance** to initialize.
 
-![create](../../../../static/images/5-Workshop/5.3-Implementation/conf-notebook.png)
+![create](/images/5-Workshop/5.3-Implementation/conf-notebook.png)
 
 
 

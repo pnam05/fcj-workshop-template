@@ -82,7 +82,7 @@ sklearn_processor.run(
     ]
 )
 ```
-![preprocess](../../../../static/images/5-Workshop/5.3-Implementation/preprocess.png)
+![preprocess](/images/5-Workshop/5.3-Implementation/preprocess.png)
 
 
 #### Huấn luyện Mô hình XGBoost Đơn lẻ (Training Job)
@@ -223,7 +223,7 @@ for col in hpo_results.columns:
     if col not in ['TrainingJobName', 'TrainingJobStatus', 'FinalObjectiveValue', 'TrainingStartTime', 'TrainingEndTime']:
         print(f" - {col}: {best_job_row[col]}")
 ```
-![best-conf](../../../../static/images/5-Workshop/5.3-Implementation/best-conf.png)
+![best-conf](/images/5-Workshop/5.3-Implementation/best-conf.png)
 
 #### Đăng ký Mô hình vào SageMaker Model Registry
 Tạo mới một Model Package Group và đăng ký mô hình tốt nhất đạt được từ bước HPO.
@@ -270,7 +270,7 @@ sm_boto3_client.update_model_package(
 )
 print(" Đã chuyển trạng thái mô hình sang APPROVED thành công!")
 ```
-![best-conf](../../../../static/images/5-Workshop/5.3-Implementation/model-reg.png)
+![best-conf](/images/5-Workshop/5.3-Implementation/model-reg.png)
 
 #### Triển khai & Kiểm thử Serverless Endpoint
 
@@ -300,7 +300,7 @@ predictor = model.deploy(
 )
 print(f" Triển khai Serverless Endpoint thành công: {endpoint_name}")
 ```
-![deploy](../../../../static/images/5-Workshop/5.3-Implementation/deploy.png)
+![deploy](/images/5-Workshop/5.3-Implementation/deploy.png)
 
 
 ##### Kiểm thử dự đoán (Inference Test)
@@ -323,7 +323,7 @@ churn_probability = float(response["Body"].read().decode("utf-8"))
 print(f" Xác suất rời bỏ dịch vụ (Churn Probability): {churn_probability:.4f}")
 print(f" Dự đoán: {'CHURN (Rời bỏ)' if churn_probability >= 0.5 else 'RETAIN (Ở lại)'}")
 ```
-![deploy](../../../../static/images/5-Workshop/5.3-Implementation/inference.png)
+![deploy](/images/5-Workshop/5.3-Implementation/inference.png)
 
 #### Đóng gói & Tự động hóa với SageMaker Pipeline (4 Bước)
 Toàn bộ quy trình sẽ được tự động hóa bằng SageMaker Pipeline gồm:
@@ -456,7 +456,7 @@ print(f" Đã khởi tạo thành công SageMaker Pipeline 4 bước: {pipeline_
 execution = pipeline.start()
 print(f" Pipeline đang tự động thực thi! Execution ARN: {execution.arn}")
 ```
-![deploy](../../../../static/images/5-Workshop/5.3-Implementation/pipeline.png)
+![deploy](/images/5-Workshop/5.3-Implementation/pipeline.png)
 
 
 

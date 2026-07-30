@@ -33,7 +33,7 @@ The system uses the following IAM Roles to delegate permissions between services
    - **Attached Policies:** AmazonSageMakerFullAccess, AmazonS3FullAccess.
    - **Purpose:** Grants permissions for SageMaker Processing Job, HPO Job, Evaluation, and Serverless Endpoint to access S3 data.
 
-![telco-churn-role](../../../static/images/3-Prerequiste/telco-churn-role.png)
+![telco-churn-role](/images/3-Prerequiste/telco-churn-role.png)
 
 2. **Lambda-Execution-Role (used for Lambda Trigger & Lambda Deployer):**
    - **Service Trust:** lambda.amazonaws.com
@@ -67,7 +67,7 @@ telco-churn-mlops-<account-id>/
 │   └── test/
 └── models/              # Contains model.tar.gz compressed files
 ```
-![s3](../../../static/images/3-Prerequiste/S3.png)
+![s3](/images/3-Prerequiste/S3.png)
 
 
 ## Prepare Data & Coding Environment (Local / SageMaker Studio)

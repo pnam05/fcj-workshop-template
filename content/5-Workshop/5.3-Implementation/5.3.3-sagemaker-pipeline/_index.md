@@ -82,7 +82,7 @@ sklearn_processor.run(
     ]
 )
 ```
-![preprocess](../../../../static/images/5-Workshop/5.3-Implementation/preprocess.png)
+![preprocess](/images/5-Workshop/5.3-Implementation/preprocess.png)
 
 
 #### Standalone XGBoost Model Training (Training Job)
@@ -223,7 +223,7 @@ for col in hpo_results.columns:
     if col not in ['TrainingJobName', 'TrainingJobStatus', 'FinalObjectiveValue', 'TrainingStartTime', 'TrainingEndTime']:
         print(f" - {col}: {best_job_row[col]}")
 ```
-![best-conf](../../../../static/images/5-Workshop/5.3-Implementation/best-conf.png)
+![best-conf](/images/5-Workshop/5.3-Implementation/best-conf.png)
 
 #### Register Model in SageMaker Model Registry
 Create a new Model Package Group and register the best model obtained from the HPO step.
@@ -270,7 +270,7 @@ sm_boto3_client.update_model_package(
 )
 print(" Successfully updated model status to APPROVED!")
 ```
-![best-conf](../../../../static/images/5-Workshop/5.3-Implementation/model-reg.png)
+![best-conf](/images/5-Workshop/5.3-Implementation/model-reg.png)
 
 #### Deploy & Test Serverless Endpoint
 
@@ -300,7 +300,7 @@ predictor = model.deploy(
 )
 print(f" Successfully deployed Serverless Endpoint: {endpoint_name}")
 ```
-![deploy](../../../../static/images/5-Workshop/5.3-Implementation/deploy.png)
+![deploy](/images/5-Workshop/5.3-Implementation/deploy.png)
 
 
 ##### Prediction Test (Inference Test)
@@ -323,7 +323,7 @@ churn_probability = float(response["Body"].read().decode("utf-8"))
 print(f" Churn Probability: {churn_probability:.4f}")
 print(f" Prediction: {'CHURN (Leave)' if churn_probability >= 0.5 else 'RETAIN (Stay)'}")
 ```
-![deploy](../../../../static/images/5-Workshop/5.3-Implementation/inference.png)
+![deploy](/images/5-Workshop/5.3-Implementation/inference.png)
 
 #### Packaging & Automation with SageMaker Pipeline (4 Steps)
 The entire workflow will be automated using SageMaker Pipeline consisting of:
@@ -456,4 +456,4 @@ print(f" Successfully initialized 4-step SageMaker Pipeline: {pipeline_name}")
 execution = pipeline.start()
 print(f" Pipeline is executing automatically! Execution ARN: {execution.arn}")
 ```
-![deploy](../../../../static/images/5-Workshop/5.3-Implementation/pipeline.png)
+![deploy](/images/5-Workshop/5.3-Implementation/pipeline.png)
