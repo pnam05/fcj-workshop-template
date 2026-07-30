@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 8"
-date: 2026-07-30
+date: 2026-07-27
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
@@ -8,25 +8,24 @@ pre: " <b> 1.8. </b> "
 
 ### Mục tiêu tuần 8:
 
-* Đào sâu kiến thức AWS Cloud về Tối ưu hóa Chi phí & Vận hành xuất sắc (AWS Well-Architected Framework & Cost Optimization): Học cách phân tích chi phí qua AWS Cost Explorer, đặt AWS Budgets và tối ưu tài nguyên Serverless.
-* Thực hành kiểm thử toàn diện toàn bộ hệ thống (End-to-End Testing & Validation Matrix) cho cả 2 luồng Auto-Retrain và Real-time Inference API.
-* Hoàn thiện tài liệu Workshop song ngữ (Việt - Anh), nghiệm thu báo cáo thực tập với Mentor và thực hiện dọn dẹp (Clean-up) toàn bộ tài nguyên trên AWS Cloud.
+* Cùng nhóm viết Blog 1 (RDS Proxy) và Blog 2 (Bảo mật AWS).
+* Học cá nhân về AWS Well-Architected Framework (5 trụ cột thiết kế hệ thống Cloud chuẩn mực).
+* Học cá nhân về Cost Optimization qua AWS Cost Explorer, AWS Budgets và quy trình Clean-up tài nguyên Cloud an toàn.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | --- | --- | --- | --- |
-| 2 | - Học nâng cao về **AWS Well-Architected Framework** (5 trụ cột: Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization) <br> - Phân tích chi phí vận hành hệ thống qua **AWS Cost Explorer** và thiết lập **AWS Budgets Alarm** cảnh báo khi chi phí vượt $10 USD/tháng <br> - Đánh giá các giải pháp tối ưu chi phí Serverless (Auto-scaling, Concurrency limits) | 03/08/2026 | 03/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - **Kiểm thử End-to-End Kịch bản 1 (Automated Retrain Flow):** <br>&emsp; + Giả lập Admin upload file dữ liệu mới vào s3://.../raw/ <br>&emsp; + Xác nhận Lambda Drift Checker kích hoạt SageMaker Pipeline <br>&emsp; + Kiểm tra Pipeline 4 bước chạy báo xanh, gửi Email SNS thông báo Succeeded <br>&emsp; + Kiểm tra EventBridge kích hoạt Lambda Deployer tự động cập nhật Serverless Endpoint | 04/08/2026 | 04/08/2026 | AWS Console Testing |
-| 4 | - **Kiểm thử End-to-End Kịch bản 2 (Real-time Inference Flow):** <br>&emsp; + Gửi nhiều mẫu payload JSON kiểm thử qua API Gateway HTTP Endpoint bằng cURL/Postman <br>&emsp; + Kiểm tra các trường hợp dự đoán Churn (Yes/No) và đánh giá độ trễ (Latency) <br>&emsp; + Lập bảng Tổng kết Kết quả Kiểm thử (**Validation Matrix**) đầy đủ các tiêu chí | 05/08/2026 | 05/08/2026 | Postman / cURL Tests |
-| 5 | - Rà soát và hoàn thiện toàn bộ tài liệu báo cáo thực tập & tài liệu Workshop trên website Hugo: <br>&emsp; + Kiểm tra tính đầy đủ của cả 2 ngôn ngữ (**Tiếng Việt** và **Tiếng Anh**) <br>&emsp; + Bổ sung sơ đồ kiến trúc, hình ảnh bằng chứng (Proof of Work) từ CloudWatch Logs và cURL response <br> - Báo cáo nghiệm thu kết quả dự án cá nhân với Mentor | 06/08/2026 | 06/08/2026 | Website Template FCAJ |
-| 6 | - **Thực hiện Dọn dẹp Tài nguyên (Clean-up):** <br>&emsp; + Xóa SageMaker Serverless Endpoint & Configurations <br>&emsp; + Làm rỗng và xóa S3 Data Lake Bucket <br>&emsp; + Xóa các hàm AWS Lambda, API Gateway, EventBridge Rules & SNS Topic <br> - Tổng kết kỳ thực tập và đóng Worklog | 07/08/2026 | 07/08/2026 | Workshop Clean-up Guide |
+| Thứ | Công việc                                                                                                                                                                                                                                                                                                                     | Ngày bắt đầu | Ngày hoàn thành | Nguồn tham khảo                                                                                      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------------------------------------------------------------------------------------- |
+| 2   | - Học nâng cao AWS Well-Architected Framework (5 trụ cột: Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization) <br> - Phân tích chi phí vận hành qua AWS Cost Explorer và thiết lập AWS Budgets Alarm cảnh báo chi phí                                                                   | 27/07/2026   | 27/07/2026      | <https://aws.amazon.com/architecture/well-architected/>                                              |
+| 3   | Cùng nhóm tìm hiểu RDS Proxy: Connection Pooling, Multiplexing, Graceful Failover, IAM Authentication <br> - Cùng nhóm viết Blog 1: "Bài toán cạn kiệt kết nối với RDS Proxy"                                                                                                                                                 | 28/07/2026   | 28/07/2026      | [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)                   |
+| 4   | Cùng nhóm tìm hiểu bảo mật AWS: IAM Least Privilege, WAF, GuardDuty, Security Hub, Public/Private Subnet <br> - Cùng nhóm viết Blog 2: "Bảo mật trong phát triển phần mềm trên AWS"                                                                                                                                           | 29/07/2026   | 29/07/2026      | [AWS Well-Architected Security](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/) |
+| 5   | - Nghiên cứu các phương pháp kiểm thử tích hợp (Integration Testing) và thiết lập bảng tiêu chí đánh giá hiệu năng (Validation Matrix) cho hệ thống Serverless trên Cloud                                                                                                                                                     | 30/07/2026   | 30/07/2026      | <https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html>                 |
+| 6   | - Học quy trình dọn dẹp tài nguyên (Resource Clean-up Best Practices) trên AWS Cloud: <br>&emsp; + Các bước xóa Endpoint, làm rỗng S3 Buckets, hủy Lambda functions, API Gateway & EventBridge Rules <br>&emsp; + Đảm bảo tài khoản AWS không phát sinh chi phí duy trì tài nguyên ngoài ý muốn sau khi kết thúc đợt thực tập | 31/07/2026   | 31/07/2026      | <https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html>                       |
 
 ### Kết quả đạt được tuần 8:
 
-* Nắm vững các nguyên tắc cốt lõi của **AWS Well-Architected Framework**, biết cách phân tích và tối ưu hóa chi phí hạ tầng Cloud bằng AWS Budgets và Cost Explorer (duy trì tổng chi phí dự án dưới $5 USD/tháng).
-* Hoàn thành kiểm thử End-to-End xuất sắc 100% các kịch bản:
-  * Chuỗi sự kiện tự động hóa Retrain và Auto-Deploy hoạt động chính xác không lỗi.
-  * API Gateway trả về kết quả suy luận Real-time với độ trễ thấp (~45ms - 80ms sau Cold Start) và phản hồi chuẩn xác.
-* Đã xuất bản hoàn chỉnh tài liệu Workshop song ngữ (Việt - Anh) trên website báo cáo thực tập cá nhân với đầy đủ hình ảnh chứng minh và hướng dẫn từng bước.
-* Đã nghiệm thu dự án thành công với Mentor và thực hiện Clean-up toàn bộ tài nguyên trên AWS, đảm bảo tài khoản không phát sinh chi phí ngoài ý muốn.
+*  Cùng nhóm viết và đăng Blog 1 - phân tích chi tiết bài toán Connection Exhaustion khi kết hợp Lambda + RDS, và cách RDS Proxy giải quyết qua Multiplexing, Graceful Failover, và IAM Authentication.
+*  Cùng nhóm viết và đăng Blog 2 - tổng hợp 5 bài học bảo mật thực tế khi phát triển trên AWS: không hardcode Access Key, Least Privilege, phân tách Public/Private Subnet, bảo vệ với WAF, giám sát với GuardDuty/Inspector/Security Hub.
+* Nắm vững các nguyên tắc cốt lõi của AWS Well-Architected Framework, biết cách phân tích và tối ưu hóa chi phí hạ tầng Cloud bằng AWS Budgets và Cost Explorer.
+* Hiểu rõ quy trình kiểm thử tích hợp và xây dựng Validation Matrix đánh giá độ tin cậy của hệ thống Cloud.
+* Làm chủ quy trình Clean-up dọn dẹp tài nguyên chuẩn mực trên AWS Cloud, bảo vệ tài khoản khỏi phát sinh chi phí ngoài ý muốn.

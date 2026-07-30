@@ -48,11 +48,11 @@ Xây dựng hệ thống MLOps trên nền tảng AWS SageMaker Workflow (Pipeli
 
 
 ### 5. Lộ trình & Mốc triển khai  
-- Tuần 1 – Tuần 2: Khảo sát bối cảnh bài toán, xử lý dữ liệu Telco Churn và xây dựng Baseline Model XGBoost.
-- Tuần 3 – Tuần 4: Đóng gói quy trình xử lý dữ liệu và huấn luyện vào SageMaker Pipelines.  
-- Tuần 5 - Tuần 6: Tự động hóa khâu đánh giá mô hình và tích hợp SageMaker Model Registry.  
-- Tuần 7: Thiết lập EventBridge, Lambda Function để hiện thực hóa tính năng Auto-Deploy lên Serverless Endpoint. Cấu hình CloudFront & AWS WAF bảo vệ API.
-- Tuần 8: Kiểm thử toàn hệ thống, tối ưu chi phí, đánh giá độ trễ Endpoint/WAF và hoàn thiện báo cáo.  
+- Tuần 4: Nhóm cùng tìm hiểu khái niệm MLOps, nghiên cứu các thành phần SageMaker và phân tích dataset Telco Churn.  
+- Tuần 5: Thiết kế kiến trúc giải pháp hoàn chỉnh, vẽ sơ đồ kiến trúc và viết Proposal.  
+- Tuần 6: Xây dựng SageMaker Pipeline hoàn chỉnh (Processing, HPO, Evaluation, ConditionStep AUC >= 0.80, Register).  
+- Tuần 7: Triển khai EventBridge + Lambda Auto-Deploy, xây dựng Inference API và End-to-End Testing.  
+- Tuần 8: Dọn dẹp tài nguyên AWS, viết blog kỹ thuật, hoàn thiện báo cáo thực tập.   
 
 ### 6. Ước tính ngân sách  
 - AWS Lambda & Amazon EventBridge: 0,00 USD/tháng (Thuộc Free Tier).  

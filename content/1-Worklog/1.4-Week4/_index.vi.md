@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 4"
-date: 2026-07-06
+date: 2026-06-29
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
@@ -8,25 +8,24 @@ pre: " <b> 1.4. </b> "
 
 ### Mục tiêu tuần 4:
 
-* Đào sâu kiến thức AWS Cloud về hệ sinh thái Machine Learning Managed Services: Tìm hiểu cơ chế quản lý Container images trên ECR, SageMaker Estimators, Hyperparameter Tuning Jobs và tích hợp Amazon CloudWatch Logs để debug jobs.
-* Xây dựng và đóng gói bước Huấn luyện & Tối ưu siêu tham số tự động (TelcoChurnHpoStep) sử dụng HyperparameterTuner với thuật toán XGBoost.
-* Viết script đánh giá mô hình evaluate.py và đóng gói bước Đánh giá hiệu năng (TelcoChurnEvalStep), trích xuất chỉ số ROC-AUC ra file evaluation.json.
+* Cùng các thành viên trong nhóm tìm hiểu định hướng MLOps và phân tích chuyên sâu tập dữ liệu Telco Customer Churn.
+* Học cá nhân về các phương pháp chuẩn hóa & mã hóa dữ liệu (Data Preprocessing) trong môi trường SageMaker Notebooks.
+* Học cá nhân về thuật toán XGBoost trên AWS SageMaker và các chỉ số đánh giá mô hình phân loại (ROC-AUC, Precision, Recall).
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | --- | --- | --- | --- |
-| 2 | - Học nâng cao về các dịch vụ Machine Learning & Analytics trên AWS: <br>&emsp; + Kiến trúc SageMaker Training Jobs & cơ chế kéo Built-in Container từ Amazon ECR <br>&emsp; + Các chiến lược Tối ưu siêu tham số (Random, Bayesian, Hyperband Search) <br>&emsp; + Quản lý Log tập trung cho các Training Jobs với Amazon CloudWatch Logs <br> - **Thực hành:** Kiểm tra ECR Image URI của XGBoost v1.5-1 tại region ap-southeast-1 | 06/07/2026 | 06/07/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Khởi tạo đối tượng Estimator cho XGBoost với các siêu tham số cố định (objective='binary:logistic', eval_metric='auc') <br> - Thiết lập dải không gian tìm kiếm siêu tham số (HyperparameterRanges): max_depth (3-10), eta (0.01-0.2), min_child_weight (1-6) <br> - Đóng gói vào HyperparameterTuner (chạy 6 jobs song song 2 jobs trên ml.m5.large) và tạo TuningStep (TelcoChurnHpoStep) | 07/07/2026 | 07/07/2026 | SageMaker SDK Documentation |
-| 4 | - Chạy thử nghiệm HPO Job độc lập để kiểm tra khả năng đọc dữ liệu từ s3://.../processed/train và s3://.../processed/validation <br> - Giám sát tiến độ Tuning Jobs và đọc metrics validation:auc trực tiếp trên SageMaker Console & CloudWatch Logs | 08/07/2026 | 08/07/2026 | AWS SageMaker Console |
-| 5 | - Lập trình file script Python evaluate.py: <br>&emsp; + Tự động giải nén file model.tar.gz tốt nhất từ HPO Job <br>&emsp; + Tải tập dữ liệu test từ s3://.../processed/test/test.csv <br>&emsp; + Dự đoán xác suất Churn và tính chỉ số ROC-AUC Score <br>&emsp; + Đóng gói kết quả AUC vào định dạng JSON tiêu chuẩn (evaluation.json) | 09/07/2026 | 09/07/2026 | Scikit-Learn / XGBoost Docs |
-| 6 | - Tạo đối tượng ScriptProcessor đóng gói file evaluate.py thành TelcoChurnEvalStep <br> - Thiết lập PropertyFile (evaluation.json) để trích xuất chỉ số AUC phục vụ cho bước kiểm tra điều kiện (Condition Gate) ở tuần sau <br> - Kiểm thử thành công luồng chạy nối tiếp: ProcessingStep $\rightarrow$ TuningStep $\rightarrow$ EvalStep | 10/07/2026 | 10/07/2026 | AWS Hands-on Labs |
+| Thứ | Công việc                                                                                                                                                                                                                                                  | Ngày bắt đầu | Ngày hoàn thành | Nguồn tham khảo                                                                                |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------------------------------------------------------------------------------- |
+| 2   | - Học kỹ thuật tiền xử lý dữ liệu và mã hóa biến (One-Hot Encoding, Label Encoding) trong môi trường Cloud Notebooks <br> - Tìm hiểu cách chuẩn hóa kiểu dữ liệu CSV theo định dạng chuẩn của SageMaker Built-in Algorithms                                | 29/06/2026   | 29/06/2026      | <https://docs.aws.amazon.com/sagemaker/latest/dg/numpytensormulticlass.html>                   |
+| 3   | - Nghiên cứu thuật toán XGBoost trên SageMaker: <br>&emsp; + Phân tích các tham số huấn luyện cốt lõi: objective='binary:logistic', eval_metric='auc' <br>&emsp; + Ý nghĩa của các siêu tham số max_depth, eta, min_child_weight, subsample                | 30/06/2026   | 30/06/2026      | <https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost.html>                                 |
+| 4   | - Cùng nhóm tìm hiểu MLOps: quy trình End-to-End, các thành phần SageMaker (Studio, Processing Jobs, Training Jobs, Pipelines) <br> - Cùng nhóm phân tích dataset Telco Churn: cấu trúc features, thống kê phân phối, xác định bài toán phân loại nhị phân | 01/07/2026   | 01/07/2026      | [SageMaker Developer Guide](https://docs.aws.amazon.com/sagemaker/latest/dg/)                  |
+| 5   | - Tìm hiểu nguyên lý phân chia tập dữ liệu (Train/Validation/Test Split) chuẩn hóa trên Cloud cho các bài toán phân loại nhị phân <br> - Nghiên cứu cơ chế nén và định dạng dữ liệu đầu vào phù hợp với SageMaker Estimators                               | 02/07/2026   | 02/07/2026      | <https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-training.html>                            |
+| 6   | - Học cách đánh giá hiệu năng mô hình phân loại nhị phân: <br>&emsp; + Các chỉ số ROC-AUC Score, Confusion Matrix, Accuracy, Precision, Recall <br>&emsp; + Thiết lập ngưỡng Quality Gate tiêu chuẩn cho các mô hình Machine Learning trên Cloud           | 03/07/2026   | 03/07/2026      | <https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-monitor-model-performance.html> |
 
 ### Kết quả đạt được tuần 4:
 
-* Nắm vững cơ chế vận hành của SageMaker Training/HPO Jobs, hiểu cách SageMaker tự động pull Docker Container từ Amazon ECR và đẩy logs về CloudWatch Logs.
-* Xây dựng thành công TelcoChurnHpoStep:
-  * Tự động thực thi 6 đợt huấn luyện tối ưu siêu tham số song song.
-  * Tìm ra bộ tham số XGBoost tối ưu cho tập dữ liệu Telco Churn, xuất file mô hình model.tar.gz lưu trữ an toàn tại s3://telco-churn-mlops-fcaj/models/.
-* Xây dựng hoàn chỉnh script evaluate.py và đóng gói thành TelcoChurnEvalStep bằng ScriptProcessor.
-* Trích xuất thành công file evaluation.json chứa giá trị Test AUC (~0.84), sẵn sàng làm đầu vào cho ConditionStep để đánh giá mô hình tự động.
+* Cùng nhóm hiểu rõ quy trình MLOps End-to-End: từ data ingestion => preprocessing => training => evaluation => model registry => deployment => monitoring. Phân tích xong dataset Telco Churn.
+
+* Master kỹ thuật tiền xử lý dữ liệu và mã hóa One-Hot Encoding chuẩn hóa cho SageMaker.
+* Nắm vững các tham số cốt lõi và phương pháp huấn luyện thuật toán XGBoost trên AWS.
+* Hiểu rõ nguyên lý đánh giá hiệu năng mô hình phân loại nhị phân qua chỉ số ROC-AUC và cách thiết lập Quality Gate.

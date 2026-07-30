@@ -47,11 +47,12 @@ Build an MLOps platform on AWS SageMaker Workflow (Pipelines) combined with Even
 3. *Event-Driven Automated Deployment & Public API Security*: Develop the AWS Lambda Deployer to handle flexible Endpoint updates. Configure EventBridge Rules to capture events from the Model Registry. Set up an Amazon CloudFront Distribution pointing to API Gateway and enable AWS WAF (Rate Limiting set to 100 requests per 5 minutes). Integrate CloudWatch Alarms and SNS Email Alerts.
 
 ### 5. Roadmap & Key Milestones  
-- Weeks 1 – 2: Survey business requirements, process Telco Churn data, and build the XGBoost Baseline Model.
-- Weeks 3 – 4: Package data processing and training workflows into SageMaker Pipelines.  
-- Weeks 5 – 6: Automate model evaluation and integrate SageMaker Model Registry.  
-- Week 7: Configure EventBridge and Lambda functions to implement Auto-Deploy to the Serverless Endpoint. Configure CloudFront & AWS WAF for API protection.
-- Week 8: End-to-end system testing, cost optimization, Endpoint/WAF latency evaluation, and final documentation.  
+- Week 4: The team explores the MLOps concept, studies SageMaker components, and analyzes the Telco Churn dataset.  
+- Week 5: Design the full solution architecture, draw the architecture diagram, and write the Proposal.  
+- Week 6: Build the complete SageMaker Pipeline (Processing, HPO, Evaluation, ConditionStep AUC >= 0.80, Register).  
+- Week 7: Implement EventBridge + Lambda Auto-Deploy, build the Inference API, and perform End-to-End testing.  
+- Week 8: Clean up AWS resources, write technical blogs, finalize the internship report.   
+
 
 ### 6. Budget Estimation  
 - AWS Lambda & Amazon EventBridge: $0.00 USD/month (Covered by AWS Free Tier).  

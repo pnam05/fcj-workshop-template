@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 1"
-date: 2026-06-15
+date: 2026-06-08
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
@@ -8,26 +8,23 @@ pre: " <b> 1.1. </b> "
 
 ### Mục tiêu tuần 1:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey (FCAJ) và nắm rõ nội quy thực tập.
-* Nắm vững các dịch vụ AWS Cloud cơ bản (IAM, S3, EC2) và làm quen với giao diện AWS Console & AWS CLI.
-* Khảo sát bài toán dự đoán khách hàng rời bỏ dịch vụ viễn thông (Telco Customer Churn) và định hình mục tiêu cho dự án MLOps.
+* Tham gia Onboarding, làm quen với các thành viên chương trình First Cloud AI Journey (FCAJ) và nắm rõ nội quy thực tập.
+* Học cá nhân các dịch vụ AWS Cloud cơ bản (IAM, S3, EC2, VPC) và giao diện AWS Console.
+* Cài đặt AWS CLI v2 trên máy cục bộ và thực hành quản lý tài nguyên AWS qua dòng lệnh Terminal.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
-| --- | --- | --- | --- | --- |
-| 2 | - Tham gia buổi Onboarding, làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định, kỷ luật tại đơn vị thực tập | 15/06/2026 | 15/06/2026 | Quy định thực tập FCAJ |
-| 3 | - Tìm hiểu tổng quan về AWS Cloud & các nhóm dịch vụ nền tảng: <br>&emsp; + Identity & Access Management (IAM) <br>&emsp; + Compute (EC2) <br>&emsp; + Storage (S3) <br>&emsp; + Networking (VPC, Security Group) | 16/06/2026 | 16/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - Thiết lập tài khoản AWS Free Tier & cấu hình bảo mật cơ bản (MFA) <br> - Cài đặt AWS CLI v2 trên máy cục bộ <br> - **Thực hành:** Tạo IAM User, tạo Access Key, cấu hình aws configure (Region ap-southeast-1) và kiểm tra kết nối qua terminal | 17/06/2026 | 17/06/2026 | AWS Documentation |
-| 5 | - Nghiên cứu dịch vụ lưu trữ Amazon S3 & dịch vụ ảo hóa Amazon EC2 <br> - Khảo sát tập dữ liệu Telco Customer Churn (`WA_Fn-UseC_-Telco-Customer-Churn.csv`) <br> - Xác định các yêu cầu kỹ thuật và công nghệ cần dùng cho hệ thống MLOps | 18/06/2026 | 18/06/2026 | Kaggle / AWS SageMaker Docs |
-| 6 | - **Thực hành:** <br>&emsp; + Tạo S3 Bucket thử nghiệm qua AWS CLI <br>&emsp; + Khởi tạo EC2 Instance (Amazon Linux 2), kết nối SSH qua Terminal <br>&emsp; + Thảo luận với Mentor về định hướng xây dựng MLOps Platform tự động | 19/06/2026 | 19/06/2026 | AWS Hands-on Labs |
+| Thứ | Công việc                                                                                                                                                                                                                                 | Ngày bắt đầu | Ngày hoàn thành | Nguồn tham khảo                    |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------------------- |
+| 2   | - Tham gia buổi Onboarding chương trình FCAJ, nghe phổ biến nội quy & định hướng đào tạo <br> - Nghiên cứu tổng quan về Điện toán đám mây & AWS Global Infrastructure (Regions, Availability Zones)                                       | 08/06/2026   | 08/06/2026      | AWS Study Group Community          |
+| 3   | - Tìm hiểu chuyên sâu dịch vụ AWS Identity & Access Management (IAM): <br>&emsp; + Phân biệt IAM Users, Groups, Roles & Policies <br>&emsp; + Thiết lập bảo mật tài khoản root & kích hoạt Multi-Factor Authentication (MFA)              | 09/06/2026   | 09/06/2026      | <https://docs.aws.amazon.com/iam/> |
+| 4   | - Cài đặt công cụ dòng lệnh AWS CLI v2 trên máy cá nhân <br> - Thực hành lệnh aws configure: Khai báo IAM Access Key, Secret Access Key, mặc định Region ap-southeast-1 và kiểm tra kết nối qua Terminal                                  | 10/06/2026   | 10/06/2026      | <https://docs.aws.amazon.com/cli/> |
+| 5   | - Nghiên cứu dịch vụ lưu trữ đối tượng Amazon S3 (Simple Storage Service): <br>&emsp; + Khái niệm S3 Bucket, Object Key, Prefix <br>&emsp; + Phân biệt các loại S3 Storage Classes và cơ chế quản lý quyền truy cập S3                    | 11/06/2026   | 11/06/2026      | <https://docs.aws.amazon.com/s3/>  |
+| 6   | - Nghiên cứu dịch vụ máy chủ ảo Amazon EC2 & Mạng Amazon VPC: <br>&emsp; + Các họ EC2 Instance types, AMI (Amazon Machine Image) <br>&emsp; + Cấu hình Security Group (Inbound/Outbound Rules), Key Pair & thực hành SSH vào EC2 Instance | 12/06/2026   | 12/06/2026      | <https://docs.aws.amazon.com/ec2/> |
 
-### Kết quả đạt được tuần 1:
+### Kết quả đạt đạt được tuần 1:
 
-* Hiểu rõ nội quy thực tập, quy trình làm việc và kết nối tốt với các thành viên trong nhóm FCAJ.
-* Cài đặt và cấu hình thành công AWS CLI v2 trên máy cá nhân với IAM Access Key (Region ap-southeast-1).
-* Nắm vững khái niệm và thao tác cơ bản trên các dịch vụ cốt lõi:
-  * **IAM:** Tạo Role, cấp quyền Least Privilege và hiểu về PassRole.
-  * **S3:** Khai niệm Bucket, Prefix, Object và phân quyền truy cập.
-  * **EC2:** Launch instance, cấu hình Security Group (Inbound/Outbound rules) và kết nối SSH an toàn.
-* Khảo sát xong tập dữ liệu Telco Customer Churn và chốt được định hướng kiến trúc MLOps Platform tự động trên AWS cho dự án cá nhân.
+* Hiểu rõ nội quy thực tập, quy trình làm việc và tham gia đầy đủ buổi Onboarding FCAJ.
+* Nắm vững kiến thức nền tảng về AWS Cloud Global Infrastructure, IAM, S3, EC2 và VPC.
+* Cài đặt thành công AWS CLI v2 và thao tác quản trị tài nguyên qua Terminal chính xác.
+* Khởi tạo máy chủ EC2 Instance và kết nối SSH an toàn qua Key Pair.

@@ -1,6 +1,6 @@
 ---
 title: "Week 2 Worklog"
-date: 2026-06-22
+date: 2026-06-15
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
@@ -8,23 +8,23 @@ pre: " <b> 1.2. </b> "
 
 ### Week 2 Objectives:
 
-* Explore and clean data (EDA) and build an experimental baseline model (XGBoost Baseline Model) for the Telco Customer Churn problem.
-* Write a standardized data preprocessing script (preprocessing.py) to prepare for integration into SageMaker Processing Step.
-* Finalize a detailed Project Proposal on the MLOps Platform architecture for Mentor approval.
+* Advanced study of object storage management with Amazon S3 (Storage Classes, Versioning, Lifecycle Rules, Bucket Policies & CORS).
+* Deep dive into AWS IAM security mechanisms (IAM Roles, Service Trust, Least Privilege principle & iam:PassRole authorization).
+* Study secure networking infrastructure with Amazon VPC Endpoints (Gateway Endpoints vs Interface Endpoints).
 
 ### Tasks to implement this week:
 
-| Day | Task | Start Date | Completion Date | Reference Documentation |
-| --- | --- | --- | --- | --- |
-| Mon | - Download Telco Customer Churn dataset (WA_Fn-UseC_-Telco-Customer-Churn.csv) to local Jupyter Notebook/Colab <br> - Perform Exploratory Data Analysis (EDA): Analyze Churn target variable distribution, handle missing values in TotalCharges column, and encode categorical features | 22/06/2026 | 22/06/2026 | Pandas / Scikit-Learn Docs |
-| Tue | - Experiment with training churn prediction model using XGBoost algorithm <br> - Evaluate baseline model performance using Machine Learning metrics: ROC-AUC, Accuracy, Precision, Recall <br> - Determine minimum AUC threshold for Quality Gate ($AUC \ge 0.80$) | 23/06/2026 | 23/06/2026 | XGBoost Documentation |
-| Wed | - Package data preprocessing logic into an independent Python script preprocessing.py <br> - Handle data type casting, One-Hot Encoding, move target column Churn to the first column (following XGBoost input format standard), and split dataset into Train (70%), Validation (15%), Test (15%) | 24/06/2026 | 24/06/2026 | SageMaker Python SDK |
-| Thu | - Draft Project Proposal document in both Vietnamese and English: <br>&emsp; + Executive Summary & Problem Statement <br>&emsp; + Event-Driven MLOps Solution Architecture on AWS <br>&emsp; + List of AWS services used (SageMaker, S3, Lambda, EventBridge, API Gateway, SNS, CloudWatch) <br>&emsp; + Budget Estimation & 8-Week Implementation Roadmap | 25/06/2026 | 25/06/2026 | AWS MLOps Framework |
-| Fri | - Test running preprocessing.py script in local environment to ensure output CSV data is compatible with SageMaker <br> - Present project Proposal to Mentor, incorporate feedback, and update MLOps system architecture diagram | 26/06/2026 | 26/06/2026 | Mentor Feedback |
+| Day | Task                                                                                                                                                                                                                                                         | Start Date | Completion Date | Reference Documentation                                                          |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | -------------------------------------------------------------------------------- |
+| Mon | - Advanced study of Amazon S3 service: <br>&emsp; + Compare S3 Storage Classes (Standard, Intelligent-Tiering, Glacier, Deep Archive) <br>&emsp; + Configure S3 Versioning & automated S3 Lifecycle Rules for tiering                                        | 15/06/2026 | 15/06/2026      | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html> |
+| Tue | - Study data protection & encryption mechanisms on Amazon S3: <br>&emsp; + Server-side encryption SSE-S3 & SSE-KMS using AWS Key Management Service <br>&emsp; + Write and configure S3 Bucket Policies & Cross-Origin Resource Sharing (CORS)               | 16/06/2026 | 16/06/2026      | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-policies.html>     |
+| Wed | - Deep dive into AWS IAM Security: <br>&emsp; + Distinguish IAM User vs IAM Role, Assume Role mechanics & Service Trust Relationships <br>&emsp; + Enforce Principle of Least Privilege using Customer Managed Policies                                      | 17/06/2026 | 17/06/2026      | <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html>                 |
+| Thu | - Research iam:PassRole service authorization permission: <br>&emsp; + Mechanism allowing AWS services to pass a Role to another service to execute tasks <br>&emsp; + Configure PassRole to limit service invocation scope following AWS security standards | 18/06/2026 | 18/06/2026      | <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html>    |
+| Fri | - Research VPC Endpoints (AWS PrivateLink) infrastructure: <br>&emsp; + Compare Gateway Endpoints (Amazon S3, DynamoDB) vs Interface Endpoints <br>&emsp; + Private access to AWS services from VPC without going through public Internet                    | 19/06/2026 | 19/06/2026      | <https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html>          |
 
-### Week 2 Accomplishments:
+### Week 2 Achievements:
 
-* Completed EDA data analysis for Telco Customer Churn problem: Successfully identified and handled 11 missing values in TotalCharges column, converted Churn variable from string (Yes/No) to binary format (1/0).
-* Successfully trained Baseline XGBoost model on cleaned dataset, achieving **ROC-AUC ~0.84** (exceeding target threshold of 0.80).
-* Built a complete Python script file preprocessing.py, supporting arguments from SageMaker's SKLearnProcessor to automatically split data into 3 sets: train.csv, validation.csv, and test.csv.
-* Finalized and published Proposal file for **MLOps Platform for Telco Customer Churn Prediction** project on the internship reporting system, ready for the automated packaging stage on AWS Cloud.
+* Mastered cost-optimal S3 Storage Class selection and S3 Lifecycle data tiering rules.
+* Understood SSE-KMS encryption mechanisms and access control using S3 Bucket Policies.
+* Mastered IAM Role security mindset, iam:PassRole authorization, and Least Privilege principles.
+* Mastered VPC Endpoints concepts for establishing private and secure internal connections to Amazon S3.
