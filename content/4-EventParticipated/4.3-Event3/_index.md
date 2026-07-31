@@ -49,7 +49,7 @@ pre: " <b> 4.3. </b> "
   * **Billing, Pricing, and Support (12%):** EC2 Pricing Models, AWS Cost Explorer, AWS Budgets, Support Plans.
 * **Study Insights & Exam Tips:**
   * **Strategy:** Learn via *Keyword Thinking*, thoroughly analyze mock test explanations, and gain hands-on experience using the AWS Free Tier.
-  * **Exam Tactics:** Use elimination (2 options are usually distractors), keep solutions simple, watch for trap keywords (`NOT`, `Least cost`), and use *Flag for review* to revisit tough questions.
+  * **Exam Tactics:** Use elimination (2 options are usually distractors), keep solutions simple, watch for trap keywords (**NOT**, **Least cost**), and use *Flag for review* to revisit tough questions.
 
 ---
 
@@ -59,7 +59,7 @@ pre: " <b> 4.3. </b> "
   * Sets clear service expectations with customers, assigns operational accountability, and manages system risk.
 * **Monitoring Reality:**
   * **Healthy infrastructure $\neq$ Happy users.**
-  * *Real-world example:* `/health` returns 200 OK and EC2 CPU runs at a cool 18%, but RDS database connection issues prevent users from logging in (`/login` fails).
+  * *Real-world example:* **/health** returns 200 OK and EC2 CPU runs at a cool 18%, but RDS database connection issues prevent users from logging in **/login** fails.
 * **The Monitoring Pyramid:**
   * Monitor top-down rather than focusing solely on lower-level infrastructure:
     1. **Customer Experience:** Can users log in / complete purchases?

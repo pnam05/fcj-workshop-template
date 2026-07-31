@@ -38,7 +38,7 @@ Khi mã nguồn chứa khóa truy cập bị đẩy lên các kho lưu trữ cô
 
 Trong mô hình quản trị truy cập IAM, nguyên tắc cốt lõi là **chỉ cấp phát vừa đủ quyền hạn cần thiết để thực thi tác vụ, không cấp thừa**.
 
-*Ví dụ:* Một EC2 Instance chỉ có nhiệm vụ đọc dữ liệu từ Amazon S3. Thay vì gán chính sách `AmazonS3FullAccess`, cấu hình tối ưu chỉ nên cấp quyền `s3:GetObject` trên đúng bucket mục tiêu. Phương pháp này giới hạn tối đa vùng ảnh hưởng (blast radius) nếu tài khoản hoặc dịch vụ bị xâm nhập — đây cũng là tiêu chuẩn bắt buộc trong thiết kế hệ thống doanh nghiệp.
+*Ví dụ:* Một EC2 Instance chỉ có nhiệm vụ đọc dữ liệu từ Amazon S3. Thay vì gán chính sách **AmazonS3FullAccess**, cấu hình tối ưu chỉ nên cấp quyền **s3:GetObject** trên đúng bucket mục tiêu. Phương pháp này giới hạn tối đa vùng ảnh hưởng (blast radius) nếu tài khoản hoặc dịch vụ bị xâm nhập — đây cũng là tiêu chuẩn bắt buộc trong thiết kế hệ thống doanh nghiệp.
 
 #### 2.3. Cấu hình Phân vùng Mạng (Subnet Segmentation)
 
@@ -85,7 +85,7 @@ Bằng cách kết hợp **Amazon EC2 Auto Scaling** và **Elastic Load Balancer
 
 #### 3.2. Quản lý Trạng thái và Dữ liệu Độc lập (Stateless Architecture)
 
-Lưu trữ dữ liệu tải lên (file uploads, media) trực tiếp trên bộ nhớ cục bộ của máy chủ (ví dụ thư mục `uploads/` trên EC2) tạo ra điểm nghẽn lớn khi mở rộng hoặc thay thế instance, dẫn đến nguy cơ mất an toàn dữ liệu.
+Lưu trữ dữ liệu tải lên (file uploads, media) trực tiếp trên bộ nhớ cục bộ của máy chủ (ví dụ thư mục **uploads/** trên EC2) tạo ra điểm nghẽn lớn khi mở rộng hoặc thay thế instance, dẫn đến nguy cơ mất an toàn dữ liệu.
 
 Việc ứng dụng **Amazon S3** làm kho lưu trữ đối tượng chuyên biệt cho hình ảnh, tài liệu và các bản sao lưu giúp tách biệt hoàn toàn giữa tầng lưu trữ dữ liệu (Storage) và tầng xử lý logic (Compute). Mô hình này không chỉ đảm bảo an toàn dữ liệu mà còn tối ưu hóa khả năng mở rộng của hệ thống.
 
@@ -108,7 +108,9 @@ Các nguyên tắc quản trị cốt lõi cần tuân thủ:
 
 ---
 
-**Nhóm tác giả:** Thành Nhân, Nguyễn Bá Nam, Nam Phan, Nguyễn Trọng Nhân
+**Nhóm tác giả:** Thành Nhân, Nguyễn Cảnh Nguyên, Nguyễn Trọng Nhân, Nam Phan, Nguyễn Bá Nam.
+
+**Link Blog:** [Security in Software Development on AWS](https://www.facebook.com/groups/awsstudygroupfcj/?multi_permalinks=2228803837884576&notif_id=1785383944402087&notif_t=feedback_reaction_generic_tagged)
 
 **Tài liệu tham khảo:**
 - [IAM Best Practices (AWS Docs)](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)

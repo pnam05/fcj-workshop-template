@@ -38,7 +38,7 @@ To eliminate credential leak risks, AWS recommends adopting standard identity ma
 
 In IAM access management, the core principle is to **grant only the minimum permissions required to perform a task, and nothing more**.
 
-*Example:* An EC2 instance only needs to read data from Amazon S3. Instead of assigning the `AmazonS3FullAccess` policy, the optimal configuration should only grant `s3:GetObject` permission on the specific target bucket. This approach minimizes the blast radius if an account or service is compromised — a mandatory standard in enterprise architecture.
+*Example:* An EC2 instance only needs to read data from Amazon S3. Instead of assigning the **AmazonS3FullAccess** policy, the optimal configuration should only grant **s3:GetObject** permission on the specific target bucket. This approach minimizes the blast radius if an account or service is compromised — a mandatory standard in enterprise architecture.
 
 #### 2.3. Subnet Segmentation Configuration
 
@@ -85,7 +85,7 @@ By combining **Amazon EC2 Auto Scaling** and **Elastic Load Balancer (ELB)**, th
 
 #### 3.2. Stateless Architecture & Independent Data Management
 
-Storing user uploads (media, files) directly on local server storage (e.g., `uploads/` directory on EC2) creates a massive bottleneck when scaling out or replacing instances, increasing data loss risks.
+Storing user uploads (media, files) directly on local server storage (e.g., **uploads/** directory on EC2) creates a massive bottleneck when scaling out or replacing instances, increasing data loss risks.
 
 Adopting **Amazon S3** as a dedicated object storage service for images, documents, and backups completely decouples Storage from Compute. This model not only secures data but also optimizes overall system scalability.
 
@@ -108,7 +108,9 @@ For real-world engineering problems, understanding the technical nature and prob
 
 ---
 
-**Authors:** Thành Nhân, Nguyễn Bá Nam, Nam Phan, Nguyễn Trọng Nhân
+**Authors:** Thành Nhân, Nguyễn Cảnh Nguyên, Nguyễn Trọng Nhân, Nam Phan, Nguyễn Bá Nam.
+
+**Link Blog:** [Security in Software Development on AWS](https://www.facebook.com/groups/awsstudygroupfcj/?multi_permalinks=2228803837884576&notif_id=1785383944402087&notif_t=feedback_reaction_generic_tagged)
 
 **References:**
 - [IAM Best Practices (AWS Docs)](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)

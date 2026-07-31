@@ -5,7 +5,7 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-Trong quá trình thực tập tại FCAJ, nhóm chúng tôi đã tiến hành nghiên cứu, thảo luận và hoàn thiện 2 bài viết chuyên sâu về hệ sinh thái AWS, được chia sẻ tới cộng đồng [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj). Mỗi bài viết là kết quả của quá trình tổng hợp tri thức kỹ thuật và đúc kết kinh nghiệm thực tiễn từ các bài toán vận hành trên nền tảng AWS.
+Trong quá trình thực tập tại FCAJ, nhóm chúng tôi đã tiến hành nghiên cứu, thảo luận và hoàn thiện 3 bài viết chuyên sâu về hệ sinh thái AWS, được chia sẻ tới cộng đồng [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj). Mỗi bài viết là kết quả của quá trình tổng hợp tri thức kỹ thuật và đúc kết kinh nghiệm thực tiễn từ các bài toán vận hành trên nền tảng AWS.
 
 ---
 
@@ -21,4 +21,8 @@ Phân tích chuyên sâu sự cố **Connection Exhaustion (Cạn kiệt kết n
 Tổng hợp 5 nguyên tắc bảo mật cốt lõi trong quy trình phát triển và triển khai ứng dụng trên hạ tầng AWS: Quản lý thông tin xác thực an toàn, áp dụng nguyên tắc cấp quyền tối thiểu (**Least Privilege**), phân vùng mạng Public/Private Subnet, phân tầng bảo vệ ứng dụng với **AWS WAF**, và thiết lập hệ thống giám sát an ninh tự động (**GuardDuty, Inspector, Security Hub**). Bài viết cũng đưa ra các phương án giải quyết cho những thách thức vận hành thực tế như xử lý quá tải lưu lượng và quản lý trạng thái dữ liệu độc lập.
 
 
+---
 
+### [Blog 3 - QUẢN LÝ HẠ TẦNG VỚI TERRAFORM](3.3-Blog3/)
+
+Hành trình dịch chuyển từ thao tác thủ công ("ClickOps") sang tư duy **Infrastructure as Code (IaC)** với HashiCorp Terraform trên nền tảng AWS. Bài viết làm rõ quy trình thực thi plan/apply, cơ chế quản lý trạng thái an toàn với **Remote Backend (S3 & DynamoDB)**, khả năng tái sử dụng cấu hình bằng **Terraform Modules**, và phương pháp xử lý **Infrastructure Drift** nhằm đảm bảo hạ tầng luôn được kiểm soát tập trung.

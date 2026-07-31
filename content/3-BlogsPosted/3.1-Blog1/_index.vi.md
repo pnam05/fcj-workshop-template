@@ -66,7 +66,9 @@ Việc nắm vững các giới hạn vật lý của tiến trình hệ điều
 
 ---
 
-**Nhóm tác giả:** Thành Nhân, Nguyễn Cảnh Nguyên, Nguyễn Trọng Nhân, Nam Phan, Nguyễn Bá Nam
+**Nhóm tác giả:** Thành Nhân, Nguyễn Cảnh Nguyên, Nguyễn Trọng Nhân, Nam Phan, Nguyễn Bá Nam.
+
+**Link Blog:** [Amazon RDS Proxy](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2227947781303515/)
 
 **Tài liệu tham khảo:**
 - [Tổng quan về quản lý kết nối với Amazon RDS Proxy](https://aws.amazon.com/rds/proxy/)

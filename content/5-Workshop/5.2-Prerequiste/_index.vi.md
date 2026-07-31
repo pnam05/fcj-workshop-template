@@ -1,77 +1,68 @@
 ---
-title : "Các bước chuẩn bị"
-date : 2026-07-27
-weight : 2
-chapter : false
-pre : " <b> 5.2. </b> "
+title: "Các bước chuẩn bị"
+date: 2026-07-27
+weight: 2
+chapter: false
+pre: " <b> 5.2. </b> "
 ---
 
-# Các bước chuẩn bị cho Workshop (Prerequisites)
 
-Trước khi tiến hành triển khai hệ thống MLOps trên AWS, cần chuẩn bị đầy đủ tài khoản, quyền truy cập IAM, cấu trúc lưu trữ S3 và môi trường thực thi theo hướng dẫn dưới đây.
+Trước khi tiến hành triển khai hệ thống MLOps trên AWS, cần chuẩn bị đầy đủ tài khoản, quyền truy cập IAM, các IAM Role hỗ trợ, cấu trúc lưu trữ S3 và môi trường thực thi theo hướng dẫn dưới đây.
 
 ---
 
-## Yêu cầu Tài khoản & Quyền hạn (AWS Account & IAM)
-- **Tài khoản AWS:** Có quyền truy cập vào AWS Management.
-- **Quyền IAM (IAM Permissions):** Tài khoản IAM người dùng cần có quyền AdministratorAccess hoặc các policy tối thiểu bao gồm:
+## 1. Yêu cầu Tài khoản & Quyền hạn (AWS Account & IAM)
+
+- **Tài khoản AWS:** Đã đăng ký và có quyền truy cập vào **AWS Management Console**.
+- **AWS Region:** Khuyến nghị sử dụng vùng **us-east-1 (N. Virginia)** hoặc **ap-southeast-1 (Singapore)** để đảm bảo hỗ trợ đầy đủ các dịch vụ (SageMaker Serverless Inference, CloudFront, AWS WAF, EventBridge).
+- **Quyền IAM (IAM Permissions):** Tài khoản IAM người dùng cần có quyền **AdministratorAccess** hoặc tập hợp các Managed Policies tối thiểu bao gồm:
   - AmazonSageMakerFullAccess
   - AWSLambda_FullAccess
   - AmazonS3FullAccess
   - AmazonEventBridgeFullAccess
   - AmazonSNSFullAccess
   - AmazonAPIGatewayAdministrator
-  - IAMFullAccess (để cấu hình PassRole)
+  - CloudWatchLogsFullAccess
+  - AWSCloudFrontFullAccess
+  - AWSWAFv2FullAccess
+  - IAMFullAccess (để tạo và gắn inline policy `iam:PassRole`)
 
 ---
 
-## Khởi tạo IAM Roles cho các dịch vụ
-Hệ thống sử dụng các IAM Role sau để phân quyền giữa các dịch vụ (nguyên tắc Principal of Least Privilege):
+## 2. Khởi tạo IAM Roles cho các dịch vụ (Service Roles)
 
-1. **SageMaker-Telco-Churn-Role:**
-   - **Service Trust:** sagemaker.amazonaws.com
-   - **Attached Policies:** AmazonSageMakerFullAccess, AmazonS3FullAccess.
-   - **Mục đích:** Cấp quyền cho SageMaker Processing Job, HPO Job, Evaluation và Serverless Endpoint truy cập dữ liệu S3.
- 
+Hệ thống tuân thủ nguyên tắc **Least Privilege**, sử dụng các IAM Role riêng biệt để phân quyền giữa các dịch vụ AWS:
+
+### 2.1. SageMaker Execution Role 
+- **Service Trust:** sagemaker.amazonaws.com
+- **Attached Policies:** AmazonSageMakerFullAccess, AmazonS3FullAccess
+- **Mục đích:** Cấp quyền cho SageMaker Processing Job, HPO Job, Evaluation, SageMaker Pipeline và Serverless Endpoint đọc/ghi dữ liệu trên S3.
+
 ![telco-churn-role](/images/3-Prerequiste/telco-churn-role.png)
 
-2. **Lambda-Execution-Role (dùng cho Lambda Trigger & Lambda Deployer):**
-   - **Service Trust:** lambda.amazonaws.com
-   - **Attached Policies:** AWSLambdaBasicExecutionRole,AmazonSageMakerFullAccess, AmazonS3FullAccess.
-   - **Inline Policy (PassRolePolicy):** Cho phép Lambda thực thi lệnh iam:PassRole tới SageMaker-Execution-Role:
-     ```json
-     {
-         "Version": "2012-10-17",
-         "Statement": [
-             {
-                 "Effect": "Allow",
-                 "Action": "iam:PassRole",
-                 "Resource": "arn:aws:iam::<YOUR_ACCOUNT_ID>:role/<SageMaker-Execution-Role-Name>"
-             }
-         ]
-     }
-     ```
+### 2.2. Lambda Execution Role 
+- **Service Trust:** lambda.amazonaws.com
+- **Attached Policies:** AWSLambdaBasicExecutionRole, AmazonSageMakerFullAccess, AmazonS3FullAccess, AmazonSNSFullAccess.
+- **Inline Policy (PassRolePolicy):** Bắt buộc cấu hình cho phép Lambda chuyển đổi quyền (`iam:PassRole`) sang **SageMaker-Telco-Churn-Role** khi khởi chạy Pipeline và triển khai Endpoint:
+  ```json
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": "iam:PassRole",
+              "Resource": "arn:aws:iam::<YOUR_ACCOUNT_ID>:role/SageMaker-Telco-Churn-Role"
+          }
+      ]
+  }
+  ```
 
 ---
 
-## Tạo S3 Bucket & Cấu trúc Thư mục Data Lake
-Tạo 1 S3 Bucket duy nhất với tên độc nhất trên toàn hệ thống (Ví dụ: telco-churn-mlops-<account-id>).
+## 3. Chuẩn bị Dữ liệu & Môi trường Lập trình
 
-Tạo cấu trúc thư mục (Prefixes) bên trong Bucket như sau:
-```text
-telco-churn-mlops-<account-id>/
-├── raw/                 # Chứa dữ liệu thô (.csv)
-├── processed/           # Chứa dữ liệu sau tiền xử lý
-│   ├── train/
-│   ├── validation/
-│   └── test/
-└── models/              # Chứa các file nén model.tar.gz
-```
-![s3](/images/3-Prerequiste/S3.png)
-
-
-## Chuẩn bị Dữ liệu & Môi trường Lập trình (Local / SageMaker Studio)
-- **Tập dữ liệu:** Tải file dữ liệu huấn luyện ban đầu WA_Fn-UseC_-Telco-Customer-Churn.csv.
-- **SageMaker Studio / Jupyter Notebook:** Khởi tạo môi trường Python 3.10+ trên SageMaker Studio.
-
-
+- **Tập dữ liệu Telco Customer Churn:** Tải file dữ liệu huấn luyện ban đầu `WA_Fn-UseC_-Telco-Customer-Churn.csv` từ bộ dữ liệu chuẩn IBM / Kaggle.
+- **Môi trường Lập trình:** Khởi tạo môi trường Python 3.10+ trên **SageMaker Studio / JupyterLab Notebook** hoặc máy local với các thư viện cần thiết:
+  ```bash
+  pip install boto3 sagemaker pandas numpy scikit-learn xgboost
+  ```

@@ -26,8 +26,8 @@ pre: " <b> 4.4. </b> "
   * Built an AI-Native application tailor-made for Solution Architects:
     * Analyzes natural language documents and extracts a Requirements Catalogue in minutes.
     * Automatically generates enterprise-compliant cloud architecture drafts (supporting Hybrid-Cloud).
-    * Generates editable architecture diagrams (`Draw.io` and standard AWS icons).
-    * Estimates AWS costs grouped by region (e.g., `ap-southeast-1`).
+    * Generates editable architecture diagrams (Draw.io and standard AWS icons).
+    * Estimates AWS costs grouped by region (e.g., ap-southeast-1).
     * Interactive refinement via a Chatbot Sidebar.
 * **Technical Architecture & Tech Stack:**
   * **AI & Retrieval Services:** Amazon Bedrock, Knowledge Base, Draw.io MCP, AWS Pricing MCP.
@@ -65,7 +65,7 @@ Beyond technical architectures, participating teams shared valuable lessons from
 
 #### 1. Challenges & Technical Hurdles
 * **Learning Curve & Time Constraints:** Several team members were new to AI and AWS services, facing the challenge of shipping a functional Minimum Viable Product (MVP) within 24 hours.
-* **Technical Incidents:** Experiencing video processing lag, frame tracking loss, staying up late debugging until 3 AM, and accidental secrets commits (`.env` file pushed to GitHub).
+* **Technical Incidents:** Experiencing video processing lag, frame tracking loss, staying up late debugging until 3 AM, and accidental secrets commits (**.env**file pushed to GitHub).
 
 #### 2. Memorable Experiences
 * Experiencing the high-energy 24-hour overnight atmosphere, team brainstorming sessions, late-night walks to recharge, and strong team bonding.

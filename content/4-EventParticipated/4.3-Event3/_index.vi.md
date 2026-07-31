@@ -49,7 +49,7 @@ pre: " <b> 4.3. </b> "
   * **Billing, Pricing, and Support (12%):** Các mô hình giá EC2, AWS Cost Explorer, AWS Budgets, các gói Support Plan.
 * **Kinh nghiệm ôn thi & Mẹo làm bài:**
   * **Phương pháp:** Học theo từ khóa (*Keyword Thinking*), phân tích kỹ lý do đúng/sai khi luyện đề thử, kết hợp thực hành trải nghiệm thực tế trên AWS Free Tier.
-  * **Mẹo trong phòng thi:** Áp dụng phương pháp loại trừ (thường có 2 đáp án không liên quan), chọn đáp án đơn giản và trực diện nhất, chú ý các từ khóa bẫy (`NOT`, `Least cost`), và dùng tính năng *Flag for review* để xem lại câu khó sau.
+  * **Mẹo trong phòng thi:** Áp dụng phương pháp loại trừ (thường có 2 đáp án không liên quan), chọn đáp án đơn giản và trực diện nhất, chú ý các từ khóa bẫy (**NOT**, **Least cost**), và dùng tính năng *Flag for review* để xem lại câu khó sau.
 
 ---
 
@@ -59,7 +59,7 @@ pre: " <b> 4.3. </b> "
   * SLA giúp thiết lập kỳ vọng dịch vụ rõ ràng với khách hàng, quy trách nhiệm vận hành và hỗ trợ quản trị rủi ro hệ thống.
 * **Sự thật về Giám sát (Monitoring Reality):**
   * **Hạ tầng khỏe chưa chắc Trải nghiệm người dùng đã tốt** (*Healthy infrastructure $\neq$ Happy users*).
-  * *Ví dụ thực tế:* Cấu hình `/health` trả về 200 OK, CPU của EC2 chỉ chạy 18% rất mát, nhưng kết nối tới RDS Database bị lỗi khiến người dùng không thể đăng nhập (`/login` thất bại).
+  * *Ví dụ thực tế:* Cấu hình **/health** trả về **200 OK**, CPU của EC2 chỉ chạy **18%** rất mát, nhưng kết nối tới RDS Database bị lỗi khiến người dùng không thể đăng nhập **/login** thất bại.
 * **Mô hình Kim tự tháp Giám sát (Monitoring Pyramid):**
   * Cần giám sát theo thứ tự từ trên xuống dưới, tránh chỉ tập trung vào tầng dưới cùng:
     1. **Customer Experience:** Người dùng có đăng nhập/mua hàng thành công không?

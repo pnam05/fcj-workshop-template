@@ -21,4 +21,4 @@ pre: " <b> 1. </b> "
 
 **Tuần 7 (20/07 - 26/07)**: [Serverless Inference & Cùng nhóm code Lambda, API Gateway, Test API](1.7-week7/)  
 
-**Tuần 8 (27/07 - 31/07)**: [Well-Architected & Cùng nhóm viết Blog 1, Blog 2, Tổng kết Dự án](1.8-week8/)  
+**Tuần 8 (27/07 - 31/07)**: [Well-Architected & Cùng nhóm viết Blog 1, Blog 2, Blog 3, Tổng kết Dự án](1.8-week8/)  

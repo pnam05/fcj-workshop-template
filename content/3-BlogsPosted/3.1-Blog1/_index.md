@@ -22,9 +22,9 @@ The **Serverless (AWS Lambda)** model and **Relational Databases (Amazon RDS** s
 
 - **AWS Lambda (Elastic Scaling & Stateless):** Capable of automatically scaling out from 0 to thousands of execution environments in milliseconds during sudden traffic surges. These instances are completely stateless and short-lived.
 
-- **Amazon RDS (Resource-Intensive Initialization & Fixed):** Establishing each connection to RDS incurs significant resource overhead. For example, in PostgreSQL, each new connection requires the OS to allocate a separate process, consuming an average of **~10MB of RAM**. The maximum connection limit (`max_connections`) is strictly bounded from a few hundred to a thousand, directly depending on the server's RAM configuration.
+- **Amazon RDS (Resource-Intensive Initialization & Fixed):** Establishing each connection to RDS incurs significant resource overhead. For example, in PostgreSQL, each new connection requires the OS to allocate a separate process, consuming an average of **~10MB of RAM**. The maximum connection limit (max_connections) is strictly bounded from a few hundred to a thousand, directly depending on the server's RAM configuration.
 
-**Incident Scenario:** When the system experiences a sudden spike in traffic, API Gateway triggers 2,000 Lambda functions concurrently. Each Lambda function automatically initializes a new connection to the database. If RDS only supports a maximum of 500 concurrent connections, the system will immediately throw `Too many connections` errors, rejecting queries and causing a **cascading failure** across the entire system.
+**Incident Scenario:** When the system experiences a sudden spike in traffic, API Gateway triggers 2,000 Lambda functions concurrently. Each Lambda function automatically initializes a new connection to the database. If RDS only supports a maximum of 500 concurrent connections, the system will immediately throw **Too many connections** errors, rejecting queries and causing a **cascading failure** across the entire system.
 
 ---
 
@@ -66,7 +66,9 @@ Mastering the physical limits of underlying OS database processes helps shape an
 
 ---
 
-**Authors:** Thành Nhân, Nguyễn Cảnh Nguyên, Nguyễn Trọng Nhân, Nam Phan, Nguyễn Bá Nam
+**Authors:** Thành Nhân, Nguyễn Cảnh Nguyên, Nguyễn Trọng Nhân, Nam Phan, Nguyễn Bá Nam.
+
+**Link Blog:** [Amazon RDS Proxy](https://www.facebook.com/groups/awsstudygroupfcj/permalink/2227947781303515/)
 
 **References:**
 - [Overview of connection management with Amazon RDS Proxy](https://aws.amazon.com/rds/proxy/)

@@ -26,8 +26,8 @@ pre: " <b> 4.4. </b> "
   * Xây dựng ứng dụng AI-Native dành riêng cho SA:
     * Phân tích văn bản tự nhiên và trích xuất danh mục yêu cầu (Requirements Catalogue) trong vài phút.
     * Tự động tạo bản thảo kiến trúc đám mây (hỗ trợ Hybrid-Cloud) tuân thủ tiêu chuẩn doanh nghiệp.
-    * Sinh sơ đồ kiến trúc có thể chỉnh sửa (`Draw.io` và biểu tượng chuẩn AWS).
-    * Dự toán chi phí AWS theo từng vùng (vd: `ap-southeast-1`).
+    * Sinh sơ đồ kiến trúc có thể chỉnh sửa (Draw.io và biểu tượng chuẩn AWS).
+    * Dự toán chi phí AWS theo từng vùng (vd: ap-southeast-1).
     * Tương tác và tinh chỉnh thông qua Chatbot Sidebar.
 * **Kiến trúc kỹ thuật & Tech Stack:**
   * **AI & Retrieval:** Amazon Bedrock, Knowledge Base, Draw.io MCP, AWS Pricing MCP.
@@ -65,7 +65,7 @@ Bên cạnh giải pháp kỹ thuật, đại diện các đội thi đã chia s
 
 #### 1. Thách thức & Sự cố thực tế
 * **Rào cản chuyên môn & Thời gian:** Nhiều thành viên lần đầu tiếp xúc với AI và dịch vụ AWS, phải hoàn thiện sản phẩm chạy được (MVP) chỉ trong đúng 24 giờ.
-* **Sự cố kỹ thuật:** Xử lý video real-time bị giật lag, mất tracking giữa các khung hình, thức xuyên đêm debug tới 3 giờ sáng, hay sự cố vô tình push file chứa thông tin bảo mật (`.env`) lên GitHub.
+* **Sự cố kỹ thuật:** Xử lý video real-time bị giật lag, mất tracking giữa các khung hình, thức xuyên đêm debug tới 3 giờ sáng, hay sự cố vô tình push file chứa thông tin bảo mật **(.env)** lên GitHub.
 
 #### 2. Trải nghiệm đáng nhớ
 * Không khí 24 giờ thức trắng làm việc nhóm, cùng thảo luận phân công công việc, đi dạo nạp năng lượng đêm khuya và tinh thần đồng đội gắn kết.
